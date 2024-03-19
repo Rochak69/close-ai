@@ -109,12 +109,15 @@ class _GeminiInputFieldState extends State<GeminiInputField> {
             hintText: widget.hintText,
             contentPadding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
             enabledBorder: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(color: AppColors.textFieldGrey),
             ),
             focusedBorder: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(width: 2, color: AppColors.textFieldGrey),
             ),
             errorBorder: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 width: 2,
                 color: AppColors.colorRed,
@@ -126,6 +129,7 @@ class _GeminiInputFieldState extends State<GeminiInputField> {
               fontWeight: FontWeight.w500,
             ),
             focusedErrorBorder: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(16)),
               borderSide: BorderSide(
                 width: 2,
                 color: AppColors.colorRed,

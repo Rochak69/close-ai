@@ -7,10 +7,13 @@ import 'package:close_ai/features/common/app_spacing.dart';
 import 'package:close_ai/features/common/gemini_input_field.dart';
 import 'package:close_ai/features/homescreen/presentation/bloc/home_bloc.dart';
 import 'package:close_ai/utlis/helper.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:form_validator/form_validator.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -58,73 +61,25 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         body: SafeArea(
-          child: Column(
+          child: Stack(
+            alignment: Alignment.bottomCenter,
             children: [
-              Expanded(
-                child: BlocConsumer<HomeBloc, HomeState>(
-                  listener: (context, state) {},
-                  builder: (context, state) {
-                    return ColoredBox(
-                      color: Theme.of(context).canvasColor,
-                      child: ListView(
-                        controller: _scrollController,
-                        reverse: true,
-                        children: [
-                          if (state.progressPrompt != null)
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 6,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    textDirection: TextDirection.rtl,
-                                    children: [
-                                      const Icon(
-                                        Icons.person,
-                                        size: 18,
-                                        color: AppColors.colorRed,
-                                      ),
-                                      const HorizontalSpacing(4),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: Text(
-                                            state.progressPrompt?.prompt ?? '',
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const VerticalSpacing(16),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SvgPicture.asset(
-                                        AppImages.geimini,
-                                        width: 20,
-                                      ),
-                                      const HorizontalSpacing(4),
-                                      Expanded(
-                                        child: Text(
-                                          state.progressPrompt?.result ?? '',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ListView.separated(
-                            physics: const NeverScrollableScrollPhysics(),
+              Column(
+                children: [
+                  Expanded(
+                    child: BlocConsumer<HomeBloc, HomeState>(
+                      listener: (context, state) {},
+                      builder: (context, state) {
+                        return ColoredBox(
+                          color: Theme.of(context).canvasColor,
+                          child: ListView.separated(
+                            controller: _scrollController,
                             shrinkWrap: true,
+                            reverse: true,
                             keyboardDismissBehavior:
                                 ScrollViewKeyboardDismissBehavior.onDrag,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 16,
-                            ),
+                            padding:
+                                const EdgeInsets.only(top: 16, bottom: 100),
                             itemBuilder: (context, index) => Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 6,
@@ -133,39 +88,30 @@ class _HomeScreenState extends State<HomeScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    textDirection: TextDirection.rtl,
-                                    children: [
-                                      const Icon(
-                                        Icons.person,
-                                        size: 18,
-                                        color: AppColors.colorRed,
-                                      ),
-                                      const HorizontalSpacing(4),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: Text(
-                                            state.homeResponse?[index].prompt ??
-                                                '',
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const VerticalSpacing(16),
-                                  Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    textDirection:
+                                        state.chathistory?[index].role ==
+                                                'model'
+                                            ? null
+                                            : TextDirection.rtl,
                                     children: [
-                                      SvgPicture.asset(
-                                        AppImages.geimini,
-                                        width: 20,
-                                      ),
+                                      if (state.chathistory?[index].role ==
+                                          'model')
+                                        SvgPicture.asset(
+                                          AppImages.geimini,
+                                          width: 24,
+                                        )
+                                      else
+                                        const Icon(
+                                          Icons.person,
+                                          color: AppColors.colorRed,
+                                        ),
                                       const HorizontalSpacing(4),
-                                      Expanded(
+                                      Flexible(
                                         child: Text(
-                                          state.homeResponse?[index].result ??
-                                              '',
+                                          _getText(state, index),
+                                          style: const TextStyle(fontSize: 16),
                                         ),
                                       ),
                                     ],
@@ -173,51 +119,51 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ],
                               ),
                             ),
-                            separatorBuilder: (context, index) => Container(
-                              margin: const EdgeInsets.symmetric(vertical: 24),
-                              width: double.infinity,
-                              height: 1,
-                              color: AppColors.primaryDark,
-                            ),
-                            itemCount: state.homeResponse?.length ?? 0,
+                            separatorBuilder: (context, index) =>
+                                const VerticalSpacing(32),
+                            itemCount: state.chathistory?.length ?? 0,
                           ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                child: Form(
-                  key: _formKey,
-                  child: GeminiInputField(
-                    hintText: 'Ask anything to Gemini....',
-                    validator: ValidationBuilder().required().build(),
-                    autovalidateMode: AutovalidateMode.disabled,
-                    textEditingController: controller,
-                    onSend: (files) {
-                      if (_formKey.currentState!.validate()) {
-                        AppUtils.unfocusKeyboard(context);
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                  child: Form(
+                    key: _formKey,
+                    child: GeminiInputField(
+                      hintText: 'Ask anything to Gemini....',
+                      validator: ValidationBuilder().required().build(),
+                      autovalidateMode: AutovalidateMode.disabled,
+                      textEditingController: controller,
+                      onSend: (files) {
+                        if (_formKey.currentState!.validate()) {
+                          AppUtils.unfocusKeyboard(context);
 
-                        BlocProvider.of<HomeBloc>(context).add(
-                          HomeEvent.fetch(
-                              prompt: controller.text, files: files),
-                        );
-                        controller.clear();
-                        Future.delayed(
-                          Durations.short1,
-                          () {
-                            _scrollController.animateTo(
-                              _scrollController.position.minScrollExtent,
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.decelerate,
-                            );
-                          },
-                        );
-                      }
-                    },
+                          BlocProvider.of<HomeBloc>(context).add(
+                            HomeEvent.startChat(prompt: controller.text, id: 1),
+                          );
+                          controller.clear();
+                          Future.delayed(
+                            Durations.short1,
+                            () {
+                              _scrollController.animateTo(
+                                _scrollController.position.minScrollExtent,
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.decelerate,
+                              );
+                            },
+                          );
+                        }
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -226,5 +172,17 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  String _getText(HomeState state, int index) {
+    final contentParts = state.chathistory?[index].parts ?? [];
+    for (var i in contentParts) {
+      if (i is TextPart) {
+        return i.text;
+      } else if (i is DataPart) {
+        return i.bytes.toString();
+      }
+    }
+    return 'WTFF';
   }
 }

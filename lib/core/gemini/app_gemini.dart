@@ -15,6 +15,7 @@ class GeminiClient {
   static final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
   static final imagemodel =
       GenerativeModel(model: 'gemini-pro-vision', apiKey: apiKey);
+  static final a = model.startChat();
 
   Future<Either<AppError, String>> generateContentFromText({
     required String prompt,
@@ -77,6 +78,17 @@ class GeminiClient {
               : AppConstants.errorMessage,
         ),
       );
+    }
+  }
+
+  Future<Either<AppError, Stream<GenerateContentResponse>>> chat({
+    required String prompt,
+  }) async {
+    try {
+      final b = a.sendMessageStream(Content.text(prompt));
+      return right(b);
+    } catch (e) {
+      return left(const InternalAppError());
     }
   }
 }
