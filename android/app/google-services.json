@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "181871412352",
+    "project_id": "closeai-9376f",
+    "storage_bucket": "closeai-9376f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181871412352:android:fc16e85d01204cca5bd265",
+        "android_client_info": {
+          "package_name": "com.chronosphere.closeai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJXxLmtlw6yvA-qRbFZ6kOi1X8GUmQX68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

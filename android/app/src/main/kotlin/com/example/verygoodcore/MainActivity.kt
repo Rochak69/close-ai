@@ -1,4 +1,4 @@
-package com.example.verygoodcore.close_ai
+package com.chronosphere.closeai
 
 import io.flutter.embedding.android.FlutterActivity
 

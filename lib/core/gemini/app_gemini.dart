@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:close_ai/constants/app_constant.dart';
 import 'package:close_ai/core/dio_provider/api_error.dart';
 import 'package:dartz/dartz.dart';
@@ -50,7 +48,7 @@ class GeminiClient {
       final response = await imagemodel.generateContent(
         [content],
       );
-      print(response.text);
+
       if (response.text == null) {
         return left(
           const InternalAppError(message: 'Empty response from model'),

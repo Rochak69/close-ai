@@ -20,3 +20,5 @@ analyzer:
     strict-inference: false
   exclude:
     - bricks/**
+    - lib/**.g.dart
+

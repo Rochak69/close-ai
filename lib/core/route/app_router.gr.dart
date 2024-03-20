@@ -27,6 +27,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginScreen(),
       );
     },
+    SelectTextRoute.name: (routeData) {
+      final args = routeData.argsAs<SelectTextRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: SelectTextScreen(
+          key: args.key,
+          text: args.text,
+        ),
+      );
+    },
     SplashRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -68,6 +78,44 @@ class LoginRoute extends PageRouteInfo<void> {
   static const String name = 'LoginRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SelectTextScreen]
+class SelectTextRoute extends PageRouteInfo<SelectTextRouteArgs> {
+  SelectTextRoute({
+    Key? key,
+    required String text,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SelectTextRoute.name,
+          args: SelectTextRouteArgs(
+            key: key,
+            text: text,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'SelectTextRoute';
+
+  static const PageInfo<SelectTextRouteArgs> page =
+      PageInfo<SelectTextRouteArgs>(name);
+}
+
+class SelectTextRouteArgs {
+  const SelectTextRouteArgs({
+    this.key,
+    required this.text,
+  });
+
+  final Key? key;
+
+  final String text;
+
+  @override
+  String toString() {
+    return 'SelectTextRouteArgs{key: $key, text: $text}';
+  }
 }
 
 /// generated route for

@@ -5,7 +5,7 @@ class HomeState with _$HomeState {
   const factory HomeState({
     @Default(TheStates.initial) TheStates theStates,
     List<Content>? chathistory,
-    HomeResponse? progressPrompt,
+    @Default(GeminiModelEnum.text) GeminiModelEnum currentModel,
     @Default(InternalAppError()) AppError error,
   }) = _HomeState;
 }

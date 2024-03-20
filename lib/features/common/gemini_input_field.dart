@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:close_ai/constants/app_colors.dart';
+import 'package:close_ai/enum/gemini_model_enum.dart';
 import 'package:close_ai/features/common/app_spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,6 +24,7 @@ class GeminiInputField extends StatefulWidget {
     this.onTap,
     this.isReadOnly = false,
     this.scroll = EdgeInsets.zero,
+    this.currentModel = GeminiModelEnum.text,
   });
 
   final String? Function(String?)? validator;
@@ -37,7 +39,7 @@ class GeminiInputField extends StatefulWidget {
   final void Function()? onTap;
   final void Function(List<XFile>?)? onSend;
   final EdgeInsets scroll;
-
+  final GeminiModelEnum currentModel;
   final AutovalidateMode autovalidateMode;
   final TextInputAction textInputAction;
 
@@ -73,8 +75,9 @@ class _GeminiInputFieldState extends State<GeminiInputField> {
                       },
                       child: Container(
                         decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColors.colorWhite,),
+                          shape: BoxShape.circle,
+                          color: AppColors.colorWhite,
+                        ),
                         child: const Icon(
                           Icons.remove,
                           color: AppColors.colorRed,
@@ -138,61 +141,63 @@ class _GeminiInputFieldState extends State<GeminiInputField> {
             suffixIcon: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Material(
-                  borderRadius: BorderRadius.circular(25),
-                  child: InkWell(
-                    splashColor: AppColors.primary,
+                if (widget.currentModel == GeminiModelEnum.image)
+                  Material(
                     borderRadius: BorderRadius.circular(25),
-                    onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        useSafeArea: true,
-                        builder: (context) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 16,
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                ListTile(
-                                  onTap: () async {
-                                    Navigator.pop(context);
-                                    var picker = ImagePicker();
-                                    var images = await picker.pickMultiImage();
-                                    files = images;
-                                    setState(() {});
-                                  },
-                                  leading: const Icon(Icons.photo),
-                                  title: const Text('Upload from Gallery'),
-                                ),
-                                ListTile(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  leading: const Icon(Icons.camera),
-                                  title: const Text('Take a picture'),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      padding: const EdgeInsets.all(4),
-                      child: const Icon(
-                        Icons.attach_file,
-                        color: AppColors.black,
+                    child: InkWell(
+                      splashColor: AppColors.primary,
+                      borderRadius: BorderRadius.circular(25),
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          useSafeArea: true,
+                          builder: (context) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 16,
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ListTile(
+                                    onTap: () async {
+                                      Navigator.pop(context);
+                                      var picker = ImagePicker();
+                                      var images =
+                                          await picker.pickMultiImage();
+                                      files = images;
+                                      setState(() {});
+                                    },
+                                    leading: const Icon(Icons.photo),
+                                    title: const Text('Upload from Gallery'),
+                                  ),
+                                  ListTile(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    leading: const Icon(Icons.camera),
+                                    title: const Text('Take a picture'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        padding: const EdgeInsets.all(4),
+                        child: const Icon(
+                          Icons.attach_file,
+                          color: AppColors.black,
+                        ),
                       ),
                     ),
                   ),
-                ),
                 IconButton(
                   onPressed: () {
                     widget.onSend?.call(files);

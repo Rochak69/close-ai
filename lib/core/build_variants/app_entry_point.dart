@@ -4,11 +4,15 @@ import 'dart:io';
 import 'package:close_ai/core/bloc/app_bloc_observer.dart';
 import 'package:close_ai/core/config/app_config.dart';
 import 'package:close_ai/core/dependency_injection/dependency_injection.dart';
+import 'package:close_ai/core/firestore/app_firestore.dart';
 
 import 'package:close_ai/core/route/app_router.dart';
 import 'package:close_ai/core/theme/app_theme.dart';
+import 'package:close_ai/features/drawer/presentation/bloc/drawer_bloc.dart';
 import 'package:close_ai/features/homescreen/presentation/bloc/home_bloc.dart';
 import 'package:close_ai/features/login/presentation/bloc/login_bloc.dart';
+import 'package:close_ai/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +29,14 @@ class AppEntryPoint {
     AppConfiguration? envSettings,
   ) async {
     WidgetsFlutterBinding.ensureInitialized();
+    try {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+      AppFirestore.init();
+    } catch (e) {
+      debugPrint(e.toString());
+    }
     await configureDependencies();
 
     if (Platform.isAndroid) {
@@ -70,6 +82,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<HomeBloc>(
             create: (BuildContext context) => sl<HomeBloc>(),
+          ),
+          BlocProvider<DrawerBloc>(
+            create: (BuildContext context) => sl<DrawerBloc>(),
           ),
         ],
         child: MaterialApp.router(
