@@ -44,23 +44,11 @@ class GeminiClient {
 
   Future<Either<AppError, String>> generateContentFromImage({
     required String prompt,
-    List<File>? files,
+    required Content content,
   }) async {
     try {
-      final partedText = TextPart(prompt);
-      if (files == null || files.isEmpty) {
-        // Handle the case where no files are provided
-        return left(const InternalAppError());
-      }
-
-      final bytesImages = await Future.wait(
-        files.map((file) => file.readAsBytes()),
-      );
-      final imageParts = bytesImages.map((e) => DataPart('image/jpeg', e));
       final response = await imagemodel.generateContent(
-        [
-          Content.multi([partedText, ...imageParts]),
-        ],
+        [content],
       );
       print(response.text);
       if (response.text == null) {

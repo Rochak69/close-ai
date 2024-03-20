@@ -4,7 +4,6 @@ import 'package:close_ai/constants/app_colors.dart';
 import 'package:close_ai/features/common/app_spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 
 class GeminiInputField extends StatefulWidget {
@@ -73,10 +72,10 @@ class _GeminiInputFieldState extends State<GeminiInputField> {
                         setState(() {});
                       },
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: AppColors.colorWhite),
-                        child: Icon(
+                            color: AppColors.colorWhite,),
+                        child: const Icon(
                           Icons.remove,
                           color: AppColors.colorRed,
                         ),

@@ -28,22 +28,24 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final HomeUsecase _homeUsecase;
 
   FutureOr<void> _fetchData(_Home event, Emitter<HomeState> emit) async {
+    final newList = List<Content>.from(state.chathistory ?? [])
+      ..addAll([
+        Content.text(event.prompt),
+        Content.model([TextPart('Please wait..')])
+      ]);
     emit(
-      state.copyWith(
-        theStates: TheStates.loading,
-        progressPrompt:
-            HomeResponse(prompt: event.prompt, result: 'Please wait...'),
-      ),
+      state.copyWith(theStates: TheStates.loading, chathistory: newList),
     );
+    final partedText = TextPart(event.prompt);
 
-    final result = event.files == null || event.files!.isEmpty
-        ? await sl<GeminiClient>().generateContentFromText(
-            prompt: event.prompt,
-          )
-        : await sl<GeminiClient>().generateContentFromImage(
-            prompt: event.prompt,
-            files: event.files?.map((e) => File(e.path)).toList(),
-          );
+    final bytesImages = await Future.wait(
+      event.files.map((file) => file.readAsBytes()),
+    );
+    final imageParts = bytesImages.map((e) => DataPart('image/jpeg', e));
+    final content = Content.multi([partedText, ...imageParts]);
+
+    final result = await sl<GeminiClient>()
+        .generateContentFromImage(prompt: event.prompt, content: content);
     // ignore: cascade_invocations
     result.fold((l) {
       _addToList(l.message, event, emit);
@@ -54,6 +56,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _addToList(String r, HomeEvent event, Emitter<HomeState> emit) {
     final newList = List<Content>.from(state.chathistory ?? [])
+      ..removeLast()
       ..add(Content.model([TextPart(r)]));
 
     emit(
@@ -67,11 +70,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> _startChat(_StartChat event, Emitter<HomeState> emit) async {
     final newList = List<Content>.from(state.chathistory ?? [])
-      ..add(Content.text(event.prompt));
+      ..addAll([
+        Content.text(event.prompt),
+        Content.model([TextPart('Please wait..')])
+      ]);
     emit(
       state.copyWith(
         theStates: TheStates.loading,
-        chathistory: newList.reversed.toList(),
+        chathistory: newList,
       ),
     );
 
@@ -83,9 +89,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       var streamedtext = '';
       // ignore: cancel_subscriptions
       final c = r.listen((events) {
-        if (!streamedtext.isEmpty) {
-          newList.removeLast();
-        }
+        newList.removeLast();
         streamedtext = streamedtext + (events.text ?? '');
 
         newList.add(Content.model([TextPart(streamedtext)]));
@@ -93,7 +97,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(
           state.copyWith(
             theStates: TheStates.success,
-            chathistory: newList.reversed.toList(),
+            chathistory: newList,
             progressPrompt: null,
           ),
         );

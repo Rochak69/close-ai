@@ -19,38 +19,39 @@ mixin _$HomeEvent {
   String get prompt => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String prompt, List<XFile>? files) fetch,
+    required TResult Function(String prompt, List<XFile> files)
+        generateFromImage,
     required TResult Function(int id, String prompt) startChat,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String prompt, List<XFile>? files)? fetch,
+    TResult? Function(String prompt, List<XFile> files)? generateFromImage,
     TResult? Function(int id, String prompt)? startChat,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String prompt, List<XFile>? files)? fetch,
+    TResult Function(String prompt, List<XFile> files)? generateFromImage,
     TResult Function(int id, String prompt)? startChat,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Home value) fetch,
+    required TResult Function(_Home value) generateFromImage,
     required TResult Function(_StartChat value) startChat,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Home value)? fetch,
+    TResult? Function(_Home value)? generateFromImage,
     TResult? Function(_StartChat value)? startChat,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Home value)? fetch,
+    TResult Function(_Home value)? generateFromImage,
     TResult Function(_StartChat value)? startChat,
     required TResult orElse(),
   }) =>
@@ -100,7 +101,7 @@ abstract class _$$HomeImplCopyWith<$Res> implements $HomeEventCopyWith<$Res> {
       __$$HomeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String prompt, List<XFile>? files});
+  $Res call({String prompt, List<XFile> files});
 }
 
 /// @nodoc
@@ -114,17 +115,17 @@ class __$$HomeImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? prompt = null,
-    Object? files = freezed,
+    Object? files = null,
   }) {
     return _then(_$HomeImpl(
       prompt: null == prompt
           ? _value.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
               as String,
-      files: freezed == files
+      files: null == files
           ? _value._files
           : files // ignore: cast_nullable_to_non_nullable
-              as List<XFile>?,
+              as List<XFile>,
     ));
   }
 }
@@ -132,24 +133,22 @@ class __$$HomeImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$HomeImpl implements _Home {
-  const _$HomeImpl({required this.prompt, final List<XFile>? files})
+  const _$HomeImpl({required this.prompt, required final List<XFile> files})
       : _files = files;
 
   @override
   final String prompt;
-  final List<XFile>? _files;
+  final List<XFile> _files;
   @override
-  List<XFile>? get files {
-    final value = _files;
-    if (value == null) return null;
+  List<XFile> get files {
     if (_files is EqualUnmodifiableListView) return _files;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_files);
   }
 
   @override
   String toString() {
-    return 'HomeEvent.fetch(prompt: $prompt, files: $files)';
+    return 'HomeEvent.generateFromImage(prompt: $prompt, files: $files)';
   }
 
   @override
@@ -174,30 +173,31 @@ class _$HomeImpl implements _Home {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String prompt, List<XFile>? files) fetch,
+    required TResult Function(String prompt, List<XFile> files)
+        generateFromImage,
     required TResult Function(int id, String prompt) startChat,
   }) {
-    return fetch(prompt, files);
+    return generateFromImage(prompt, files);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String prompt, List<XFile>? files)? fetch,
+    TResult? Function(String prompt, List<XFile> files)? generateFromImage,
     TResult? Function(int id, String prompt)? startChat,
   }) {
-    return fetch?.call(prompt, files);
+    return generateFromImage?.call(prompt, files);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String prompt, List<XFile>? files)? fetch,
+    TResult Function(String prompt, List<XFile> files)? generateFromImage,
     TResult Function(int id, String prompt)? startChat,
     required TResult orElse(),
   }) {
-    if (fetch != null) {
-      return fetch(prompt, files);
+    if (generateFromImage != null) {
+      return generateFromImage(prompt, files);
     }
     return orElse();
   }
@@ -205,30 +205,30 @@ class _$HomeImpl implements _Home {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Home value) fetch,
+    required TResult Function(_Home value) generateFromImage,
     required TResult Function(_StartChat value) startChat,
   }) {
-    return fetch(this);
+    return generateFromImage(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Home value)? fetch,
+    TResult? Function(_Home value)? generateFromImage,
     TResult? Function(_StartChat value)? startChat,
   }) {
-    return fetch?.call(this);
+    return generateFromImage?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Home value)? fetch,
+    TResult Function(_Home value)? generateFromImage,
     TResult Function(_StartChat value)? startChat,
     required TResult orElse(),
   }) {
-    if (fetch != null) {
-      return fetch(this);
+    if (generateFromImage != null) {
+      return generateFromImage(this);
     }
     return orElse();
   }
@@ -236,11 +236,12 @@ class _$HomeImpl implements _Home {
 
 abstract class _Home implements HomeEvent {
   const factory _Home(
-      {required final String prompt, final List<XFile>? files}) = _$HomeImpl;
+      {required final String prompt,
+      required final List<XFile> files}) = _$HomeImpl;
 
   @override
   String get prompt;
-  List<XFile>? get files;
+  List<XFile> get files;
   @override
   @JsonKey(ignore: true)
   _$$HomeImplCopyWith<_$HomeImpl> get copyWith =>
@@ -321,7 +322,8 @@ class _$StartChatImpl implements _StartChat {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String prompt, List<XFile>? files) fetch,
+    required TResult Function(String prompt, List<XFile> files)
+        generateFromImage,
     required TResult Function(int id, String prompt) startChat,
   }) {
     return startChat(id, prompt);
@@ -330,7 +332,7 @@ class _$StartChatImpl implements _StartChat {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String prompt, List<XFile>? files)? fetch,
+    TResult? Function(String prompt, List<XFile> files)? generateFromImage,
     TResult? Function(int id, String prompt)? startChat,
   }) {
     return startChat?.call(id, prompt);
@@ -339,7 +341,7 @@ class _$StartChatImpl implements _StartChat {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String prompt, List<XFile>? files)? fetch,
+    TResult Function(String prompt, List<XFile> files)? generateFromImage,
     TResult Function(int id, String prompt)? startChat,
     required TResult orElse(),
   }) {
@@ -352,7 +354,7 @@ class _$StartChatImpl implements _StartChat {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Home value) fetch,
+    required TResult Function(_Home value) generateFromImage,
     required TResult Function(_StartChat value) startChat,
   }) {
     return startChat(this);
@@ -361,7 +363,7 @@ class _$StartChatImpl implements _StartChat {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Home value)? fetch,
+    TResult? Function(_Home value)? generateFromImage,
     TResult? Function(_StartChat value)? startChat,
   }) {
     return startChat?.call(this);
@@ -370,7 +372,7 @@ class _$StartChatImpl implements _StartChat {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Home value)? fetch,
+    TResult Function(_Home value)? generateFromImage,
     TResult Function(_StartChat value)? startChat,
     required TResult orElse(),
   }) {

@@ -7,9 +7,7 @@ import 'package:close_ai/features/common/app_spacing.dart';
 import 'package:close_ai/features/common/gemini_input_field.dart';
 import 'package:close_ai/features/homescreen/presentation/bloc/home_bloc.dart';
 import 'package:close_ai/utlis/helper.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:form_validator/form_validator.dart';
@@ -70,6 +68,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: BlocConsumer<HomeBloc, HomeState>(
                       listener: (context, state) {},
                       builder: (context, state) {
+                        final reversedChat =
+                            state.chathistory?.reversed.toList();
                         return ColoredBox(
                           color: Theme.of(context).canvasColor,
                           child: ListView.separated(
@@ -91,13 +91,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     textDirection:
-                                        state.chathistory?[index].role ==
-                                                'model'
+                                        reversedChat?[index].role == 'model'
                                             ? null
                                             : TextDirection.rtl,
                                     children: [
-                                      if (state.chathistory?[index].role ==
-                                          'model')
+                                      if (reversedChat?[index].role == 'model')
                                         SvgPicture.asset(
                                           AppImages.geimini,
                                           width: 24,
@@ -105,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       else
                                         const Icon(
                                           Icons.person,
-                                          color: AppColors.colorRed,
+                                          color: AppColors.primaryDark,
                                         ),
                                       const HorizontalSpacing(4),
                                       Flexible(
@@ -121,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             separatorBuilder: (context, index) =>
                                 const VerticalSpacing(32),
-                            itemCount: state.chathistory?.length ?? 0,
+                            itemCount: reversedChat?.length ?? 0,
                           ),
                         );
                       },
@@ -146,10 +144,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       onSend: (files) {
                         if (_formKey.currentState!.validate()) {
                           AppUtils.unfocusKeyboard(context);
+                          if (files?.isEmpty ?? true) {
+                            BlocProvider.of<HomeBloc>(context).add(
+                              HomeEvent.startChat(
+                                  prompt: controller.text, id: 1),
+                            );
+                          } else {
+                            BlocProvider.of<HomeBloc>(context).add(
+                                HomeEvent.generateFromImage(
+                                    prompt: controller.text, files: files!));
+                          }
 
-                          BlocProvider.of<HomeBloc>(context).add(
-                            HomeEvent.startChat(prompt: controller.text, id: 1),
-                          );
                           controller.clear();
                           Future.delayed(
                             Durations.short1,
@@ -175,8 +180,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String _getText(HomeState state, int index) {
-    final contentParts = state.chathistory?[index].parts ?? [];
-    for (var i in contentParts) {
+    final reversedChat = state.chathistory?.reversed.toList();
+    final contentParts = reversedChat?[index].parts ?? [];
+    for (final i in contentParts) {
       if (i is TextPart) {
         return i.text;
       } else if (i is DataPart) {
