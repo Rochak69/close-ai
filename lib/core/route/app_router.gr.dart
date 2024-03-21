@@ -32,8 +32,8 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: SelectTextScreen(
-          key: args.key,
           text: args.text,
+          key: args.key,
         ),
       );
     },
@@ -84,14 +84,14 @@ class LoginRoute extends PageRouteInfo<void> {
 /// [SelectTextScreen]
 class SelectTextRoute extends PageRouteInfo<SelectTextRouteArgs> {
   SelectTextRoute({
-    Key? key,
     required String text,
+    Key? key,
     List<PageRouteInfo>? children,
   }) : super(
           SelectTextRoute.name,
           args: SelectTextRouteArgs(
-            key: key,
             text: text,
+            key: key,
           ),
           initialChildren: children,
         );
@@ -104,17 +104,17 @@ class SelectTextRoute extends PageRouteInfo<SelectTextRouteArgs> {
 
 class SelectTextRouteArgs {
   const SelectTextRouteArgs({
-    this.key,
     required this.text,
+    this.key,
   });
-
-  final Key? key;
 
   final String text;
 
+  final Key? key;
+
   @override
   String toString() {
-    return 'SelectTextRouteArgs{key: $key, text: $text}';
+    return 'SelectTextRouteArgs{text: $text, key: $key}';
   }
 }
 

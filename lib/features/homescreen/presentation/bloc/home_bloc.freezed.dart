@@ -22,7 +22,7 @@ mixin _$HomeEvent {
         generateFromImage,
     required TResult Function(int id, String prompt) startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(int id) selectChat,
+    required TResult Function(String id, String title) selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
@@ -33,7 +33,7 @@ mixin _$HomeEvent {
     TResult? Function(String prompt, List<XFile> files)? generateFromImage,
     TResult? Function(int id, String prompt)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(int id)? selectChat,
+    TResult? Function(String id, String title)? selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
@@ -44,7 +44,7 @@ mixin _$HomeEvent {
     TResult Function(String prompt, List<XFile> files)? generateFromImage,
     TResult Function(int id, String prompt)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(int id)? selectChat,
+    TResult Function(String id, String title)? selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
@@ -189,7 +189,7 @@ class _$GenerateFromImageImpl implements _GenerateFromImage {
         generateFromImage,
     required TResult Function(int id, String prompt) startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(int id) selectChat,
+    required TResult Function(String id, String title) selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
@@ -203,7 +203,7 @@ class _$GenerateFromImageImpl implements _GenerateFromImage {
     TResult? Function(String prompt, List<XFile> files)? generateFromImage,
     TResult? Function(int id, String prompt)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(int id)? selectChat,
+    TResult? Function(String id, String title)? selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
@@ -217,7 +217,7 @@ class _$GenerateFromImageImpl implements _GenerateFromImage {
     TResult Function(String prompt, List<XFile> files)? generateFromImage,
     TResult Function(int id, String prompt)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(int id)? selectChat,
+    TResult Function(String id, String title)? selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
@@ -364,7 +364,7 @@ class _$StartChatImpl implements _StartChat {
         generateFromImage,
     required TResult Function(int id, String prompt) startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(int id) selectChat,
+    required TResult Function(String id, String title) selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
@@ -378,7 +378,7 @@ class _$StartChatImpl implements _StartChat {
     TResult? Function(String prompt, List<XFile> files)? generateFromImage,
     TResult? Function(int id, String prompt)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(int id)? selectChat,
+    TResult? Function(String id, String title)? selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
@@ -392,7 +392,7 @@ class _$StartChatImpl implements _StartChat {
     TResult Function(String prompt, List<XFile> files)? generateFromImage,
     TResult Function(int id, String prompt)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(int id)? selectChat,
+    TResult Function(String id, String title)? selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
@@ -531,7 +531,7 @@ class _$GenerateFromTextImpl implements _GenerateFromText {
         generateFromImage,
     required TResult Function(int id, String prompt) startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(int id) selectChat,
+    required TResult Function(String id, String title) selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
@@ -545,7 +545,7 @@ class _$GenerateFromTextImpl implements _GenerateFromText {
     TResult? Function(String prompt, List<XFile> files)? generateFromImage,
     TResult? Function(int id, String prompt)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(int id)? selectChat,
+    TResult? Function(String id, String title)? selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
@@ -559,7 +559,7 @@ class _$GenerateFromTextImpl implements _GenerateFromText {
     TResult Function(String prompt, List<XFile> files)? generateFromImage,
     TResult Function(int id, String prompt)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(int id)? selectChat,
+    TResult Function(String id, String title)? selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
@@ -634,7 +634,7 @@ abstract class _$$SelectChatImplCopyWith<$Res> {
           _$SelectChatImpl value, $Res Function(_$SelectChatImpl) then) =
       __$$SelectChatImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int id});
+  $Res call({String id, String title});
 }
 
 /// @nodoc
@@ -649,12 +649,17 @@ class __$$SelectChatImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? title = null,
   }) {
     return _then(_$SelectChatImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -662,14 +667,16 @@ class __$$SelectChatImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SelectChatImpl implements _SelectChat {
-  const _$SelectChatImpl({required this.id});
+  const _$SelectChatImpl({required this.id, required this.title});
 
   @override
-  final int id;
+  final String id;
+  @override
+  final String title;
 
   @override
   String toString() {
-    return 'HomeEvent.selectChat(id: $id)';
+    return 'HomeEvent.selectChat(id: $id, title: $title)';
   }
 
   @override
@@ -677,11 +684,12 @@ class _$SelectChatImpl implements _SelectChat {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SelectChatImpl &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, id, title);
 
   @JsonKey(ignore: true)
   @override
@@ -696,12 +704,12 @@ class _$SelectChatImpl implements _SelectChat {
         generateFromImage,
     required TResult Function(int id, String prompt) startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(int id) selectChat,
+    required TResult Function(String id, String title) selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
   }) {
-    return selectChat(id);
+    return selectChat(id, title);
   }
 
   @override
@@ -710,12 +718,12 @@ class _$SelectChatImpl implements _SelectChat {
     TResult? Function(String prompt, List<XFile> files)? generateFromImage,
     TResult? Function(int id, String prompt)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(int id)? selectChat,
+    TResult? Function(String id, String title)? selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
   }) {
-    return selectChat?.call(id);
+    return selectChat?.call(id, title);
   }
 
   @override
@@ -724,14 +732,14 @@ class _$SelectChatImpl implements _SelectChat {
     TResult Function(String prompt, List<XFile> files)? generateFromImage,
     TResult Function(int id, String prompt)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(int id)? selectChat,
+    TResult Function(String id, String title)? selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
     required TResult orElse(),
   }) {
     if (selectChat != null) {
-      return selectChat(id);
+      return selectChat(id, title);
     }
     return orElse();
   }
@@ -784,9 +792,12 @@ class _$SelectChatImpl implements _SelectChat {
 }
 
 abstract class _SelectChat implements HomeEvent {
-  const factory _SelectChat({required final int id}) = _$SelectChatImpl;
+  const factory _SelectChat(
+      {required final String id,
+      required final String title}) = _$SelectChatImpl;
 
-  int get id;
+  String get id;
+  String get title;
   @JsonKey(ignore: true)
   _$$SelectChatImplCopyWith<_$SelectChatImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -861,7 +872,7 @@ class _$SwitchModelImpl implements _SwitchModel {
         generateFromImage,
     required TResult Function(int id, String prompt) startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(int id) selectChat,
+    required TResult Function(String id, String title) selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
@@ -875,7 +886,7 @@ class _$SwitchModelImpl implements _SwitchModel {
     TResult? Function(String prompt, List<XFile> files)? generateFromImage,
     TResult? Function(int id, String prompt)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(int id)? selectChat,
+    TResult? Function(String id, String title)? selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
@@ -889,7 +900,7 @@ class _$SwitchModelImpl implements _SwitchModel {
     TResult Function(String prompt, List<XFile> files)? generateFromImage,
     TResult Function(int id, String prompt)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(int id)? selectChat,
+    TResult Function(String id, String title)? selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
@@ -1026,7 +1037,7 @@ class _$SpeakImpl implements _Speak {
         generateFromImage,
     required TResult Function(int id, String prompt) startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(int id) selectChat,
+    required TResult Function(String id, String title) selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
@@ -1040,7 +1051,7 @@ class _$SpeakImpl implements _Speak {
     TResult? Function(String prompt, List<XFile> files)? generateFromImage,
     TResult? Function(int id, String prompt)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(int id)? selectChat,
+    TResult? Function(String id, String title)? selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
@@ -1054,7 +1065,7 @@ class _$SpeakImpl implements _Speak {
     TResult Function(String prompt, List<XFile> files)? generateFromImage,
     TResult Function(int id, String prompt)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(int id)? selectChat,
+    TResult Function(String id, String title)? selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
@@ -1190,7 +1201,7 @@ class _$PauseImpl implements _Pause {
         generateFromImage,
     required TResult Function(int id, String prompt) startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(int id) selectChat,
+    required TResult Function(String id, String title) selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
@@ -1204,7 +1215,7 @@ class _$PauseImpl implements _Pause {
     TResult? Function(String prompt, List<XFile> files)? generateFromImage,
     TResult? Function(int id, String prompt)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(int id)? selectChat,
+    TResult? Function(String id, String title)? selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
@@ -1218,7 +1229,7 @@ class _$PauseImpl implements _Pause {
     TResult Function(String prompt, List<XFile> files)? generateFromImage,
     TResult Function(int id, String prompt)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(int id)? selectChat,
+    TResult Function(String id, String title)? selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
@@ -1289,7 +1300,7 @@ abstract class _Pause implements HomeEvent {
 /// @nodoc
 mixin _$HomeState {
   TheStates get theStates => throw _privateConstructorUsedError;
-  List<Content>? get chathistory => throw _privateConstructorUsedError;
+  List<ContentResponse>? get chathistory => throw _privateConstructorUsedError;
   GeminiModelEnum get currentModel => throw _privateConstructorUsedError;
   AppError get error => throw _privateConstructorUsedError;
 
@@ -1305,7 +1316,7 @@ abstract class $HomeStateCopyWith<$Res> {
   @useResult
   $Res call(
       {TheStates theStates,
-      List<Content>? chathistory,
+      List<ContentResponse>? chathistory,
       GeminiModelEnum currentModel,
       AppError error});
 }
@@ -1336,7 +1347,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       chathistory: freezed == chathistory
           ? _value.chathistory
           : chathistory // ignore: cast_nullable_to_non_nullable
-              as List<Content>?,
+              as List<ContentResponse>?,
       currentModel: null == currentModel
           ? _value.currentModel
           : currentModel // ignore: cast_nullable_to_non_nullable
@@ -1359,7 +1370,7 @@ abstract class _$$HomeStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {TheStates theStates,
-      List<Content>? chathistory,
+      List<ContentResponse>? chathistory,
       GeminiModelEnum currentModel,
       AppError error});
 }
@@ -1388,7 +1399,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
       chathistory: freezed == chathistory
           ? _value._chathistory
           : chathistory // ignore: cast_nullable_to_non_nullable
-              as List<Content>?,
+              as List<ContentResponse>?,
       currentModel: null == currentModel
           ? _value.currentModel
           : currentModel // ignore: cast_nullable_to_non_nullable
@@ -1406,7 +1417,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
 class _$HomeStateImpl implements _HomeState {
   const _$HomeStateImpl(
       {this.theStates = TheStates.initial,
-      final List<Content>? chathistory,
+      final List<ContentResponse>? chathistory,
       this.currentModel = GeminiModelEnum.text,
       this.error = const InternalAppError()})
       : _chathistory = chathistory;
@@ -1414,9 +1425,9 @@ class _$HomeStateImpl implements _HomeState {
   @override
   @JsonKey()
   final TheStates theStates;
-  final List<Content>? _chathistory;
+  final List<ContentResponse>? _chathistory;
   @override
-  List<Content>? get chathistory {
+  List<ContentResponse>? get chathistory {
     final value = _chathistory;
     if (value == null) return null;
     if (_chathistory is EqualUnmodifiableListView) return _chathistory;
@@ -1464,14 +1475,14 @@ class _$HomeStateImpl implements _HomeState {
 abstract class _HomeState implements HomeState {
   const factory _HomeState(
       {final TheStates theStates,
-      final List<Content>? chathistory,
+      final List<ContentResponse>? chathistory,
       final GeminiModelEnum currentModel,
       final AppError error}) = _$HomeStateImpl;
 
   @override
   TheStates get theStates;
   @override
-  List<Content>? get chathistory;
+  List<ContentResponse>? get chathistory;
   @override
   GeminiModelEnum get currentModel;
   @override

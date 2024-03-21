@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'history_response.dart';
+part of 'conversation_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,34 +14,35 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-HistoryResponse _$HistoryResponseFromJson(Map<String, dynamic> json) {
-  return _HistoryResponse.fromJson(json);
+ConversationResponse _$ConversationResponseFromJson(Map<String, dynamic> json) {
+  return _ConversationResponse.fromJson(json);
 }
 
 /// @nodoc
-mixin _$HistoryResponse {
-  int? get id => throw _privateConstructorUsedError;
+mixin _$ConversationResponse {
+  String? get id => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $HistoryResponseCopyWith<HistoryResponse> get copyWith =>
+  $ConversationResponseCopyWith<ConversationResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HistoryResponseCopyWith<$Res> {
-  factory $HistoryResponseCopyWith(
-          HistoryResponse value, $Res Function(HistoryResponse) then) =
-      _$HistoryResponseCopyWithImpl<$Res, HistoryResponse>;
+abstract class $ConversationResponseCopyWith<$Res> {
+  factory $ConversationResponseCopyWith(ConversationResponse value,
+          $Res Function(ConversationResponse) then) =
+      _$ConversationResponseCopyWithImpl<$Res, ConversationResponse>;
   @useResult
-  $Res call({int? id, String? title});
+  $Res call({String? id, String? title});
 }
 
 /// @nodoc
-class _$HistoryResponseCopyWithImpl<$Res, $Val extends HistoryResponse>
-    implements $HistoryResponseCopyWith<$Res> {
-  _$HistoryResponseCopyWithImpl(this._value, this._then);
+class _$ConversationResponseCopyWithImpl<$Res,
+        $Val extends ConversationResponse>
+    implements $ConversationResponseCopyWith<$Res> {
+  _$ConversationResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -58,7 +59,7 @@ class _$HistoryResponseCopyWithImpl<$Res, $Val extends HistoryResponse>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -68,22 +69,22 @@ class _$HistoryResponseCopyWithImpl<$Res, $Val extends HistoryResponse>
 }
 
 /// @nodoc
-abstract class _$$HistoryResponseImplCopyWith<$Res>
-    implements $HistoryResponseCopyWith<$Res> {
-  factory _$$HistoryResponseImplCopyWith(_$HistoryResponseImpl value,
-          $Res Function(_$HistoryResponseImpl) then) =
-      __$$HistoryResponseImplCopyWithImpl<$Res>;
+abstract class _$$ConversationResponseImplCopyWith<$Res>
+    implements $ConversationResponseCopyWith<$Res> {
+  factory _$$ConversationResponseImplCopyWith(_$ConversationResponseImpl value,
+          $Res Function(_$ConversationResponseImpl) then) =
+      __$$ConversationResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String? title});
+  $Res call({String? id, String? title});
 }
 
 /// @nodoc
-class __$$HistoryResponseImplCopyWithImpl<$Res>
-    extends _$HistoryResponseCopyWithImpl<$Res, _$HistoryResponseImpl>
-    implements _$$HistoryResponseImplCopyWith<$Res> {
-  __$$HistoryResponseImplCopyWithImpl(
-      _$HistoryResponseImpl _value, $Res Function(_$HistoryResponseImpl) _then)
+class __$$ConversationResponseImplCopyWithImpl<$Res>
+    extends _$ConversationResponseCopyWithImpl<$Res, _$ConversationResponseImpl>
+    implements _$$ConversationResponseImplCopyWith<$Res> {
+  __$$ConversationResponseImplCopyWithImpl(_$ConversationResponseImpl _value,
+      $Res Function(_$ConversationResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,11 +93,11 @@ class __$$HistoryResponseImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? title = freezed,
   }) {
-    return _then(_$HistoryResponseImpl(
+    return _then(_$ConversationResponseImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -107,38 +108,27 @@ class __$$HistoryResponseImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$HistoryResponseImpl
-    with DiagnosticableTreeMixin
-    implements _HistoryResponse {
-  const _$HistoryResponseImpl({this.id, this.title});
+class _$ConversationResponseImpl implements _ConversationResponse {
+  const _$ConversationResponseImpl({this.id, this.title});
 
-  factory _$HistoryResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$HistoryResponseImplFromJson(json);
+  factory _$ConversationResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ConversationResponseImplFromJson(json);
 
   @override
-  final int? id;
+  final String? id;
   @override
   final String? title;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HistoryResponse(id: $id, title: $title)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'HistoryResponse'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('title', title));
+  String toString() {
+    return 'ConversationResponse(id: $id, title: $title)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HistoryResponseImpl &&
+            other is _$ConversationResponseImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title));
   }
@@ -150,31 +140,32 @@ class _$HistoryResponseImpl
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$HistoryResponseImplCopyWith<_$HistoryResponseImpl> get copyWith =>
-      __$$HistoryResponseImplCopyWithImpl<_$HistoryResponseImpl>(
-          this, _$identity);
+  _$$ConversationResponseImplCopyWith<_$ConversationResponseImpl>
+      get copyWith =>
+          __$$ConversationResponseImplCopyWithImpl<_$ConversationResponseImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$HistoryResponseImplToJson(
+    return _$$ConversationResponseImplToJson(
       this,
     );
   }
 }
 
-abstract class _HistoryResponse implements HistoryResponse {
-  const factory _HistoryResponse({final int? id, final String? title}) =
-      _$HistoryResponseImpl;
+abstract class _ConversationResponse implements ConversationResponse {
+  const factory _ConversationResponse({final String? id, final String? title}) =
+      _$ConversationResponseImpl;
 
-  factory _HistoryResponse.fromJson(Map<String, dynamic> json) =
-      _$HistoryResponseImpl.fromJson;
+  factory _ConversationResponse.fromJson(Map<String, dynamic> json) =
+      _$ConversationResponseImpl.fromJson;
 
   @override
-  int? get id;
+  String? get id;
   @override
   String? get title;
   @override
   @JsonKey(ignore: true)
-  _$$HistoryResponseImplCopyWith<_$HistoryResponseImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ConversationResponseImplCopyWith<_$ConversationResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

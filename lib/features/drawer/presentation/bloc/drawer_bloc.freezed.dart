@@ -167,7 +167,8 @@ abstract class _GetChatHistory implements DrawerEvent {
 /// @nodoc
 mixin _$DrawerState {
   TheStates get theStates => throw _privateConstructorUsedError;
-  List<HistoryResponse>? get allhistory => throw _privateConstructorUsedError;
+  List<ConversationResponse>? get conversationHistory =>
+      throw _privateConstructorUsedError;
   AppError get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -182,7 +183,9 @@ abstract class $DrawerStateCopyWith<$Res> {
       _$DrawerStateCopyWithImpl<$Res, DrawerState>;
   @useResult
   $Res call(
-      {TheStates theStates, List<HistoryResponse>? allhistory, AppError error});
+      {TheStates theStates,
+      List<ConversationResponse>? conversationHistory,
+      AppError error});
 }
 
 /// @nodoc
@@ -199,7 +202,7 @@ class _$DrawerStateCopyWithImpl<$Res, $Val extends DrawerState>
   @override
   $Res call({
     Object? theStates = null,
-    Object? allhistory = freezed,
+    Object? conversationHistory = freezed,
     Object? error = null,
   }) {
     return _then(_value.copyWith(
@@ -207,10 +210,10 @@ class _$DrawerStateCopyWithImpl<$Res, $Val extends DrawerState>
           ? _value.theStates
           : theStates // ignore: cast_nullable_to_non_nullable
               as TheStates,
-      allhistory: freezed == allhistory
-          ? _value.allhistory
-          : allhistory // ignore: cast_nullable_to_non_nullable
-              as List<HistoryResponse>?,
+      conversationHistory: freezed == conversationHistory
+          ? _value.conversationHistory
+          : conversationHistory // ignore: cast_nullable_to_non_nullable
+              as List<ConversationResponse>?,
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -228,7 +231,9 @@ abstract class _$$DrawerStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {TheStates theStates, List<HistoryResponse>? allhistory, AppError error});
+      {TheStates theStates,
+      List<ConversationResponse>? conversationHistory,
+      AppError error});
 }
 
 /// @nodoc
@@ -243,7 +248,7 @@ class __$$DrawerStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? theStates = null,
-    Object? allhistory = freezed,
+    Object? conversationHistory = freezed,
     Object? error = null,
   }) {
     return _then(_$DrawerStateImpl(
@@ -251,10 +256,10 @@ class __$$DrawerStateImplCopyWithImpl<$Res>
           ? _value.theStates
           : theStates // ignore: cast_nullable_to_non_nullable
               as TheStates,
-      allhistory: freezed == allhistory
-          ? _value._allhistory
-          : allhistory // ignore: cast_nullable_to_non_nullable
-              as List<HistoryResponse>?,
+      conversationHistory: freezed == conversationHistory
+          ? _value._conversationHistory
+          : conversationHistory // ignore: cast_nullable_to_non_nullable
+              as List<ConversationResponse>?,
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -268,19 +273,20 @@ class __$$DrawerStateImplCopyWithImpl<$Res>
 class _$DrawerStateImpl implements _DrawerState {
   const _$DrawerStateImpl(
       {this.theStates = TheStates.initial,
-      final List<HistoryResponse>? allhistory,
+      final List<ConversationResponse>? conversationHistory,
       this.error = const InternalAppError()})
-      : _allhistory = allhistory;
+      : _conversationHistory = conversationHistory;
 
   @override
   @JsonKey()
   final TheStates theStates;
-  final List<HistoryResponse>? _allhistory;
+  final List<ConversationResponse>? _conversationHistory;
   @override
-  List<HistoryResponse>? get allhistory {
-    final value = _allhistory;
+  List<ConversationResponse>? get conversationHistory {
+    final value = _conversationHistory;
     if (value == null) return null;
-    if (_allhistory is EqualUnmodifiableListView) return _allhistory;
+    if (_conversationHistory is EqualUnmodifiableListView)
+      return _conversationHistory;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -291,7 +297,7 @@ class _$DrawerStateImpl implements _DrawerState {
 
   @override
   String toString() {
-    return 'DrawerState(theStates: $theStates, allhistory: $allhistory, error: $error)';
+    return 'DrawerState(theStates: $theStates, conversationHistory: $conversationHistory, error: $error)';
   }
 
   @override
@@ -302,13 +308,13 @@ class _$DrawerStateImpl implements _DrawerState {
             (identical(other.theStates, theStates) ||
                 other.theStates == theStates) &&
             const DeepCollectionEquality()
-                .equals(other._allhistory, _allhistory) &&
+                .equals(other._conversationHistory, _conversationHistory) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, theStates,
-      const DeepCollectionEquality().hash(_allhistory), error);
+      const DeepCollectionEquality().hash(_conversationHistory), error);
 
   @JsonKey(ignore: true)
   @override
@@ -320,13 +326,13 @@ class _$DrawerStateImpl implements _DrawerState {
 abstract class _DrawerState implements DrawerState {
   const factory _DrawerState(
       {final TheStates theStates,
-      final List<HistoryResponse>? allhistory,
+      final List<ConversationResponse>? conversationHistory,
       final AppError error}) = _$DrawerStateImpl;
 
   @override
   TheStates get theStates;
   @override
-  List<HistoryResponse>? get allhistory;
+  List<ConversationResponse>? get conversationHistory;
   @override
   AppError get error;
   @override

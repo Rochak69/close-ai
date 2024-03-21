@@ -1,20 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'history_response.dart';
+part of 'conversation_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$HistoryResponseImpl _$$HistoryResponseImplFromJson(
+_$ConversationResponseImpl _$$ConversationResponseImplFromJson(
         Map<String, dynamic> json) =>
-    _$HistoryResponseImpl(
-      id: json['id'] as int?,
+    _$ConversationResponseImpl(
+      id: json['id'] as String?,
       title: json['title'] as String?,
     );
 
-Map<String, dynamic> _$$HistoryResponseImplToJson(
-        _$HistoryResponseImpl instance) =>
+Map<String, dynamic> _$$ConversationResponseImplToJson(
+        _$ConversationResponseImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

@@ -28,13 +28,84 @@ class AppDrawer extends StatelessWidget {
                   ),
                 ),
                 const Divider(),
-                ElevatedButton(
-                  onPressed: () {
-                    BlocProvider.of<DrawerBloc>(context)
-                        .add(const DrawerEvent.getChatHistory());
-                  },
-                  child: const Text('Get Chat History'),
-                ),
+                // ElevatedButton(
+                //   onPressed: () async {
+                //     const content = ContentResponse(
+                //       image: 'asdasasd',
+                //       role: 'mosadel',
+                //       text: 'Chat 2',
+                //     );
+                //     final conversationCollection = <String, dynamic>{
+                //       'data': [
+                //         const ConversationResponse(
+                //           id: '0',
+                //           title: 'Conversation three',
+                //         ).toJson(),
+                //         const ConversationResponse(
+                //           id: '1',
+                //           title: 'Conversation four',
+                //         ).toJson(),
+                //         const ConversationResponse(
+                //           id: '2',
+                //           title: 'Conversation five',
+                //         ).toJson(),
+                //         const ConversationResponse(
+                //           id: '3',
+                //           title: 'Conversation six',
+                //         ).toJson(),
+                //         const ConversationResponse(
+                //           id: '4',
+                //           title: 'Conversatation One',
+                //         ).toJson(),
+                //         const ConversationResponse(
+                //           id: '5',
+                //           title: 'Conversation two',
+                //         ).toJson(),
+                //       ],
+                //     };
+                //     final chatCollection = <String, dynamic>{
+                //       'data': [
+                //         const ContentResponse(
+                //           image: 'image 1',
+                //           role: 'user',
+                //           text: 'This is a text 1',
+                //         ).toJson(),
+                //         const ContentResponse(
+                //           image: 'image 2',
+                //           role: 'model',
+                //           text: 'This is a text 2',
+                //         ).toJson(),
+                //         const ContentResponse(
+                //           image: 'image 2',
+                //           role: 'user',
+                //           text: 'This is a text 3',
+                //         ).toJson(),
+                //         const ContentResponse(
+                //           image: 'image 2',
+                //           role: 'model',
+                //           text: 'This is a text 4',
+                //         ).toJson(),
+                //       ],
+                //     };
+
+                //     await AppFirestore.conversationCollection()
+                //         .doc('Rochak')
+                //         .set(conversationCollection);
+                //     final conversation =
+                //         await AppFirestore.conversationCollection()
+                //             .doc('Rochak')
+                //             .get();
+                //     final conversationData = conversation.data();
+                //     final coversationId = conversationData?['data'][0]['id'];
+                //     await AppFirestore.chatDocument(coversationId)
+                //         .update(chatCollection);
+                //     final chat =
+                //         await AppFirestore.chatDocument(coversationId).get();
+                //     final chatData = chat.data();
+                //     final a = 2;
+                //   },
+                //   child: const Text('Set data'),
+                // ),
                 ListTile(
                   onTap: () {
                     Navigator.pop(context);
@@ -68,27 +139,42 @@ class AppDrawer extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: ListView.builder(
-                    itemBuilder: (context, index) => Column(
-                      children: [
-                        ListTile(
-                          style: ListTileStyle.drawer,
-                          onTap: () {
-                            Navigator.pop(context);
-                            BlocProvider.of<HomeBloc>(context)
-                                .add(const HomeEvent.selectChat(id: 1));
-                          },
-                          title: Text(state.allhistory?[index].title ?? ''),
-                        ),
-                        if (index != state.allhistory!.length - 1)
-                          Container(
-                            width: double.infinity,
-                            color: AppColors.primaryDark,
-                            height: 1,
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      BlocProvider.of<DrawerBloc>(context)
+                          .add(const DrawerEvent.getChatHistory());
+                    },
+                    child: ListView.builder(
+                      itemBuilder: (context, index) => Column(
+                        children: [
+                          ListTile(
+                            style: ListTileStyle.drawer,
+                            onTap: () {
+                              Navigator.pop(context);
+                              BlocProvider.of<HomeBloc>(context).add(
+                                HomeEvent.selectChat(
+                                  id: state.conversationHistory?[index].id ??
+                                      '',
+                                  title:
+                                      state.conversationHistory?[index].title ??
+                                          '',
+                                ),
+                              );
+                            },
+                            title: Text(
+                              state.conversationHistory?[index].title ?? '',
+                            ),
                           ),
-                      ],
+                          if (index != state.conversationHistory!.length - 1)
+                            Container(
+                              width: double.infinity,
+                              color: AppColors.primaryDark,
+                              height: 1,
+                            ),
+                        ],
+                      ),
+                      itemCount: state.conversationHistory?.length ?? 0,
                     ),
-                    itemCount: state.allhistory?.length ?? 0,
                   ),
                 ),
                 ListTile(

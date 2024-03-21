@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemBuilder: (context, index) => MessageWidget(
                               isLoading: index == 0 &&
                                   state.theStates == TheStates.loading,
-                              contents: reversedChat?[index],
+                              content: reversedChat?[index],
                             ),
                             itemCount: reversedChat?.length ?? 0,
                           ),

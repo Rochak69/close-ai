@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:close_ai/core/dio_provider/api_error.dart';
+import 'package:close_ai/core/firestore/app_firestore.dart';
 import 'package:close_ai/enum/the_states.dart';
-import 'package:close_ai/features/drawer/data/model/history_response.dart';
+
+import 'package:close_ai/features/homescreen/data/model/conversation_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -22,21 +24,15 @@ class DrawerBloc extends Bloc<DrawerEvent, DrawerState> {
     Emitter<DrawerState> emit,
   ) async {
     emit(state.copyWith(theStates: TheStates.loading));
+    final conversation =
+        await AppFirestore.conversationDocument('Rochak').get();
+    final conversationData = conversation.data();
+    final result = (conversationData?['data'] as List<dynamic>?)
+        ?.map((e) => ConversationResponse.fromJson(e))
+        .toList();
 
     emit(
-      state.copyWith(
-        theStates: TheStates.success,
-        allhistory: [
-          const HistoryResponse(title: 'This is history 7'),
-          const HistoryResponse(title: 'This is history 0'),
-          const HistoryResponse(title: 'This is history 1'),
-          const HistoryResponse(title: 'This is history 2'),
-          const HistoryResponse(title: 'This is history 3'),
-          const HistoryResponse(title: 'This is history 4'),
-          const HistoryResponse(title: 'This is history 5'),
-          const HistoryResponse(title: 'This is history 6'),
-        ],
-      ),
+      state.copyWith(theStates: TheStates.success, conversationHistory: result),
     );
   }
 }

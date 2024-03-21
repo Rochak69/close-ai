@@ -8,9 +8,11 @@ class HomeEvent with _$HomeEvent {
   }) = _GenerateFromImage;
   const factory HomeEvent.startChat({required int id, required String prompt}) =
       _StartChat;
+
   const factory HomeEvent.generateFromText({required String prompt}) =
       _GenerateFromText;
-  const factory HomeEvent.selectChat({required int id}) = _SelectChat;
+  const factory HomeEvent.selectChat(
+      {required String id, required String title,}) = _SelectChat;
   const factory HomeEvent.switchModel({required GeminiModelEnum modelEnum}) =
       _SwitchModel;
   const factory HomeEvent.speak({required String text}) = _Speak;

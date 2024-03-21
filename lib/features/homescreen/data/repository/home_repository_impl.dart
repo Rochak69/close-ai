@@ -12,11 +12,12 @@ class HomeRepositoryImpl extends HomeRepository {
   HomeRepositoryImpl(this._remoteSource);
   final HomeRemoteSource _remoteSource;
   @override
-  Future<Either<AppError, ApiResponse<HomeResponse>>> fetchData(
-      {required String prompt,}) async {
+  Future<Either<AppError, ApiResponse<HomeResponse>>> fetchData({
+    required String prompt,
+  }) async {
     try {
       final result = await _remoteSource.fetchData(prompt: prompt);
-      return right(result);
+      throw Exception();
     } catch (e) {
       if (e is ApiErrorResponse) {
         return left(ApiErrorResponse(message: e.message));
