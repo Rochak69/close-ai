@@ -20,14 +20,21 @@ class SelectTextScreen extends StatelessWidget {
           },
           icon: const Icon(Icons.close),
         ),
-        title: const Text('Select Text'),
+        title: const Text(
+          'Select Text',
+        ),
       ),
       body: SelectionArea(
-          child: SingleChildScrollView(
-              child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-        child: Text(text),
-      ),),),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+            child: Text(
+              text,
+              style: const TextStyle(fontSize: 16),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -17,6 +17,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
+import 'package:uuid/uuid.dart';
+
+Uuid uuid = const Uuid();
 
 class AppEntryPoint {
   AppEntryPoint(AppConfiguration buildVariant) {

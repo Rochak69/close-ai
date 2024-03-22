@@ -4,6 +4,7 @@ import 'package:close_ai/core/route/app_router.dart';
 import 'package:close_ai/enum/gemini_model_enum.dart';
 import 'package:close_ai/features/drawer/presentation/bloc/drawer_bloc.dart';
 import 'package:close_ai/features/homescreen/presentation/bloc/home_bloc.dart';
+import 'package:close_ai/utlis/app_globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,9 +23,12 @@ class AppDrawer extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   height: 40,
-                  child: const Text(
-                    'Rochak Shrestha',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  child: Text(
+                    AppGlobals.user,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
                 const Divider(),
@@ -116,20 +120,20 @@ class AppDrawer extends StatelessWidget {
                     );
                   },
                   leading: const Icon(Icons.chat_outlined),
-                  title: const Text('Chat with Gemini'),
+                  title: const Text('New Chat'),
                 ),
-                ListTile(
-                  onTap: () {
-                    Navigator.pop(context);
-                    BlocProvider.of<HomeBloc>(context).add(
-                      const HomeEvent.switchModel(
-                        modelEnum: GeminiModelEnum.image,
-                      ),
-                    );
-                  },
-                  leading: const Icon(Icons.image_outlined),
-                  title: const Text('Image Prompt with Gemini'),
-                ),
+                // ListTile(
+                //   onTap: () {
+                //     Navigator.pop(context);
+                //     BlocProvider.of<HomeBloc>(context).add(
+                //       const HomeEvent.switchModel(
+                //         modelEnum: GeminiModelEnum.image,
+                //       ),
+                //     );
+                //   },
+                //   leading: const Icon(Icons.image_outlined),
+                //   title: const Text('New Image Prompt'),
+                // ),
                 const Divider(),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16),
@@ -163,6 +167,8 @@ class AppDrawer extends StatelessWidget {
                             },
                             title: Text(
                               state.conversationHistory?[index].title ?? '',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           if (index != state.conversationHistory!.length - 1)

@@ -1,21 +1,26 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:close_ai/core/build_variants/app_entry_point.dart';
 import 'package:close_ai/core/dependency_injection/dependency_injection.dart';
 import 'package:close_ai/core/dio_provider/api_error.dart';
 import 'package:close_ai/core/firestore/app_firestore.dart';
 import 'package:close_ai/core/gemini/app_gemini.dart';
+import 'package:close_ai/core/route/app_router.dart';
 import 'package:close_ai/enum/gemini_model_enum.dart';
 import 'package:close_ai/enum/the_states.dart';
+import 'package:close_ai/features/drawer/presentation/bloc/drawer_bloc.dart';
 import 'package:close_ai/features/homescreen/data/model/content_response.dart';
+import 'package:close_ai/features/homescreen/data/model/conversation_response.dart';
 import 'package:close_ai/features/homescreen/domain/usecase/home_usecase.dart';
+import 'package:close_ai/utlis/app_globals.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
-import 'package:equatable/equatable.dart';
+
 part 'home_bloc.freezed.dart';
 part 'home_event.dart';
 part 'home_state.dart';
@@ -79,6 +84,26 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   FutureOr<void> _startChat(_StartChat event, Emitter<HomeState> emit) async {
+    if (state.chathistory?.isEmpty ?? true) {
+      emit(state.copyWith(theStates: TheStates.initial));
+      final context = AppRouter.instance.navigatorKey.currentContext!;
+      final newConversation = List<ConversationResponse>.from(
+        BlocProvider.of<DrawerBloc>(context).state.conversationHistory ?? [],
+      )..insert(
+          0,
+          ConversationResponse(
+            id: state.selectedCoversationId,
+            title: event.prompt,
+          ),
+        );
+      final conversationCollection = <String, dynamic>{
+        'data': newConversation.map((e) => e.toJson()),
+      };
+      await AppFirestore.conversationDocument(AppGlobals.user)
+          .set(conversationCollection);
+      BlocProvider.of<DrawerBloc>(context)
+          .add(const DrawerEvent.getChatHistory());
+    }
     final newList = List<ContentResponse>.from(state.chathistory ?? [])
       ..addAll([
         ContentResponse(role: 'user', text: event.prompt),
@@ -86,6 +111,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       ]);
     emit(
       state.copyWith(
+        theStates: TheStates.loading,
         chathistory: newList,
       ),
     );
@@ -96,13 +122,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       _addToList(l.message, event, emit);
     }, (r) async {
       var streamedtext = '';
-      // ignore: cancel_subscriptions
+
       final c = r.listen((events) {
-        newList.removeLast();
+        final updatedList = List<ContentResponse>.from(newList)..removeLast();
         streamedtext = streamedtext + (events.text ?? '');
 
-        newList.add(ContentResponse(role: 'model', text: streamedtext));
-        final updatedList = List<ContentResponse>.from(newList);
+        updatedList.add(ContentResponse(role: 'model', text: streamedtext));
 
         emit(
           state.copyWith(
@@ -111,33 +136,55 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         );
       });
       await c.asFuture();
+      if (streamedtext.isEmpty) {
+        _addToList(
+          'I apologize. I am not equipped to answer to it.',
+          event,
+          emit,
+        );
+      }
       emit(state.copyWith(theStates: TheStates.success));
+      c.cancel();
+      final data = state.chathistory?.map((e) => e.toJson()).toList();
+
+      AppFirestore.chatDocument(event.id).set({'data': data});
     });
   }
 
   FutureOr<void> _selectChat(_SelectChat event, Emitter<HomeState> emit) async {
-    emit(state.copyWith(theStates: TheStates.loading, chathistory: []));
+    emit(
+      state.copyWith(
+        theStates: TheStates.initial,
+        selectedCoversationId: event.id,
+        chathistory: [],
+      ),
+    );
     final response = await AppFirestore.chatDocument(event.id).get();
     final chatData = (response.data()?['data'] as List<dynamic>?)
         ?.map((e) => ContentResponse.fromJson(e))
         .toList();
 
     emit(
-      state.copyWith(theStates: TheStates.success, chathistory: chatData),
+      state.copyWith(
+        theStates: TheStates.success,
+        selectedCoversationId: event.id,
+        chathistory: chatData,
+      ),
     );
   }
 
-  FutureOr<void> _switchModel(_SwitchModel event, Emitter<HomeState> emit) {
-    emit(
-      state.copyWith(
-        theStates: TheStates.loading,
-        currentModel: event.modelEnum,
-        chathistory: [],
-      ),
-    );
+  Future<void> _switchModel(_SwitchModel event, Emitter<HomeState> emit) async {
+    if (state.chathistory?.isEmpty ?? false) {
+      emit(state.copyWith(currentModel: event.modelEnum));
+      return;
+    }
+
     emit(
       state.copyWith(
         theStates: TheStates.success,
+        currentModel: event.modelEnum,
+        selectedCoversationId: uuid.v1(),
+        chathistory: [],
       ),
     );
   }

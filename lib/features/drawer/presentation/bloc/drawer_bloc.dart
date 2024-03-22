@@ -6,6 +6,7 @@ import 'package:close_ai/core/firestore/app_firestore.dart';
 import 'package:close_ai/enum/the_states.dart';
 
 import 'package:close_ai/features/homescreen/data/model/conversation_response.dart';
+import 'package:close_ai/utlis/app_globals.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -25,7 +26,7 @@ class DrawerBloc extends Bloc<DrawerEvent, DrawerState> {
   ) async {
     emit(state.copyWith(theStates: TheStates.loading));
     final conversation =
-        await AppFirestore.conversationDocument('Rochak').get();
+        await AppFirestore.conversationDocument(AppGlobals.user).get();
     final conversationData = conversation.data();
     final result = (conversationData?['data'] as List<dynamic>?)
         ?.map((e) => ConversationResponse.fromJson(e))

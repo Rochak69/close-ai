@@ -5,6 +5,7 @@ import 'package:close_ai/enum/gemini_model_enum.dart';
 import 'package:close_ai/features/common/app_spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:image_picker/image_picker.dart';
 
 class GeminiInputField extends StatefulWidget {
@@ -19,11 +20,13 @@ class GeminiInputField extends StatefulWidget {
     this.obscureText = false,
     this.suffixIcon,
     this.onSend,
+    this.onStop,
     this.textInputAction = TextInputAction.next,
     this.autovalidateMode = AutovalidateMode.onUserInteraction,
     this.onTap,
     this.isReadOnly = false,
     this.scroll = EdgeInsets.zero,
+    this.isLoading = false,
     this.currentModel = GeminiModelEnum.text,
   });
 
@@ -36,7 +39,9 @@ class GeminiInputField extends StatefulWidget {
   final Widget? suffixIcon;
   final bool obscureText;
   final bool isReadOnly;
+  final bool isLoading;
   final void Function()? onTap;
+  final void Function()? onStop;
   final void Function(List<XFile>?)? onSend;
   final EdgeInsets scroll;
   final GeminiModelEnum currentModel;
@@ -198,17 +203,35 @@ class _GeminiInputFieldState extends State<GeminiInputField> {
                       ),
                     ),
                   ),
-                IconButton(
-                  onPressed: () {
-                    widget.onSend?.call(files);
-                    files = [];
-                    setState(() {});
-                  },
-                  icon: const Icon(
-                    Icons.send,
-                    color: AppColors.primaryDark,
+                if (widget.isLoading)
+                  IconButton(
+                    onPressed: widget.onStop,
+                    icon: const Icon(
+                      Icons.stop_circle,
+                      color: AppColors.colorRed,
+                    ),
+                  ).animate(
+                    onComplete: (controller) {
+                      controller.repeat(reverse: true);
+                    },
+                  ).scaleXY(
+                    begin: 1.2,
+                    end: 1.4,
+                    curve: Curves.decelerate,
+                    duration: const Duration(milliseconds: 600),
+                  )
+                else
+                  IconButton(
+                    onPressed: () {
+                      widget.onSend?.call(files);
+                      files = [];
+                      setState(() {});
+                    },
+                    icon: const Icon(
+                      Icons.send,
+                      color: AppColors.primaryDark,
+                    ),
                   ),
-                ),
               ],
             ),
           ),

@@ -1,1 +1,3 @@
-class AppGlobals {}
+class AppGlobals {
+  static String user = 'Rochak';
+}

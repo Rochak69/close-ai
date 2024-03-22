@@ -1,16 +1,21 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:close_ai/constants/app_colors.dart';
+import 'package:close_ai/constants/app_lottie_animation.dart';
 import 'package:close_ai/enum/gemini_model_enum.dart';
 import 'package:close_ai/enum/the_states.dart';
 import 'package:close_ai/features/common/app_scaffold.dart';
 import 'package:close_ai/features/common/gemini_input_field.dart';
+import 'package:close_ai/features/drawer/presentation/bloc/drawer_bloc.dart';
 import 'package:close_ai/features/drawer/presentation/screens/app_drawer.dart';
 import 'package:close_ai/features/homescreen/presentation/bloc/home_bloc.dart';
 import 'package:close_ai/features/homescreen/presentation/screens/widgets/message_widget.dart';
+import 'package:close_ai/features/homescreen/presentation/screens/widgets/rotating_gemini.dart';
 import 'package:close_ai/utlis/helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validator/form_validator.dart';
+import 'package:lottie/lottie.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -29,6 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
+    BlocProvider.of<DrawerBloc>(context)
+        .add(const DrawerEvent.getChatHistory());
+    BlocProvider.of<HomeBloc>(context)
+        .add(const HomeEvent.switchModel(modelEnum: GeminiModelEnum.text));
   }
 
   TextEditingController controller = TextEditingController();
@@ -55,23 +64,68 @@ class _HomeScreenState extends State<HomeScreen> {
                       builder: (context, state) {
                         final reversedChat =
                             state.chathistory?.reversed.toList();
-                        return ColoredBox(
+                        return Container(
+                          width: double.infinity,
                           color: Theme.of(context).canvasColor,
-                          child: ListView.builder(
-                            controller: _scrollController,
-                            shrinkWrap: true,
-                            reverse: true,
-                            keyboardDismissBehavior:
-                                ScrollViewKeyboardDismissBehavior.onDrag,
-                            padding:
-                                const EdgeInsets.only(top: 16, bottom: 100),
-                            itemBuilder: (context, index) => MessageWidget(
-                              isLoading: index == 0 &&
-                                  state.theStates == TheStates.loading,
-                              content: reversedChat?[index],
-                            ),
-                            itemCount: reversedChat?.length ?? 0,
-                          ),
+                          child: state.theStates == TheStates.initial
+                              ? const Align(child: RotatinGemini.large())
+                              : (state.chathistory?.isEmpty ?? true)
+                                  ? Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Align(
+                                          child: Lottie.asset(
+                                            width: 120,
+                                            AppLottieAnimations.startChat,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 32,
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              const Text(
+                                                'This Text to Text model remembers the context of your chat.',
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              const Text(
+                                                'Start chatting ',
+                                                style: TextStyle(fontSize: 16),
+                                              ).animate(
+                                                onComplete: (controller) {
+                                                  controller.repeat();
+                                                },
+                                              ).shimmer(
+                                                color: AppColors.primaryDark,
+                                                duration: Durations.extralong4,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : ListView.builder(
+                                      controller: _scrollController,
+                                      shrinkWrap: true,
+                                      reverse: true,
+                                      keyboardDismissBehavior:
+                                          ScrollViewKeyboardDismissBehavior
+                                              .onDrag,
+                                      padding: const EdgeInsets.only(
+                                        top: 16,
+                                        bottom: 100,
+                                      ),
+                                      itemBuilder: (context, index) =>
+                                          MessageWidget(
+                                        isLoading: index == 0 &&
+                                            state.theStates ==
+                                                TheStates.loading,
+                                        content: reversedChat?[index],
+                                      ),
+                                      itemCount: reversedChat?.length ?? 0,
+                                    ),
                         );
                       },
                     ),
@@ -92,11 +146,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: BlocBuilder<HomeBloc, HomeState>(
                       builder: (context, state) {
                         return GeminiInputField(
-                          hintText: 'Ask anything to Gemini....',
+                          hintText: 'Ask Gemini to anything....',
                           validator: ValidationBuilder().required().build(),
                           autovalidateMode: AutovalidateMode.disabled,
                           textEditingController: controller,
                           currentModel: state.currentModel,
+                          isLoading: state.theStates == TheStates.loading,
                           onSend: (files) {
                             if (_formKey.currentState!.validate()) {
                               AppUtils.unfocusKeyboard(context);
@@ -104,14 +159,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 BlocProvider.of<HomeBloc>(context).add(
                                   HomeEvent.startChat(
                                     prompt: controller.text,
-                                    id: 1,
+                                    id: state.selectedCoversationId ?? 'null',
                                   ),
                                 );
                               } else {
                                 if (files?.isEmpty ?? true) {
                                   BlocProvider.of<HomeBloc>(context).add(
                                     HomeEvent.startChat(
-                                      id: 1,
+                                      id: state.selectedCoversationId ??
+                                          'image null',
                                       prompt: controller.text,
                                     ),
                                   );
@@ -138,6 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             }
                           },
+                          onStop: () {},
                         );
                       },
                     ),

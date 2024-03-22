@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:close_ai/constants/app_colors.dart';
 import 'package:close_ai/constants/app_images.dart';
@@ -8,8 +9,10 @@ import 'package:close_ai/features/homescreen/presentation/bloc/home_bloc.dart';
 import 'package:close_ai/features/homescreen/presentation/screens/widgets/rotating_gemini.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:share_plus/share_plus.dart';
 
 class MessageWidget extends StatelessWidget {
   const MessageWidget({required this.isLoading, super.key, this.content});
@@ -41,7 +44,8 @@ class MessageWidget extends StatelessWidget {
                     onTap: () async {
                       Navigator.pop(context);
                       await Clipboard.setData(
-                          ClipboardData(text: content?.text ?? ''),);
+                        ClipboardData(text: content?.text ?? ''),
+                      );
                     },
                   ),
                   ListTile(
@@ -58,6 +62,7 @@ class MessageWidget extends StatelessWidget {
                       leading: const Icon(Icons.share_outlined),
                       title: const Text('Share Text'),
                       onTap: () {
+                        Share.share('check out my website https://example.com');
                         Navigator.pop(context);
                       },
                     ),
@@ -85,7 +90,7 @@ class MessageWidget extends StatelessWidget {
           );
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 16),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             textDirection: content?.role == 'model' ? null : TextDirection.rtl,
@@ -95,7 +100,7 @@ class MessageWidget extends StatelessWidget {
                     ? const RotatinGemini()
                     : SvgPicture.asset(
                         AppImages.geimini,
-                        width: 24,
+                        width: 28,
                       )
               else
                 const Icon(
@@ -109,12 +114,29 @@ class MessageWidget extends StatelessWidget {
                       ? CrossAxisAlignment.end
                       : CrossAxisAlignment.start,
                   children: [
-                    Text(content?.text ?? ''),
+                    Text(
+                      content?.text ?? '',
+                      style: const TextStyle(fontSize: 16),
+                    ),
                     if (isLoading && content?.role == 'model')
-                      const Padding(
-                        padding: EdgeInsets.only(top: 8),
-                        child: RotatinGemini(),
-                      ),
+                      AnimatedTextKit(
+                        repeatForever: true,
+                        animatedTexts: [
+                          TyperAnimatedText(
+                            '•••••••',
+                            curve: Curves.decelerate,
+                            speed: const Duration(milliseconds: 200),
+                            textStyle: const TextStyle(fontSize: 24),
+                          ),
+                        ],
+                      )
+                          .animate(
+                            onComplete: (controller) => controller.repeat(),
+                          )
+                          .shimmer(
+                            color: AppColors.primaryDark,
+                            duration: const Duration(milliseconds: 500),
+                          ),
                   ],
                 ),
               ),
