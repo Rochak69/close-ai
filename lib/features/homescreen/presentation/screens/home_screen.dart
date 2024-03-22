@@ -4,6 +4,7 @@ import 'package:close_ai/constants/app_lottie_animation.dart';
 import 'package:close_ai/enum/gemini_model_enum.dart';
 import 'package:close_ai/enum/the_states.dart';
 import 'package:close_ai/features/common/app_scaffold.dart';
+import 'package:close_ai/features/common/app_spacing.dart';
 import 'package:close_ai/features/common/gemini_input_field.dart';
 import 'package:close_ai/features/drawer/presentation/bloc/drawer_bloc.dart';
 import 'package:close_ai/features/drawer/presentation/screens/app_drawer.dart';
@@ -12,6 +13,7 @@ import 'package:close_ai/features/homescreen/presentation/screens/widgets/messag
 import 'package:close_ai/features/homescreen/presentation/screens/widgets/rotating_gemini.dart';
 import 'package:close_ai/utlis/helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_validator/form_validator.dart';
