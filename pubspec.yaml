@@ -9,7 +9,7 @@ environment:
 dependencies:
   animated_text_kit: ^4.2.2
   another_flushbar: ^1.12.30
-  auto_route: ^7.8.5
+  auto_route: ^7.9.2
   bloc: ^8.1.2
   bloc_concurrency: ^0.2.4
   cached_network_image: ^3.3.1
