@@ -1,6 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.chronosphere.closeai">
    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>       -->
    <application
         android:label="${appName}"
         android:name="${applicationName}"
@@ -20,12 +25,7 @@
             <meta-data
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
-              />  
-            <queries>
-                <intent>
-                    <action android:name="android.intent.action.TTS_SERVICE" />
-                </intent>
-            </queries>          
+              />     
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

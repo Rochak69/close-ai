@@ -2,15 +2,18 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:close_ai/constants/app_colors.dart';
+import 'package:close_ai/constants/app_images.dart';
 import 'package:close_ai/core/build_variants/enum.dart';
 import 'package:close_ai/core/config/environment_helper.dart';
 import 'package:close_ai/core/route/app_router.dart';
 
 import 'package:close_ai/enum/the_states.dart';
+import 'package:close_ai/features/common/app_outlined_button.dart';
 import 'package:close_ai/features/common/app_scaffold.dart';
 import 'package:close_ai/features/common/app_spacing.dart';
 import 'package:close_ai/features/common/app_text_form_field.dart';
 import 'package:close_ai/features/login/presentation/bloc/login_bloc.dart';
+import 'package:close_ai/features/login/presentation/screens/widgets/social_icon_button.dart';
 import 'package:close_ai/utlis/app_flushbar.dart';
 import 'package:close_ai/utlis/helper.dart';
 import 'package:close_ai/utlis/uihelper.dart';
@@ -129,6 +132,54 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const VerticalSpacing(16),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Divider(
+                          color: AppColors.primaryDark,
+                          thickness: 1,
+                          endIndent: 5,
+                        ),
+                      ),
+                      Text(
+                        'Or Login With',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: AppColors.primaryDark,
+                        ),
+                      ),
+                      Flexible(
+                        child: Divider(
+                          color: AppColors.primaryDark,
+                          thickness: 1,
+                          indent: 5,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const VerticalSpacing(16),
+                  Center(
+                    child: SocialIconButton(
+                      iconPng: AppImages.googlePng,
+                      onTap: () {},
+                    ),
+                  ),
+                  const VerticalSpacing(16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Don't have an account? ",
+                        style: TextStyle(
+                          color: AppColors.textFieldGrey,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                        ),
+                      ),
+                      TextButton(onPressed: () {}, child: Text('Sign up here'))
+                    ],
+                  ),
                 ],
               ),
             ),
