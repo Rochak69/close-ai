@@ -7,11 +7,9 @@ import 'package:close_ai/core/route/app_router.dart';
 import 'package:close_ai/features/common/app_scaffold.dart';
 import 'package:close_ai/features/common/app_spacing.dart';
 import 'package:close_ai/features/common/app_text_form_field.dart';
-import 'package:close_ai/features/homescreen/presentation/bloc/home_bloc.dart';
 import 'package:close_ai/features/login/presentation/screens/widgets/social_icon_button.dart';
 import 'package:close_ai/features/signup/presentation/bloc/signup_bloc.dart';
 import 'package:close_ai/utlis/app_flushbar.dart';
-import 'package:close_ai/utlis/app_globals.dart';
 import 'package:close_ai/utlis/uihelper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -50,11 +48,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             },
             loading: () => UiHelper.showloaderdialog(context),
             success: (userDetails) {
-              BlocProvider.of<HomeBloc>(context)
-                  .add(HomeEvent.init(userDetails: userDetails));
-              AppGlobals.uuid = userDetails.uuid ?? '';
-              AppGlobals.userEmail = userDetails.email ?? '';
-              AutoRouter.of(context).replace(const HomeRoute());
+              AutoRouter.of(context)
+                  .replace(HomeRoute(userDetails: userDetails));
             },
             orElse: () {},
           );

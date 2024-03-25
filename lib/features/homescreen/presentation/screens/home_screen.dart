@@ -10,6 +10,7 @@ import 'package:close_ai/features/drawer/presentation/screens/app_drawer.dart';
 import 'package:close_ai/features/homescreen/presentation/bloc/home_bloc.dart';
 import 'package:close_ai/features/homescreen/presentation/screens/widgets/message_widget.dart';
 import 'package:close_ai/features/homescreen/presentation/screens/widgets/rotating_gemini.dart';
+import 'package:close_ai/features/signup/data/model/signup_response.dart';
 import 'package:close_ai/utlis/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -19,7 +20,8 @@ import 'package:lottie/lottie.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({required this.userDetails, super.key});
+  final SignUpResponse userDetails;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -38,6 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
         .add(const DrawerEvent.getChatHistory());
     BlocProvider.of<HomeBloc>(context)
         .add(const HomeEvent.switchModel(modelEnum: GeminiModelEnum.text));
+    BlocProvider.of<HomeBloc>(context)
+        .add(HomeEvent.init(userDetails: widget.userDetails));
   }
 
   TextEditingController controller = TextEditingController();

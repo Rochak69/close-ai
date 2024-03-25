@@ -1,14 +1,11 @@
 import 'package:close_ai/core/dio_provider/api_response.dart';
-import 'package:close_ai/core/preferences/preferences.dart';
 import 'package:close_ai/features/signup/data/model/signup_response.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class LoginRemoteSource {
-  LoginRemoteSource(this._preferences);
-
-  final Preferences _preferences;
+  LoginRemoteSource();
 
   Future<ApiResponse<SignUpResponse>> login({
     required String email,

@@ -5,6 +5,8 @@ import 'package:close_ai/enum/gemini_model_enum.dart';
 import 'package:close_ai/features/drawer/presentation/bloc/drawer_bloc.dart';
 import 'package:close_ai/features/homescreen/presentation/bloc/home_bloc.dart';
 import 'package:close_ai/utlis/app_globals.dart';
+import 'package:close_ai/utlis/uihelper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -185,9 +187,15 @@ class AppDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.logout),
-                  onTap: () {
-                    Navigator.pop(context);
-                    AutoRouter.of(context).replace(const LoginRoute());
+                  onTap: () async {
+                    UiHelper.showloaderdialog(context);
+                    await FirebaseAuth.instance.signOut();
+                    Future.delayed(
+                      const Duration(seconds: 1),
+                      () {
+                        AutoRouter.of(context).replace(const LoginRoute());
+                      },
+                    );
                   },
                   title: const Text('Logout'),
                   trailing: IconButton(

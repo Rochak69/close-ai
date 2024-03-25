@@ -218,6 +218,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   FutureOr<void> _init(_Init event, Emitter<HomeState> emit) {
+    AppGlobals.userEmail = event.userDetails.email ?? '';
+    AppGlobals.uuid = event.userDetails.uuid ?? '';
     emit(state.copyWith(signUpResponse: event.userDetails));
   }
 }

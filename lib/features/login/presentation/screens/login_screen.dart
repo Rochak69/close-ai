@@ -1,20 +1,16 @@
 import 'dart:io';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:close_ai/constants/app_colors.dart';
 import 'package:close_ai/constants/app_images.dart';
 import 'package:close_ai/core/build_variants/enum.dart';
 import 'package:close_ai/core/config/environment_helper.dart';
 import 'package:close_ai/core/route/app_router.dart';
-
 import 'package:close_ai/features/common/app_scaffold.dart';
 import 'package:close_ai/features/common/app_spacing.dart';
 import 'package:close_ai/features/common/app_text_form_field.dart';
-import 'package:close_ai/features/homescreen/presentation/bloc/home_bloc.dart';
 import 'package:close_ai/features/login/presentation/bloc/login_bloc.dart';
 import 'package:close_ai/features/login/presentation/screens/widgets/social_icon_button.dart';
 import 'package:close_ai/utlis/app_flushbar.dart';
-import 'package:close_ai/utlis/app_globals.dart';
 import 'package:close_ai/utlis/uihelper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -62,11 +58,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   success: (userDetails) {
                     Navigator.pop(context);
-                    BlocProvider.of<HomeBloc>(context)
-                        .add(HomeEvent.init(userDetails: userDetails));
-                    AppGlobals.uuid = userDetails.uuid ?? '';
-                    AppGlobals.userEmail = userDetails.email ?? '';
-                    AutoRouter.of(context).replace(const HomeRoute());
+
+                    AutoRouter.of(context)
+                        .replace(HomeRoute(userDetails: userDetails));
                   },
                   loading: () => UiHelper.showloaderdialog(context),
                   orElse: () {},

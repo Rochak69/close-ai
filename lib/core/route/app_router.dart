@@ -4,6 +4,7 @@ import 'package:close_ai/features/homescreen/presentation/screens/home_screen.da
 
 import 'package:close_ai/features/login/presentation/screens/login_screen.dart';
 import 'package:close_ai/features/select_text/select_text_screen.dart';
+import 'package:close_ai/features/signup/data/model/signup_response.dart';
 import 'package:close_ai/features/signup/presentation/screens/signup_screen.dart';
 import 'package:close_ai/features/splash/splash_screen.dart';
 import 'package:close_ai/features/unknown/unknown_screen.dart';
