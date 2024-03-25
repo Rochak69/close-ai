@@ -6,8 +6,10 @@ class HomeEvent with _$HomeEvent {
     required String prompt,
     required List<XFile> files,
   }) = _GenerateFromImage;
-  const factory HomeEvent.startChat(
-      {required String id, required String prompt,}) = _StartChat;
+  const factory HomeEvent.startChat({
+    required String id,
+    required String prompt,
+  }) = _StartChat;
 
   const factory HomeEvent.generateFromText({required String prompt}) =
       _GenerateFromText;
@@ -19,4 +21,5 @@ class HomeEvent with _$HomeEvent {
       _SwitchModel;
   const factory HomeEvent.speak({required String text}) = _Speak;
   const factory HomeEvent.pause({required String text}) = _Pause;
+  const factory HomeEvent.init({required SignUpResponse userDetails}) = _Init;
 }

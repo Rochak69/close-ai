@@ -68,6 +68,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '181871412352',
     projectId: 'closeai-9376f',
     storageBucket: 'closeai-9376f.appspot.com',
+    iosClientId:
+        '181871412352-irvaidqsegqqsin961j5as9had1ohsim.apps.googleusercontent.com',
     iosBundleId: 'com.chronosphere.closeai',
   );
 
@@ -77,6 +79,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '181871412352',
     projectId: 'closeai-9376f',
     storageBucket: 'closeai-9376f.appspot.com',
+    iosClientId:
+        '181871412352-hhrj3ngs5ruph0vsdjap7a5slrs3ivqt.apps.googleusercontent.com',
     iosBundleId: 'com.example.myApp.RunnerTests',
   );
 }

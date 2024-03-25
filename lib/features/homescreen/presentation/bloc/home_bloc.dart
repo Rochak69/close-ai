@@ -14,6 +14,7 @@ import 'package:close_ai/features/drawer/presentation/bloc/drawer_bloc.dart';
 import 'package:close_ai/features/homescreen/data/model/content_response.dart';
 import 'package:close_ai/features/homescreen/data/model/conversation_response.dart';
 import 'package:close_ai/features/homescreen/domain/usecase/home_usecase.dart';
+import 'package:close_ai/features/signup/data/model/signup_response.dart';
 import 'package:close_ai/utlis/app_globals.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -34,7 +35,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<_SwitchModel>(_switchModel);
     on<_Speak>(_speak);
     on<_Pause>(_pause);
-    _init();
+    on<_Init>(_init);
+    initTTS();
   }
   // ignore: unused_field
   final HomeUsecase _homeUsecase;
@@ -99,10 +101,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final conversationCollection = <String, dynamic>{
         'data': newConversation.map((e) => e.toJson()),
       };
-      await AppFirestore.conversationDocument(AppGlobals.user)
+      await AppFirestore.conversationDocument(AppGlobals.uuid)
           .set(conversationCollection);
-      BlocProvider.of<DrawerBloc>(context)
-          .add(const DrawerEvent.getChatHistory());
+      if (context.mounted) {
+        BlocProvider.of<DrawerBloc>(context)
+            .add(const DrawerEvent.getChatHistory());
+      }
     }
     final newList = List<ContentResponse>.from(state.chathistory ?? [])
       ..addAll([
@@ -189,7 +193,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     );
   }
 
-  Future<void> _init() async {
+  Future<void> initTTS() async {
     if (Platform.isIOS) {
       await flutterTts.setSharedInstance(true);
       await flutterTts.setIosAudioCategory(
@@ -206,10 +210,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   FutureOr<void> _speak(_Speak event, Emitter<HomeState> emit) async {
-    var result = await flutterTts.speak(event.text);
+    await flutterTts.speak(event.text);
   }
 
   FutureOr<void> _pause(_Pause event, Emitter<HomeState> emit) async {
-    var result = await flutterTts.stop();
+    await flutterTts.stop();
+  }
+
+  FutureOr<void> _init(_Init event, Emitter<HomeState> emit) {
+    emit(state.copyWith(signUpResponse: event.userDetails));
   }
 }

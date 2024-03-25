@@ -24,7 +24,7 @@ class AppDrawer extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   height: 40,
                   child: Text(
-                    AppGlobals.user,
+                    AppGlobals.userEmail,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,

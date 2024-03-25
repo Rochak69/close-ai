@@ -26,6 +26,7 @@ mixin _$HomeEvent {
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
+    required TResult Function(SignUpResponse userDetails) init,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,6 +38,7 @@ mixin _$HomeEvent {
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
+    TResult? Function(SignUpResponse userDetails)? init,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,6 +50,7 @@ mixin _$HomeEvent {
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
+    TResult Function(SignUpResponse userDetails)? init,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -60,6 +63,7 @@ mixin _$HomeEvent {
     required TResult Function(_SwitchModel value) switchModel,
     required TResult Function(_Speak value) speak,
     required TResult Function(_Pause value) pause,
+    required TResult Function(_Init value) init,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +75,7 @@ mixin _$HomeEvent {
     TResult? Function(_SwitchModel value)? switchModel,
     TResult? Function(_Speak value)? speak,
     TResult? Function(_Pause value)? pause,
+    TResult? Function(_Init value)? init,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -82,6 +87,7 @@ mixin _$HomeEvent {
     TResult Function(_SwitchModel value)? switchModel,
     TResult Function(_Speak value)? speak,
     TResult Function(_Pause value)? pause,
+    TResult Function(_Init value)? init,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -193,6 +199,7 @@ class _$GenerateFromImageImpl implements _GenerateFromImage {
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
+    required TResult Function(SignUpResponse userDetails) init,
   }) {
     return generateFromImage(prompt, files);
   }
@@ -207,6 +214,7 @@ class _$GenerateFromImageImpl implements _GenerateFromImage {
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
+    TResult? Function(SignUpResponse userDetails)? init,
   }) {
     return generateFromImage?.call(prompt, files);
   }
@@ -221,6 +229,7 @@ class _$GenerateFromImageImpl implements _GenerateFromImage {
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
+    TResult Function(SignUpResponse userDetails)? init,
     required TResult orElse(),
   }) {
     if (generateFromImage != null) {
@@ -239,6 +248,7 @@ class _$GenerateFromImageImpl implements _GenerateFromImage {
     required TResult Function(_SwitchModel value) switchModel,
     required TResult Function(_Speak value) speak,
     required TResult Function(_Pause value) pause,
+    required TResult Function(_Init value) init,
   }) {
     return generateFromImage(this);
   }
@@ -253,6 +263,7 @@ class _$GenerateFromImageImpl implements _GenerateFromImage {
     TResult? Function(_SwitchModel value)? switchModel,
     TResult? Function(_Speak value)? speak,
     TResult? Function(_Pause value)? pause,
+    TResult? Function(_Init value)? init,
   }) {
     return generateFromImage?.call(this);
   }
@@ -267,6 +278,7 @@ class _$GenerateFromImageImpl implements _GenerateFromImage {
     TResult Function(_SwitchModel value)? switchModel,
     TResult Function(_Speak value)? speak,
     TResult Function(_Pause value)? pause,
+    TResult Function(_Init value)? init,
     required TResult orElse(),
   }) {
     if (generateFromImage != null) {
@@ -368,6 +380,7 @@ class _$StartChatImpl implements _StartChat {
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
+    required TResult Function(SignUpResponse userDetails) init,
   }) {
     return startChat(id, prompt);
   }
@@ -382,6 +395,7 @@ class _$StartChatImpl implements _StartChat {
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
+    TResult? Function(SignUpResponse userDetails)? init,
   }) {
     return startChat?.call(id, prompt);
   }
@@ -396,6 +410,7 @@ class _$StartChatImpl implements _StartChat {
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
+    TResult Function(SignUpResponse userDetails)? init,
     required TResult orElse(),
   }) {
     if (startChat != null) {
@@ -414,6 +429,7 @@ class _$StartChatImpl implements _StartChat {
     required TResult Function(_SwitchModel value) switchModel,
     required TResult Function(_Speak value) speak,
     required TResult Function(_Pause value) pause,
+    required TResult Function(_Init value) init,
   }) {
     return startChat(this);
   }
@@ -428,6 +444,7 @@ class _$StartChatImpl implements _StartChat {
     TResult? Function(_SwitchModel value)? switchModel,
     TResult? Function(_Speak value)? speak,
     TResult? Function(_Pause value)? pause,
+    TResult? Function(_Init value)? init,
   }) {
     return startChat?.call(this);
   }
@@ -442,6 +459,7 @@ class _$StartChatImpl implements _StartChat {
     TResult Function(_SwitchModel value)? switchModel,
     TResult Function(_Speak value)? speak,
     TResult Function(_Pause value)? pause,
+    TResult Function(_Init value)? init,
     required TResult orElse(),
   }) {
     if (startChat != null) {
@@ -536,6 +554,7 @@ class _$GenerateFromTextImpl implements _GenerateFromText {
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
+    required TResult Function(SignUpResponse userDetails) init,
   }) {
     return generateFromText(prompt);
   }
@@ -550,6 +569,7 @@ class _$GenerateFromTextImpl implements _GenerateFromText {
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
+    TResult? Function(SignUpResponse userDetails)? init,
   }) {
     return generateFromText?.call(prompt);
   }
@@ -564,6 +584,7 @@ class _$GenerateFromTextImpl implements _GenerateFromText {
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
+    TResult Function(SignUpResponse userDetails)? init,
     required TResult orElse(),
   }) {
     if (generateFromText != null) {
@@ -582,6 +603,7 @@ class _$GenerateFromTextImpl implements _GenerateFromText {
     required TResult Function(_SwitchModel value) switchModel,
     required TResult Function(_Speak value) speak,
     required TResult Function(_Pause value) pause,
+    required TResult Function(_Init value) init,
   }) {
     return generateFromText(this);
   }
@@ -596,6 +618,7 @@ class _$GenerateFromTextImpl implements _GenerateFromText {
     TResult? Function(_SwitchModel value)? switchModel,
     TResult? Function(_Speak value)? speak,
     TResult? Function(_Pause value)? pause,
+    TResult? Function(_Init value)? init,
   }) {
     return generateFromText?.call(this);
   }
@@ -610,6 +633,7 @@ class _$GenerateFromTextImpl implements _GenerateFromText {
     TResult Function(_SwitchModel value)? switchModel,
     TResult Function(_Speak value)? speak,
     TResult Function(_Pause value)? pause,
+    TResult Function(_Init value)? init,
     required TResult orElse(),
   }) {
     if (generateFromText != null) {
@@ -709,6 +733,7 @@ class _$SelectChatImpl implements _SelectChat {
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
+    required TResult Function(SignUpResponse userDetails) init,
   }) {
     return selectChat(id, title);
   }
@@ -723,6 +748,7 @@ class _$SelectChatImpl implements _SelectChat {
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
+    TResult? Function(SignUpResponse userDetails)? init,
   }) {
     return selectChat?.call(id, title);
   }
@@ -737,6 +763,7 @@ class _$SelectChatImpl implements _SelectChat {
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
+    TResult Function(SignUpResponse userDetails)? init,
     required TResult orElse(),
   }) {
     if (selectChat != null) {
@@ -755,6 +782,7 @@ class _$SelectChatImpl implements _SelectChat {
     required TResult Function(_SwitchModel value) switchModel,
     required TResult Function(_Speak value) speak,
     required TResult Function(_Pause value) pause,
+    required TResult Function(_Init value) init,
   }) {
     return selectChat(this);
   }
@@ -769,6 +797,7 @@ class _$SelectChatImpl implements _SelectChat {
     TResult? Function(_SwitchModel value)? switchModel,
     TResult? Function(_Speak value)? speak,
     TResult? Function(_Pause value)? pause,
+    TResult? Function(_Init value)? init,
   }) {
     return selectChat?.call(this);
   }
@@ -783,6 +812,7 @@ class _$SelectChatImpl implements _SelectChat {
     TResult Function(_SwitchModel value)? switchModel,
     TResult Function(_Speak value)? speak,
     TResult Function(_Pause value)? pause,
+    TResult Function(_Init value)? init,
     required TResult orElse(),
   }) {
     if (selectChat != null) {
@@ -877,6 +907,7 @@ class _$SwitchModelImpl implements _SwitchModel {
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
+    required TResult Function(SignUpResponse userDetails) init,
   }) {
     return switchModel(modelEnum);
   }
@@ -891,6 +922,7 @@ class _$SwitchModelImpl implements _SwitchModel {
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
+    TResult? Function(SignUpResponse userDetails)? init,
   }) {
     return switchModel?.call(modelEnum);
   }
@@ -905,6 +937,7 @@ class _$SwitchModelImpl implements _SwitchModel {
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
+    TResult Function(SignUpResponse userDetails)? init,
     required TResult orElse(),
   }) {
     if (switchModel != null) {
@@ -923,6 +956,7 @@ class _$SwitchModelImpl implements _SwitchModel {
     required TResult Function(_SwitchModel value) switchModel,
     required TResult Function(_Speak value) speak,
     required TResult Function(_Pause value) pause,
+    required TResult Function(_Init value) init,
   }) {
     return switchModel(this);
   }
@@ -937,6 +971,7 @@ class _$SwitchModelImpl implements _SwitchModel {
     TResult? Function(_SwitchModel value)? switchModel,
     TResult? Function(_Speak value)? speak,
     TResult? Function(_Pause value)? pause,
+    TResult? Function(_Init value)? init,
   }) {
     return switchModel?.call(this);
   }
@@ -951,6 +986,7 @@ class _$SwitchModelImpl implements _SwitchModel {
     TResult Function(_SwitchModel value)? switchModel,
     TResult Function(_Speak value)? speak,
     TResult Function(_Pause value)? pause,
+    TResult Function(_Init value)? init,
     required TResult orElse(),
   }) {
     if (switchModel != null) {
@@ -1042,6 +1078,7 @@ class _$SpeakImpl implements _Speak {
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
+    required TResult Function(SignUpResponse userDetails) init,
   }) {
     return speak(text);
   }
@@ -1056,6 +1093,7 @@ class _$SpeakImpl implements _Speak {
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
+    TResult? Function(SignUpResponse userDetails)? init,
   }) {
     return speak?.call(text);
   }
@@ -1070,6 +1108,7 @@ class _$SpeakImpl implements _Speak {
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
+    TResult Function(SignUpResponse userDetails)? init,
     required TResult orElse(),
   }) {
     if (speak != null) {
@@ -1088,6 +1127,7 @@ class _$SpeakImpl implements _Speak {
     required TResult Function(_SwitchModel value) switchModel,
     required TResult Function(_Speak value) speak,
     required TResult Function(_Pause value) pause,
+    required TResult Function(_Init value) init,
   }) {
     return speak(this);
   }
@@ -1102,6 +1142,7 @@ class _$SpeakImpl implements _Speak {
     TResult? Function(_SwitchModel value)? switchModel,
     TResult? Function(_Speak value)? speak,
     TResult? Function(_Pause value)? pause,
+    TResult? Function(_Init value)? init,
   }) {
     return speak?.call(this);
   }
@@ -1116,6 +1157,7 @@ class _$SpeakImpl implements _Speak {
     TResult Function(_SwitchModel value)? switchModel,
     TResult Function(_Speak value)? speak,
     TResult Function(_Pause value)? pause,
+    TResult Function(_Init value)? init,
     required TResult orElse(),
   }) {
     if (speak != null) {
@@ -1206,6 +1248,7 @@ class _$PauseImpl implements _Pause {
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
+    required TResult Function(SignUpResponse userDetails) init,
   }) {
     return pause(text);
   }
@@ -1220,6 +1263,7 @@ class _$PauseImpl implements _Pause {
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
+    TResult? Function(SignUpResponse userDetails)? init,
   }) {
     return pause?.call(text);
   }
@@ -1234,6 +1278,7 @@ class _$PauseImpl implements _Pause {
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
+    TResult Function(SignUpResponse userDetails)? init,
     required TResult orElse(),
   }) {
     if (pause != null) {
@@ -1252,6 +1297,7 @@ class _$PauseImpl implements _Pause {
     required TResult Function(_SwitchModel value) switchModel,
     required TResult Function(_Speak value) speak,
     required TResult Function(_Pause value) pause,
+    required TResult Function(_Init value) init,
   }) {
     return pause(this);
   }
@@ -1266,6 +1312,7 @@ class _$PauseImpl implements _Pause {
     TResult? Function(_SwitchModel value)? switchModel,
     TResult? Function(_Speak value)? speak,
     TResult? Function(_Pause value)? pause,
+    TResult? Function(_Init value)? init,
   }) {
     return pause?.call(this);
   }
@@ -1280,6 +1327,7 @@ class _$PauseImpl implements _Pause {
     TResult Function(_SwitchModel value)? switchModel,
     TResult Function(_Speak value)? speak,
     TResult Function(_Pause value)? pause,
+    TResult Function(_Init value)? init,
     required TResult orElse(),
   }) {
     if (pause != null) {
@@ -1299,10 +1347,191 @@ abstract class _Pause implements HomeEvent {
 }
 
 /// @nodoc
+abstract class _$$InitImplCopyWith<$Res> {
+  factory _$$InitImplCopyWith(
+          _$InitImpl value, $Res Function(_$InitImpl) then) =
+      __$$InitImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({SignUpResponse userDetails});
+
+  $SignUpResponseCopyWith<$Res> get userDetails;
+}
+
+/// @nodoc
+class __$$InitImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$InitImpl>
+    implements _$$InitImplCopyWith<$Res> {
+  __$$InitImplCopyWithImpl(_$InitImpl _value, $Res Function(_$InitImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userDetails = null,
+  }) {
+    return _then(_$InitImpl(
+      userDetails: null == userDetails
+          ? _value.userDetails
+          : userDetails // ignore: cast_nullable_to_non_nullable
+              as SignUpResponse,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SignUpResponseCopyWith<$Res> get userDetails {
+    return $SignUpResponseCopyWith<$Res>(_value.userDetails, (value) {
+      return _then(_value.copyWith(userDetails: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$InitImpl implements _Init {
+  const _$InitImpl({required this.userDetails});
+
+  @override
+  final SignUpResponse userDetails;
+
+  @override
+  String toString() {
+    return 'HomeEvent.init(userDetails: $userDetails)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InitImpl &&
+            (identical(other.userDetails, userDetails) ||
+                other.userDetails == userDetails));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userDetails);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InitImplCopyWith<_$InitImpl> get copyWith =>
+      __$$InitImplCopyWithImpl<_$InitImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String prompt, List<XFile> files)
+        generateFromImage,
+    required TResult Function(String id, String prompt) startChat,
+    required TResult Function(String prompt) generateFromText,
+    required TResult Function(String id, String title) selectChat,
+    required TResult Function(GeminiModelEnum modelEnum) switchModel,
+    required TResult Function(String text) speak,
+    required TResult Function(String text) pause,
+    required TResult Function(SignUpResponse userDetails) init,
+  }) {
+    return init(userDetails);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String prompt, List<XFile> files)? generateFromImage,
+    TResult? Function(String id, String prompt)? startChat,
+    TResult? Function(String prompt)? generateFromText,
+    TResult? Function(String id, String title)? selectChat,
+    TResult? Function(GeminiModelEnum modelEnum)? switchModel,
+    TResult? Function(String text)? speak,
+    TResult? Function(String text)? pause,
+    TResult? Function(SignUpResponse userDetails)? init,
+  }) {
+    return init?.call(userDetails);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String prompt, List<XFile> files)? generateFromImage,
+    TResult Function(String id, String prompt)? startChat,
+    TResult Function(String prompt)? generateFromText,
+    TResult Function(String id, String title)? selectChat,
+    TResult Function(GeminiModelEnum modelEnum)? switchModel,
+    TResult Function(String text)? speak,
+    TResult Function(String text)? pause,
+    TResult Function(SignUpResponse userDetails)? init,
+    required TResult orElse(),
+  }) {
+    if (init != null) {
+      return init(userDetails);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GenerateFromImage value) generateFromImage,
+    required TResult Function(_StartChat value) startChat,
+    required TResult Function(_GenerateFromText value) generateFromText,
+    required TResult Function(_SelectChat value) selectChat,
+    required TResult Function(_SwitchModel value) switchModel,
+    required TResult Function(_Speak value) speak,
+    required TResult Function(_Pause value) pause,
+    required TResult Function(_Init value) init,
+  }) {
+    return init(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GenerateFromImage value)? generateFromImage,
+    TResult? Function(_StartChat value)? startChat,
+    TResult? Function(_GenerateFromText value)? generateFromText,
+    TResult? Function(_SelectChat value)? selectChat,
+    TResult? Function(_SwitchModel value)? switchModel,
+    TResult? Function(_Speak value)? speak,
+    TResult? Function(_Pause value)? pause,
+    TResult? Function(_Init value)? init,
+  }) {
+    return init?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GenerateFromImage value)? generateFromImage,
+    TResult Function(_StartChat value)? startChat,
+    TResult Function(_GenerateFromText value)? generateFromText,
+    TResult Function(_SelectChat value)? selectChat,
+    TResult Function(_SwitchModel value)? switchModel,
+    TResult Function(_Speak value)? speak,
+    TResult Function(_Pause value)? pause,
+    TResult Function(_Init value)? init,
+    required TResult orElse(),
+  }) {
+    if (init != null) {
+      return init(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Init implements HomeEvent {
+  const factory _Init({required final SignUpResponse userDetails}) = _$InitImpl;
+
+  SignUpResponse get userDetails;
+  @JsonKey(ignore: true)
+  _$$InitImplCopyWith<_$InitImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$HomeState {
   TheStates get theStates => throw _privateConstructorUsedError;
   List<ContentResponse>? get chathistory => throw _privateConstructorUsedError;
   String? get selectedCoversationId => throw _privateConstructorUsedError;
+  SignUpResponse? get signUpResponse => throw _privateConstructorUsedError;
   GeminiModelEnum get currentModel => throw _privateConstructorUsedError;
   AppError get error => throw _privateConstructorUsedError;
 
@@ -1320,8 +1549,11 @@ abstract class $HomeStateCopyWith<$Res> {
       {TheStates theStates,
       List<ContentResponse>? chathistory,
       String? selectedCoversationId,
+      SignUpResponse? signUpResponse,
       GeminiModelEnum currentModel,
       AppError error});
+
+  $SignUpResponseCopyWith<$Res>? get signUpResponse;
 }
 
 /// @nodoc
@@ -1340,6 +1572,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? theStates = null,
     Object? chathistory = freezed,
     Object? selectedCoversationId = freezed,
+    Object? signUpResponse = freezed,
     Object? currentModel = null,
     Object? error = null,
   }) {
@@ -1356,6 +1589,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.selectedCoversationId
           : selectedCoversationId // ignore: cast_nullable_to_non_nullable
               as String?,
+      signUpResponse: freezed == signUpResponse
+          ? _value.signUpResponse
+          : signUpResponse // ignore: cast_nullable_to_non_nullable
+              as SignUpResponse?,
       currentModel: null == currentModel
           ? _value.currentModel
           : currentModel // ignore: cast_nullable_to_non_nullable
@@ -1365,6 +1602,18 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           : error // ignore: cast_nullable_to_non_nullable
               as AppError,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SignUpResponseCopyWith<$Res>? get signUpResponse {
+    if (_value.signUpResponse == null) {
+      return null;
+    }
+
+    return $SignUpResponseCopyWith<$Res>(_value.signUpResponse!, (value) {
+      return _then(_value.copyWith(signUpResponse: value) as $Val);
+    });
   }
 }
 
@@ -1380,8 +1629,12 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       {TheStates theStates,
       List<ContentResponse>? chathistory,
       String? selectedCoversationId,
+      SignUpResponse? signUpResponse,
       GeminiModelEnum currentModel,
       AppError error});
+
+  @override
+  $SignUpResponseCopyWith<$Res>? get signUpResponse;
 }
 
 /// @nodoc
@@ -1398,6 +1651,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
     Object? theStates = null,
     Object? chathistory = freezed,
     Object? selectedCoversationId = freezed,
+    Object? signUpResponse = freezed,
     Object? currentModel = null,
     Object? error = null,
   }) {
@@ -1414,6 +1668,10 @@ class __$$HomeStateImplCopyWithImpl<$Res>
           ? _value.selectedCoversationId
           : selectedCoversationId // ignore: cast_nullable_to_non_nullable
               as String?,
+      signUpResponse: freezed == signUpResponse
+          ? _value.signUpResponse
+          : signUpResponse // ignore: cast_nullable_to_non_nullable
+              as SignUpResponse?,
       currentModel: null == currentModel
           ? _value.currentModel
           : currentModel // ignore: cast_nullable_to_non_nullable
@@ -1433,6 +1691,7 @@ class _$HomeStateImpl implements _HomeState {
       {this.theStates = TheStates.initial,
       final List<ContentResponse>? chathistory,
       this.selectedCoversationId,
+      this.signUpResponse,
       this.currentModel = GeminiModelEnum.text,
       this.error = const InternalAppError()})
       : _chathistory = chathistory;
@@ -1453,6 +1712,8 @@ class _$HomeStateImpl implements _HomeState {
   @override
   final String? selectedCoversationId;
   @override
+  final SignUpResponse? signUpResponse;
+  @override
   @JsonKey()
   final GeminiModelEnum currentModel;
   @override
@@ -1461,7 +1722,7 @@ class _$HomeStateImpl implements _HomeState {
 
   @override
   String toString() {
-    return 'HomeState(theStates: $theStates, chathistory: $chathistory, selectedCoversationId: $selectedCoversationId, currentModel: $currentModel, error: $error)';
+    return 'HomeState(theStates: $theStates, chathistory: $chathistory, selectedCoversationId: $selectedCoversationId, signUpResponse: $signUpResponse, currentModel: $currentModel, error: $error)';
   }
 
   @override
@@ -1475,6 +1736,8 @@ class _$HomeStateImpl implements _HomeState {
                 .equals(other._chathistory, _chathistory) &&
             (identical(other.selectedCoversationId, selectedCoversationId) ||
                 other.selectedCoversationId == selectedCoversationId) &&
+            (identical(other.signUpResponse, signUpResponse) ||
+                other.signUpResponse == signUpResponse) &&
             (identical(other.currentModel, currentModel) ||
                 other.currentModel == currentModel) &&
             (identical(other.error, error) || other.error == error));
@@ -1486,6 +1749,7 @@ class _$HomeStateImpl implements _HomeState {
       theStates,
       const DeepCollectionEquality().hash(_chathistory),
       selectedCoversationId,
+      signUpResponse,
       currentModel,
       error);
 
@@ -1501,6 +1765,7 @@ abstract class _HomeState implements HomeState {
       {final TheStates theStates,
       final List<ContentResponse>? chathistory,
       final String? selectedCoversationId,
+      final SignUpResponse? signUpResponse,
       final GeminiModelEnum currentModel,
       final AppError error}) = _$HomeStateImpl;
 
@@ -1510,6 +1775,8 @@ abstract class _HomeState implements HomeState {
   List<ContentResponse>? get chathistory;
   @override
   String? get selectedCoversationId;
+  @override
+  SignUpResponse? get signUpResponse;
   @override
   GeminiModelEnum get currentModel;
   @override

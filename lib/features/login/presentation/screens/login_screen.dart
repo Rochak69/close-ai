@@ -7,15 +7,14 @@ import 'package:close_ai/core/build_variants/enum.dart';
 import 'package:close_ai/core/config/environment_helper.dart';
 import 'package:close_ai/core/route/app_router.dart';
 
-import 'package:close_ai/enum/the_states.dart';
-import 'package:close_ai/features/common/app_outlined_button.dart';
 import 'package:close_ai/features/common/app_scaffold.dart';
 import 'package:close_ai/features/common/app_spacing.dart';
 import 'package:close_ai/features/common/app_text_form_field.dart';
+import 'package:close_ai/features/homescreen/presentation/bloc/home_bloc.dart';
 import 'package:close_ai/features/login/presentation/bloc/login_bloc.dart';
 import 'package:close_ai/features/login/presentation/screens/widgets/social_icon_button.dart';
 import 'package:close_ai/utlis/app_flushbar.dart';
-import 'package:close_ai/utlis/helper.dart';
+import 'package:close_ai/utlis/app_globals.dart';
 import 'package:close_ai/utlis/uihelper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -56,17 +55,24 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: BlocListener<LoginBloc, LoginState>(
               listener: (context, state) {
-                if (state.theStates == TheStates.success) {
-                  Navigator.pop(context);
-                  AppUtils.unfocusKeyboard(context);
-                  AutoRouter.of(context).replace(const HomeRoute());
-                } else if (state.theStates == TheStates.error) {
-                  Navigator.pop(context);
-                  AppFlushbar.error(context);
-                }
+                state.maybeWhen(
+                  error: (errorMessage) {
+                    Navigator.pop(context);
+                    AppFlushbar.error(context, message: errorMessage);
+                  },
+                  success: (userDetails) {
+                    Navigator.pop(context);
+                    BlocProvider.of<HomeBloc>(context)
+                        .add(HomeEvent.init(userDetails: userDetails));
+                    AppGlobals.uuid = userDetails.uuid ?? '';
+                    AppGlobals.userEmail = userDetails.email ?? '';
+                    AutoRouter.of(context).replace(const HomeRoute());
+                  },
+                  loading: () => UiHelper.showloaderdialog(context),
+                  orElse: () {},
+                );
               },
-              listenWhen: (previous, current) =>
-                  previous.theStates != current.theStates,
+              listenWhen: (previous, current) => previous != current,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -123,9 +129,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         final isFormValid = _formKey.currentState!.validate();
                         if (isFormValid) {
-                          UiHelper.showloaderdialog(context);
-                          BlocProvider.of<LoginBloc>(context)
-                              .add(const LoginEvent.login());
+                          BlocProvider.of<LoginBloc>(context).add(
+                            LoginEvent.login(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                            ),
+                          );
                         }
                       },
                       child: const Text('Login'),
@@ -177,7 +186,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontSize: 14,
                         ),
                       ),
-                      TextButton(onPressed: () {}, child: Text('Sign up here'))
+                      TextButton(
+                        onPressed: () {
+                          AutoRouter.of(context).push(const SignUpRoute());
+                        },
+                        child: const Text('Sign up here'),
+                      ),
                     ],
                   ),
                 ],
@@ -193,11 +207,11 @@ class _LoginScreenState extends State<LoginScreen> {
     if (kDebugMode) {
       if (EnvironmentHelper().getValue(EnvironmentKey.env) ==
           AppEnvironment.development.name) {
-        emailController.text = 'test@test.com';
-        passwordController.text = 'test163';
+        emailController.text = 'rochak@rochak.com';
+        passwordController.text = 'rochak123';
       } else {
-        emailController.text = 'test@test.com';
-        passwordController.text = 'test163';
+        emailController.text = 'rochak@rochak.com';
+        passwordController.text = 'rochak123';
       }
     }
   }

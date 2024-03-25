@@ -16,7 +16,7 @@ class HomeRepositoryImpl extends HomeRepository {
     required String prompt,
   }) async {
     try {
-      final result = await _remoteSource.fetchData(prompt: prompt);
+      await _remoteSource.fetchData(prompt: prompt);
       throw Exception();
     } catch (e) {
       if (e is ApiErrorResponse) {

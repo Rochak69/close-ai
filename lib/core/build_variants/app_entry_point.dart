@@ -11,6 +11,7 @@ import 'package:close_ai/core/theme/app_theme.dart';
 import 'package:close_ai/features/drawer/presentation/bloc/drawer_bloc.dart';
 import 'package:close_ai/features/homescreen/presentation/bloc/home_bloc.dart';
 import 'package:close_ai/features/login/presentation/bloc/login_bloc.dart';
+import 'package:close_ai/features/signup/presentation/bloc/signup_bloc.dart';
 import 'package:close_ai/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -88,6 +89,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<DrawerBloc>(
             create: (BuildContext context) => sl<DrawerBloc>(),
+          ),
+          BlocProvider<SignupBloc>(
+            create: (BuildContext context) => sl<SignupBloc>(),
           ),
         ],
         child: MaterialApp.router(

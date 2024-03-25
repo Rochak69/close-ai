@@ -1,3 +1,4 @@
 class AppGlobals {
-  static String user = 'Rochak';
+  static String uuid = '';
+  static String userEmail = '';
 }

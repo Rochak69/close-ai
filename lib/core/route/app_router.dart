@@ -4,6 +4,7 @@ import 'package:close_ai/features/homescreen/presentation/screens/home_screen.da
 
 import 'package:close_ai/features/login/presentation/screens/login_screen.dart';
 import 'package:close_ai/features/select_text/select_text_screen.dart';
+import 'package:close_ai/features/signup/presentation/screens/signup_screen.dart';
 import 'package:close_ai/features/splash/splash_screen.dart';
 import 'package:close_ai/features/unknown/unknown_screen.dart';
 import 'package:flutter/foundation.dart';
@@ -39,6 +40,12 @@ class AppRouter extends _$AppRouter {
           transitionsBuilder: TransitionsBuilders.slideBottom,
           path: SelectTextRoute.name.routePath(),
           page: SelectTextRoute.page,
+        ),
+        CustomRoute(
+          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+          path: SignUpRoute.name.routePath(),
+          page: SignUpRoute.page,
+          durationInMilliseconds: 200,
         ),
       ];
   static final instance = AppRouter();

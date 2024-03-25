@@ -26,7 +26,7 @@ class DrawerBloc extends Bloc<DrawerEvent, DrawerState> {
   ) async {
     emit(state.copyWith(theStates: TheStates.loading));
     final conversation =
-        await AppFirestore.conversationDocument(AppGlobals.user).get();
+        await AppFirestore.conversationDocument(AppGlobals.uuid).get();
     final conversationData = conversation.data();
     final result = (conversationData?['data'] as List<dynamic>?)
         ?.map((e) => ConversationResponse.fromJson(e))

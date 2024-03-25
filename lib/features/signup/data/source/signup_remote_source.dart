@@ -5,16 +5,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class LoginRemoteSource {
-  LoginRemoteSource(this._preferences);
+class SignUpRemoteSource {
+  SignUpRemoteSource(this._preferences);
 
   final Preferences _preferences;
 
-  Future<ApiResponse<SignUpResponse>> login({
+  Future<ApiResponse<SignUpResponse>> signup({
     required String email,
     required String pasword,
   }) async {
-    final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+    final credential =
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: email,
       password: pasword,
     );

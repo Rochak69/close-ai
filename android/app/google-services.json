@@ -12,7 +12,12 @@
           "package_name": "com.chronosphere.closeai"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "181871412352-2at7g7ln327don52tpr454p0qi7glolb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCJXxLmtlw6yvA-qRbFZ6kOi1X8GUmQX68"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "181871412352-2at7g7ln327don52tpr454p0qi7glolb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "181871412352-hhrj3ngs5ruph0vsdjap7a5slrs3ivqt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.myApp.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }

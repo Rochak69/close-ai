@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'login_bloc.dart';
+part of 'signup_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,60 +15,60 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$LoginEvent {
+mixin _$SignupEvent {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) login,
+    required TResult Function(String email, String password) withCredential,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? login,
+    TResult? Function(String email, String password)? withCredential,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? login,
+    TResult Function(String email, String password)? withCredential,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Login value) login,
+    required TResult Function(_WithCredential value) withCredential,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Login value)? login,
+    TResult? Function(_WithCredential value)? withCredential,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Login value)? login,
+    TResult Function(_WithCredential value)? withCredential,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $LoginEventCopyWith<LoginEvent> get copyWith =>
+  $SignupEventCopyWith<SignupEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LoginEventCopyWith<$Res> {
-  factory $LoginEventCopyWith(
-          LoginEvent value, $Res Function(LoginEvent) then) =
-      _$LoginEventCopyWithImpl<$Res, LoginEvent>;
+abstract class $SignupEventCopyWith<$Res> {
+  factory $SignupEventCopyWith(
+          SignupEvent value, $Res Function(SignupEvent) then) =
+      _$SignupEventCopyWithImpl<$Res, SignupEvent>;
   @useResult
   $Res call({String email, String password});
 }
 
 /// @nodoc
-class _$LoginEventCopyWithImpl<$Res, $Val extends LoginEvent>
-    implements $LoginEventCopyWith<$Res> {
-  _$LoginEventCopyWithImpl(this._value, this._then);
+class _$SignupEventCopyWithImpl<$Res, $Val extends SignupEvent>
+    implements $SignupEventCopyWith<$Res> {
+  _$SignupEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -95,21 +95,22 @@ class _$LoginEventCopyWithImpl<$Res, $Val extends LoginEvent>
 }
 
 /// @nodoc
-abstract class _$$LoginImplCopyWith<$Res> implements $LoginEventCopyWith<$Res> {
-  factory _$$LoginImplCopyWith(
-          _$LoginImpl value, $Res Function(_$LoginImpl) then) =
-      __$$LoginImplCopyWithImpl<$Res>;
+abstract class _$$WithCredentialImplCopyWith<$Res>
+    implements $SignupEventCopyWith<$Res> {
+  factory _$$WithCredentialImplCopyWith(_$WithCredentialImpl value,
+          $Res Function(_$WithCredentialImpl) then) =
+      __$$WithCredentialImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String email, String password});
 }
 
 /// @nodoc
-class __$$LoginImplCopyWithImpl<$Res>
-    extends _$LoginEventCopyWithImpl<$Res, _$LoginImpl>
-    implements _$$LoginImplCopyWith<$Res> {
-  __$$LoginImplCopyWithImpl(
-      _$LoginImpl _value, $Res Function(_$LoginImpl) _then)
+class __$$WithCredentialImplCopyWithImpl<$Res>
+    extends _$SignupEventCopyWithImpl<$Res, _$WithCredentialImpl>
+    implements _$$WithCredentialImplCopyWith<$Res> {
+  __$$WithCredentialImplCopyWithImpl(
+      _$WithCredentialImpl _value, $Res Function(_$WithCredentialImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +119,7 @@ class __$$LoginImplCopyWithImpl<$Res>
     Object? email = null,
     Object? password = null,
   }) {
-    return _then(_$LoginImpl(
+    return _then(_$WithCredentialImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -133,8 +134,8 @@ class __$$LoginImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoginImpl implements _Login {
-  const _$LoginImpl({required this.email, required this.password});
+class _$WithCredentialImpl implements _WithCredential {
+  const _$WithCredentialImpl({required this.email, required this.password});
 
   @override
   final String email;
@@ -143,14 +144,14 @@ class _$LoginImpl implements _Login {
 
   @override
   String toString() {
-    return 'LoginEvent.login(email: $email, password: $password)';
+    return 'SignupEvent.withCredential(email: $email, password: $password)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoginImpl &&
+            other is _$WithCredentialImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password));
@@ -162,33 +163,34 @@ class _$LoginImpl implements _Login {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
-      __$$LoginImplCopyWithImpl<_$LoginImpl>(this, _$identity);
+  _$$WithCredentialImplCopyWith<_$WithCredentialImpl> get copyWith =>
+      __$$WithCredentialImplCopyWithImpl<_$WithCredentialImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) login,
+    required TResult Function(String email, String password) withCredential,
   }) {
-    return login(email, password);
+    return withCredential(email, password);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? login,
+    TResult? Function(String email, String password)? withCredential,
   }) {
-    return login?.call(email, password);
+    return withCredential?.call(email, password);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? login,
+    TResult Function(String email, String password)? withCredential,
     required TResult orElse(),
   }) {
-    if (login != null) {
-      return login(email, password);
+    if (withCredential != null) {
+      return withCredential(email, password);
     }
     return orElse();
   }
@@ -196,36 +198,36 @@ class _$LoginImpl implements _Login {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Login value) login,
+    required TResult Function(_WithCredential value) withCredential,
   }) {
-    return login(this);
+    return withCredential(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Login value)? login,
+    TResult? Function(_WithCredential value)? withCredential,
   }) {
-    return login?.call(this);
+    return withCredential?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Login value)? login,
+    TResult Function(_WithCredential value)? withCredential,
     required TResult orElse(),
   }) {
-    if (login != null) {
-      return login(this);
+    if (withCredential != null) {
+      return withCredential(this);
     }
     return orElse();
   }
 }
 
-abstract class _Login implements LoginEvent {
-  const factory _Login(
+abstract class _WithCredential implements SignupEvent {
+  const factory _WithCredential(
       {required final String email,
-      required final String password}) = _$LoginImpl;
+      required final String password}) = _$WithCredentialImpl;
 
   @override
   String get email;
@@ -233,12 +235,12 @@ abstract class _Login implements LoginEvent {
   String get password;
   @override
   @JsonKey(ignore: true)
-  _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
+  _$$WithCredentialImplCopyWith<_$WithCredentialImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-mixin _$LoginState {
+mixin _$SignupState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -292,16 +294,16 @@ mixin _$LoginState {
 }
 
 /// @nodoc
-abstract class $LoginStateCopyWith<$Res> {
-  factory $LoginStateCopyWith(
-          LoginState value, $Res Function(LoginState) then) =
-      _$LoginStateCopyWithImpl<$Res, LoginState>;
+abstract class $SignupStateCopyWith<$Res> {
+  factory $SignupStateCopyWith(
+          SignupState value, $Res Function(SignupState) then) =
+      _$SignupStateCopyWithImpl<$Res, SignupState>;
 }
 
 /// @nodoc
-class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
-    implements $LoginStateCopyWith<$Res> {
-  _$LoginStateCopyWithImpl(this._value, this._then);
+class _$SignupStateCopyWithImpl<$Res, $Val extends SignupState>
+    implements $SignupStateCopyWith<$Res> {
+  _$SignupStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -318,7 +320,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$LoginStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$SignupStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -332,7 +334,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'LoginState.initial()';
+    return 'SignupState.initial()';
   }
 
   @override
@@ -419,7 +421,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements LoginState {
+abstract class _Initial implements SignupState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -432,7 +434,7 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$LoginStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$SignupStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
@@ -446,7 +448,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'LoginState.loading()';
+    return 'SignupState.loading()';
   }
 
   @override
@@ -533,7 +535,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements LoginState {
+abstract class _Loading implements SignupState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -548,7 +550,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$LoginStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$SignupStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
@@ -578,7 +580,7 @@ class _$ErrorImpl implements _Error {
 
   @override
   String toString() {
-    return 'LoginState.error(errorMessage: $errorMessage)';
+    return 'SignupState.error(errorMessage: $errorMessage)';
   }
 
   @override
@@ -674,7 +676,7 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements LoginState {
+abstract class _Error implements SignupState {
   const factory _Error({required final String errorMessage}) = _$ErrorImpl;
 
   String get errorMessage;
@@ -696,7 +698,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$LoginStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$SignupStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
@@ -734,7 +736,7 @@ class _$SuccessImpl implements _Success {
 
   @override
   String toString() {
-    return 'LoginState.success(userDetails: $userDetails)';
+    return 'SignupState.success(userDetails: $userDetails)';
   }
 
   @override
@@ -830,7 +832,7 @@ class _$SuccessImpl implements _Success {
   }
 }
 
-abstract class _Success implements LoginState {
+abstract class _Success implements SignupState {
   const factory _Success({required final SignUpResponse userDetails}) =
       _$SuccessImpl;
 
