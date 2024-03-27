@@ -22,6 +22,7 @@ ConversationResponse _$ConversationResponseFromJson(Map<String, dynamic> json) {
 mixin _$ConversationResponse {
   String? get id => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
+  GeminiModelEnum? get geminiModelEnum => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $ConversationResponseCopyWith<$Res> {
           $Res Function(ConversationResponse) then) =
       _$ConversationResponseCopyWithImpl<$Res, ConversationResponse>;
   @useResult
-  $Res call({String? id, String? title});
+  $Res call({String? id, String? title, GeminiModelEnum? geminiModelEnum});
 }
 
 /// @nodoc
@@ -54,6 +55,7 @@ class _$ConversationResponseCopyWithImpl<$Res,
   $Res call({
     Object? id = freezed,
     Object? title = freezed,
+    Object? geminiModelEnum = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -64,6 +66,10 @@ class _$ConversationResponseCopyWithImpl<$Res,
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
+      geminiModelEnum: freezed == geminiModelEnum
+          ? _value.geminiModelEnum
+          : geminiModelEnum // ignore: cast_nullable_to_non_nullable
+              as GeminiModelEnum?,
     ) as $Val);
   }
 }
@@ -76,7 +82,7 @@ abstract class _$$ConversationResponseImplCopyWith<$Res>
       __$$ConversationResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, String? title});
+  $Res call({String? id, String? title, GeminiModelEnum? geminiModelEnum});
 }
 
 /// @nodoc
@@ -92,6 +98,7 @@ class __$$ConversationResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? title = freezed,
+    Object? geminiModelEnum = freezed,
   }) {
     return _then(_$ConversationResponseImpl(
       id: freezed == id
@@ -102,6 +109,10 @@ class __$$ConversationResponseImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
+      geminiModelEnum: freezed == geminiModelEnum
+          ? _value.geminiModelEnum
+          : geminiModelEnum // ignore: cast_nullable_to_non_nullable
+              as GeminiModelEnum?,
     ));
   }
 }
@@ -109,7 +120,7 @@ class __$$ConversationResponseImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ConversationResponseImpl implements _ConversationResponse {
-  const _$ConversationResponseImpl({this.id, this.title});
+  const _$ConversationResponseImpl({this.id, this.title, this.geminiModelEnum});
 
   factory _$ConversationResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ConversationResponseImplFromJson(json);
@@ -118,10 +129,12 @@ class _$ConversationResponseImpl implements _ConversationResponse {
   final String? id;
   @override
   final String? title;
+  @override
+  final GeminiModelEnum? geminiModelEnum;
 
   @override
   String toString() {
-    return 'ConversationResponse(id: $id, title: $title)';
+    return 'ConversationResponse(id: $id, title: $title, geminiModelEnum: $geminiModelEnum)';
   }
 
   @override
@@ -130,12 +143,14 @@ class _$ConversationResponseImpl implements _ConversationResponse {
         (other.runtimeType == runtimeType &&
             other is _$ConversationResponseImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title));
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.geminiModelEnum, geminiModelEnum) ||
+                other.geminiModelEnum == geminiModelEnum));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title);
+  int get hashCode => Object.hash(runtimeType, id, title, geminiModelEnum);
 
   @JsonKey(ignore: true)
   @override
@@ -154,8 +169,10 @@ class _$ConversationResponseImpl implements _ConversationResponse {
 }
 
 abstract class _ConversationResponse implements ConversationResponse {
-  const factory _ConversationResponse({final String? id, final String? title}) =
-      _$ConversationResponseImpl;
+  const factory _ConversationResponse(
+      {final String? id,
+      final String? title,
+      final GeminiModelEnum? geminiModelEnum}) = _$ConversationResponseImpl;
 
   factory _ConversationResponse.fromJson(Map<String, dynamic> json) =
       _$ConversationResponseImpl.fromJson;
@@ -164,6 +181,8 @@ abstract class _ConversationResponse implements ConversationResponse {
   String? get id;
   @override
   String? get title;
+  @override
+  GeminiModelEnum? get geminiModelEnum;
   @override
   @JsonKey(ignore: true)
   _$$ConversationResponseImplCopyWith<_$ConversationResponseImpl>

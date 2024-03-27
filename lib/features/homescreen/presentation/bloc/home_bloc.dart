@@ -19,6 +19,7 @@ import 'package:close_ai/utlis/app_globals.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 
@@ -30,7 +31,7 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc(this._homeUsecase) : super(const _HomeState()) {
     on<_GenerateFromImage>(_generateFromImage, transformer: droppable());
-    on<_StartChat>(_startChat);
+    on<_StartChat>(_startChat, transformer: restartable());
     on<_SelectChat>(_selectChat);
     on<_SwitchModel>(_switchModel);
     on<_Speak>(_speak);
@@ -46,30 +47,32 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     _GenerateFromImage event,
     Emitter<HomeState> emit,
   ) async {
-    return;
-    // final partedText = TextPart(event.prompt);
+    final partedText = TextPart(event.prompt);
 
-    // final bytesImages = await Future.wait(
-    //   event.files.map((file) => file.readAsBytes()),
-    // );
-    // final imageParts = bytesImages.map((e) => DataPart('image/jpeg', e));
-    // final content = Content.multi([partedText, ...imageParts]);
-    // final newList = List<ContentResponse>.from(state.chathistory ?? [])
-    //   ..addAll([
-    //     content,
-    //     Content.model([TextPart('Please wait..')]),
-    //   ]);
-    // emit(
-    //   state.copyWith(theStates: TheStates.loading, chathistory: newList),
-    // );
-    // final result = await sl<GeminiClient>()
-    //     .generateContentFromImage(prompt: event.prompt, content: content);
-    // // ignore: cascade_invocations
-    // result.fold((l) {
-    //   _addToList(l.message, event, emit);
-    // }, (r) {
-    //   _addToList(r, event, emit);
-    // });
+    final bytesImages = await Future.wait(
+      event.files.map((file) => file.readAsBytes()),
+    );
+    final imageParts = bytesImages.map((e) => DataPart('image/jpeg', e));
+    final content = Content.multi([partedText, ...imageParts]);
+    final newList = List<ContentResponse>.from(state.chathistory ?? [])
+      ..addAll([
+        ContentResponse(
+          role: 'user',
+          text: event.prompt,
+          images: bytesImages.map((e) => e.toString()).toList(),
+        ),
+        const ContentResponse(text: 'Please wait..', role: 'model'),
+      ]);
+    emit(
+      state.copyWith(theStates: TheStates.loading, chathistory: newList),
+    );
+    final result = await sl<GeminiClient>()
+        .generateContentFromImage(prompt: event.prompt, content: content);
+    result.fold((l) {
+      _addToList(l.message, event, emit);
+    }, (r) {
+      _addToList(r, event, emit);
+    });
   }
 
   void _addToList(String r, HomeEvent event, Emitter<HomeState> emit) {
@@ -86,6 +89,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   FutureOr<void> _startChat(_StartChat event, Emitter<HomeState> emit) async {
+    if (event.stopResponse) {
+      final newList = List<ContentResponse>.from(state.chathistory ?? []);
+      if (newList.last.text == 'Please wait..') {
+        newList.removeLast();
+      }
+      emit(
+        state.copyWith(
+          theStates: TheStates.success,
+          chathistory: newList,
+        ),
+      );
+      return;
+    }
     if (state.chathistory?.isEmpty ?? true) {
       emit(state.copyWith(theStates: TheStates.initial));
       final context = AppRouter.instance.navigatorKey.currentContext!;
@@ -96,13 +112,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           ConversationResponse(
             id: state.selectedCoversationId,
             title: event.prompt,
+            geminiModelEnum: state.currentModel,
           ),
         );
       final conversationCollection = <String, dynamic>{
         'data': newConversation.map((e) => e.toJson()),
       };
+
       await AppFirestore.conversationDocument(AppGlobals.uuid)
           .set(conversationCollection);
+
       if (context.mounted) {
         BlocProvider.of<DrawerBloc>(context)
             .add(const DrawerEvent.getChatHistory());
@@ -110,7 +129,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
     final newList = List<ContentResponse>.from(state.chathistory ?? [])
       ..addAll([
-        ContentResponse(role: 'user', text: event.prompt),
+        ContentResponse(
+          role: 'user',
+          text: event.prompt,
+        ),
         const ContentResponse(role: 'model', text: 'Please wait..'),
       ]);
     emit(
@@ -149,8 +171,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       }
       emit(state.copyWith(theStates: TheStates.success));
       c.cancel();
-      final data = state.chathistory?.map((e) => e.toJson()).toList();
-
+      final data =
+          state.chathistory?.map((e) => e.toJson()..remove('images')).toList();
+      if (emit.isDone) {
+        return;
+      }
       AppFirestore.chatDocument(event.id).set({'data': data});
     });
   }
@@ -161,13 +186,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         theStates: TheStates.initial,
         selectedCoversationId: event.id,
         chathistory: [],
+        currentModel: event.geminiModelEnum,
       ),
     );
     final response = await AppFirestore.chatDocument(event.id).get();
     final chatData = (response.data()?['data'] as List<dynamic>?)
         ?.map((e) => ContentResponse.fromJson(e))
         .toList();
-
+    GeminiClient.initChat(history: chatData);
     emit(
       state.copyWith(
         theStates: TheStates.success,
@@ -182,6 +208,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(state.copyWith(currentModel: event.modelEnum));
       return;
     }
+    GeminiClient.initChat();
 
     emit(
       state.copyWith(

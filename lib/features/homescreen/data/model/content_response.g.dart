@@ -11,7 +11,8 @@ _$ContentResponseImpl _$$ContentResponseImplFromJson(
     _$ContentResponseImpl(
       role: json['role'] as String?,
       text: json['text'] as String?,
-      image: json['image'] as String?,
+      images:
+          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$$ContentResponseImplToJson(
@@ -19,5 +20,5 @@ Map<String, dynamic> _$$ContentResponseImplToJson(
     <String, dynamic>{
       'role': instance.role,
       'text': instance.text,
-      'image': instance.image,
+      'images': instance.images,
     };

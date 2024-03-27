@@ -28,20 +28,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool hidePassword = true;
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
   late ScrollController _scrollController;
   @override
   void initState() {
     super.initState();
+    BlocProvider.of<HomeBloc>(context)
+        .add(HomeEvent.init(userDetails: widget.userDetails));
     _scrollController = ScrollController();
     BlocProvider.of<DrawerBloc>(context)
         .add(const DrawerEvent.getChatHistory());
     BlocProvider.of<HomeBloc>(context)
         .add(const HomeEvent.switchModel(modelEnum: GeminiModelEnum.text));
-    BlocProvider.of<HomeBloc>(context)
-        .add(HomeEvent.init(userDetails: widget.userDetails));
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+
+    super.dispose();
   }
 
   TextEditingController controller = TextEditingController();
@@ -179,6 +183,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   BlocProvider.of<HomeBloc>(context).add(
                                     HomeEvent.generateFromImage(
                                       prompt: controller.text,
+                                      id: state.selectedCoversationId ??
+                                          'image null',
                                       files: files!,
                                     ),
                                   );
@@ -189,6 +195,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               Future.delayed(
                                 Durations.short1,
                                 () {
+                                  if (!_scrollController.hasClients) {
+                                    return;
+                                  }
                                   _scrollController.animateTo(
                                     _scrollController.position.minScrollExtent,
                                     duration: const Duration(milliseconds: 300),
@@ -198,7 +207,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             }
                           },
-                          onStop: () {},
+                          onStop: () {
+                            BlocProvider.of<HomeBloc>(context).add(
+                              HomeEvent.startChat(
+                                id: state.selectedCoversationId ?? 'image null',
+                                prompt: controller.text,
+                                stopResponse: true,
+                              ),
+                            );
+                          },
                         );
                       },
                     ),

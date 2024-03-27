@@ -22,7 +22,7 @@ ContentResponse _$ContentResponseFromJson(Map<String, dynamic> json) {
 mixin _$ContentResponse {
   String? get role => throw _privateConstructorUsedError;
   String? get text => throw _privateConstructorUsedError;
-  String? get image => throw _privateConstructorUsedError;
+  List<String>? get images => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $ContentResponseCopyWith<$Res> {
           ContentResponse value, $Res Function(ContentResponse) then) =
       _$ContentResponseCopyWithImpl<$Res, ContentResponse>;
   @useResult
-  $Res call({String? role, String? text, String? image});
+  $Res call({String? role, String? text, List<String>? images});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$ContentResponseCopyWithImpl<$Res, $Val extends ContentResponse>
   $Res call({
     Object? role = freezed,
     Object? text = freezed,
-    Object? image = freezed,
+    Object? images = freezed,
   }) {
     return _then(_value.copyWith(
       role: freezed == role
@@ -65,10 +65,10 @@ class _$ContentResponseCopyWithImpl<$Res, $Val extends ContentResponse>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String?,
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
+      images: freezed == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ) as $Val);
   }
 }
@@ -81,7 +81,7 @@ abstract class _$$ContentResponseImplCopyWith<$Res>
       __$$ContentResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? role, String? text, String? image});
+  $Res call({String? role, String? text, List<String>? images});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class __$$ContentResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? role = freezed,
     Object? text = freezed,
-    Object? image = freezed,
+    Object? images = freezed,
   }) {
     return _then(_$ContentResponseImpl(
       role: freezed == role
@@ -108,10 +108,10 @@ class __$$ContentResponseImplCopyWithImpl<$Res>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String?,
-      image: freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
+      images: freezed == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
@@ -119,7 +119,9 @@ class __$$ContentResponseImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ContentResponseImpl implements _ContentResponse {
-  const _$ContentResponseImpl({this.role, this.text, this.image});
+  const _$ContentResponseImpl(
+      {this.role, this.text, final List<String>? images})
+      : _images = images;
 
   factory _$ContentResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContentResponseImplFromJson(json);
@@ -128,12 +130,19 @@ class _$ContentResponseImpl implements _ContentResponse {
   final String? role;
   @override
   final String? text;
+  final List<String>? _images;
   @override
-  final String? image;
+  List<String>? get images {
+    final value = _images;
+    if (value == null) return null;
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'ContentResponse(role: $role, text: $text, image: $image)';
+    return 'ContentResponse(role: $role, text: $text, images: $images)';
   }
 
   @override
@@ -143,12 +152,13 @@ class _$ContentResponseImpl implements _ContentResponse {
             other is _$ContentResponseImpl &&
             (identical(other.role, role) || other.role == role) &&
             (identical(other.text, text) || other.text == text) &&
-            (identical(other.image, image) || other.image == image));
+            const DeepCollectionEquality().equals(other._images, _images));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, role, text, image);
+  int get hashCode => Object.hash(
+      runtimeType, role, text, const DeepCollectionEquality().hash(_images));
 
   @JsonKey(ignore: true)
   @override
@@ -169,7 +179,7 @@ abstract class _ContentResponse implements ContentResponse {
   const factory _ContentResponse(
       {final String? role,
       final String? text,
-      final String? image}) = _$ContentResponseImpl;
+      final List<String>? images}) = _$ContentResponseImpl;
 
   factory _ContentResponse.fromJson(Map<String, dynamic> json) =
       _$ContentResponseImpl.fromJson;
@@ -179,7 +189,7 @@ abstract class _ContentResponse implements ContentResponse {
   @override
   String? get text;
   @override
-  String? get image;
+  List<String>? get images;
   @override
   @JsonKey(ignore: true)
   _$$ContentResponseImplCopyWith<_$ContentResponseImpl> get copyWith =>

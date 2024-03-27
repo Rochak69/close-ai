@@ -18,11 +18,14 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String prompt, List<XFile> files)
+    required TResult Function(String id, String prompt, List<XFile> files)
         generateFromImage,
-    required TResult Function(String id, String prompt) startChat,
+    required TResult Function(String id, String prompt, bool stopResponse)
+        startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(String id, String title) selectChat,
+    required TResult Function(
+            String id, String title, GeminiModelEnum geminiModelEnum)
+        selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
@@ -31,10 +34,12 @@ mixin _$HomeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult? Function(String id, String prompt)? startChat,
+    TResult? Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult? Function(String id, String prompt, bool stopResponse)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(String id, String title)? selectChat,
+    TResult? Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
@@ -43,10 +48,12 @@ mixin _$HomeEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult Function(String id, String prompt)? startChat,
+    TResult Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult Function(String id, String prompt, bool stopResponse)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(String id, String title)? selectChat,
+    TResult Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
@@ -116,7 +123,7 @@ abstract class _$$GenerateFromImageImplCopyWith<$Res> {
           $Res Function(_$GenerateFromImageImpl) then) =
       __$$GenerateFromImageImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String prompt, List<XFile> files});
+  $Res call({String id, String prompt, List<XFile> files});
 }
 
 /// @nodoc
@@ -130,10 +137,15 @@ class __$$GenerateFromImageImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? prompt = null,
     Object? files = null,
   }) {
     return _then(_$GenerateFromImageImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       prompt: null == prompt
           ? _value.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
@@ -150,9 +162,13 @@ class __$$GenerateFromImageImplCopyWithImpl<$Res>
 
 class _$GenerateFromImageImpl implements _GenerateFromImage {
   const _$GenerateFromImageImpl(
-      {required this.prompt, required final List<XFile> files})
+      {required this.id,
+      required this.prompt,
+      required final List<XFile> files})
       : _files = files;
 
+  @override
+  final String id;
   @override
   final String prompt;
   final List<XFile> _files;
@@ -165,7 +181,7 @@ class _$GenerateFromImageImpl implements _GenerateFromImage {
 
   @override
   String toString() {
-    return 'HomeEvent.generateFromImage(prompt: $prompt, files: $files)';
+    return 'HomeEvent.generateFromImage(id: $id, prompt: $prompt, files: $files)';
   }
 
   @override
@@ -173,13 +189,14 @@ class _$GenerateFromImageImpl implements _GenerateFromImage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GenerateFromImageImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.prompt, prompt) || other.prompt == prompt) &&
             const DeepCollectionEquality().equals(other._files, _files));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, prompt, const DeepCollectionEquality().hash(_files));
+      runtimeType, id, prompt, const DeepCollectionEquality().hash(_files));
 
   @JsonKey(ignore: true)
   @override
@@ -191,41 +208,48 @@ class _$GenerateFromImageImpl implements _GenerateFromImage {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String prompt, List<XFile> files)
+    required TResult Function(String id, String prompt, List<XFile> files)
         generateFromImage,
-    required TResult Function(String id, String prompt) startChat,
+    required TResult Function(String id, String prompt, bool stopResponse)
+        startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(String id, String title) selectChat,
+    required TResult Function(
+            String id, String title, GeminiModelEnum geminiModelEnum)
+        selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
     required TResult Function(SignUpResponse userDetails) init,
   }) {
-    return generateFromImage(prompt, files);
+    return generateFromImage(id, prompt, files);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult? Function(String id, String prompt)? startChat,
+    TResult? Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult? Function(String id, String prompt, bool stopResponse)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(String id, String title)? selectChat,
+    TResult? Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
     TResult? Function(SignUpResponse userDetails)? init,
   }) {
-    return generateFromImage?.call(prompt, files);
+    return generateFromImage?.call(id, prompt, files);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult Function(String id, String prompt)? startChat,
+    TResult Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult Function(String id, String prompt, bool stopResponse)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(String id, String title)? selectChat,
+    TResult Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
@@ -233,7 +257,7 @@ class _$GenerateFromImageImpl implements _GenerateFromImage {
     required TResult orElse(),
   }) {
     if (generateFromImage != null) {
-      return generateFromImage(prompt, files);
+      return generateFromImage(id, prompt, files);
     }
     return orElse();
   }
@@ -290,9 +314,11 @@ class _$GenerateFromImageImpl implements _GenerateFromImage {
 
 abstract class _GenerateFromImage implements HomeEvent {
   const factory _GenerateFromImage(
-      {required final String prompt,
+      {required final String id,
+      required final String prompt,
       required final List<XFile> files}) = _$GenerateFromImageImpl;
 
+  String get id;
   String get prompt;
   List<XFile> get files;
   @JsonKey(ignore: true)
@@ -306,7 +332,7 @@ abstract class _$$StartChatImplCopyWith<$Res> {
           _$StartChatImpl value, $Res Function(_$StartChatImpl) then) =
       __$$StartChatImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String id, String prompt});
+  $Res call({String id, String prompt, bool stopResponse});
 }
 
 /// @nodoc
@@ -322,6 +348,7 @@ class __$$StartChatImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? prompt = null,
+    Object? stopResponse = null,
   }) {
     return _then(_$StartChatImpl(
       id: null == id
@@ -332,6 +359,10 @@ class __$$StartChatImplCopyWithImpl<$Res>
           ? _value.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
               as String,
+      stopResponse: null == stopResponse
+          ? _value.stopResponse
+          : stopResponse // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -339,16 +370,20 @@ class __$$StartChatImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$StartChatImpl implements _StartChat {
-  const _$StartChatImpl({required this.id, required this.prompt});
+  const _$StartChatImpl(
+      {required this.id, required this.prompt, this.stopResponse = false});
 
   @override
   final String id;
   @override
   final String prompt;
+  @override
+  @JsonKey()
+  final bool stopResponse;
 
   @override
   String toString() {
-    return 'HomeEvent.startChat(id: $id, prompt: $prompt)';
+    return 'HomeEvent.startChat(id: $id, prompt: $prompt, stopResponse: $stopResponse)';
   }
 
   @override
@@ -357,11 +392,13 @@ class _$StartChatImpl implements _StartChat {
         (other.runtimeType == runtimeType &&
             other is _$StartChatImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.prompt, prompt) || other.prompt == prompt));
+            (identical(other.prompt, prompt) || other.prompt == prompt) &&
+            (identical(other.stopResponse, stopResponse) ||
+                other.stopResponse == stopResponse));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, prompt);
+  int get hashCode => Object.hash(runtimeType, id, prompt, stopResponse);
 
   @JsonKey(ignore: true)
   @override
@@ -372,41 +409,48 @@ class _$StartChatImpl implements _StartChat {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String prompt, List<XFile> files)
+    required TResult Function(String id, String prompt, List<XFile> files)
         generateFromImage,
-    required TResult Function(String id, String prompt) startChat,
+    required TResult Function(String id, String prompt, bool stopResponse)
+        startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(String id, String title) selectChat,
+    required TResult Function(
+            String id, String title, GeminiModelEnum geminiModelEnum)
+        selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
     required TResult Function(SignUpResponse userDetails) init,
   }) {
-    return startChat(id, prompt);
+    return startChat(id, prompt, stopResponse);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult? Function(String id, String prompt)? startChat,
+    TResult? Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult? Function(String id, String prompt, bool stopResponse)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(String id, String title)? selectChat,
+    TResult? Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
     TResult? Function(SignUpResponse userDetails)? init,
   }) {
-    return startChat?.call(id, prompt);
+    return startChat?.call(id, prompt, stopResponse);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult Function(String id, String prompt)? startChat,
+    TResult Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult Function(String id, String prompt, bool stopResponse)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(String id, String title)? selectChat,
+    TResult Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
@@ -414,7 +458,7 @@ class _$StartChatImpl implements _StartChat {
     required TResult orElse(),
   }) {
     if (startChat != null) {
-      return startChat(id, prompt);
+      return startChat(id, prompt, stopResponse);
     }
     return orElse();
   }
@@ -472,10 +516,12 @@ class _$StartChatImpl implements _StartChat {
 abstract class _StartChat implements HomeEvent {
   const factory _StartChat(
       {required final String id,
-      required final String prompt}) = _$StartChatImpl;
+      required final String prompt,
+      final bool stopResponse}) = _$StartChatImpl;
 
   String get id;
   String get prompt;
+  bool get stopResponse;
   @JsonKey(ignore: true)
   _$$StartChatImplCopyWith<_$StartChatImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -546,11 +592,14 @@ class _$GenerateFromTextImpl implements _GenerateFromText {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String prompt, List<XFile> files)
+    required TResult Function(String id, String prompt, List<XFile> files)
         generateFromImage,
-    required TResult Function(String id, String prompt) startChat,
+    required TResult Function(String id, String prompt, bool stopResponse)
+        startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(String id, String title) selectChat,
+    required TResult Function(
+            String id, String title, GeminiModelEnum geminiModelEnum)
+        selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
@@ -562,10 +611,12 @@ class _$GenerateFromTextImpl implements _GenerateFromText {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult? Function(String id, String prompt)? startChat,
+    TResult? Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult? Function(String id, String prompt, bool stopResponse)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(String id, String title)? selectChat,
+    TResult? Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
@@ -577,10 +628,12 @@ class _$GenerateFromTextImpl implements _GenerateFromText {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult Function(String id, String prompt)? startChat,
+    TResult Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult Function(String id, String prompt, bool stopResponse)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(String id, String title)? selectChat,
+    TResult Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
@@ -659,7 +712,7 @@ abstract class _$$SelectChatImplCopyWith<$Res> {
           _$SelectChatImpl value, $Res Function(_$SelectChatImpl) then) =
       __$$SelectChatImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String id, String title});
+  $Res call({String id, String title, GeminiModelEnum geminiModelEnum});
 }
 
 /// @nodoc
@@ -675,6 +728,7 @@ class __$$SelectChatImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? title = null,
+    Object? geminiModelEnum = null,
   }) {
     return _then(_$SelectChatImpl(
       id: null == id
@@ -685,6 +739,10 @@ class __$$SelectChatImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      geminiModelEnum: null == geminiModelEnum
+          ? _value.geminiModelEnum
+          : geminiModelEnum // ignore: cast_nullable_to_non_nullable
+              as GeminiModelEnum,
     ));
   }
 }
@@ -692,16 +750,19 @@ class __$$SelectChatImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SelectChatImpl implements _SelectChat {
-  const _$SelectChatImpl({required this.id, required this.title});
+  const _$SelectChatImpl(
+      {required this.id, required this.title, required this.geminiModelEnum});
 
   @override
   final String id;
   @override
   final String title;
+  @override
+  final GeminiModelEnum geminiModelEnum;
 
   @override
   String toString() {
-    return 'HomeEvent.selectChat(id: $id, title: $title)';
+    return 'HomeEvent.selectChat(id: $id, title: $title, geminiModelEnum: $geminiModelEnum)';
   }
 
   @override
@@ -710,11 +771,13 @@ class _$SelectChatImpl implements _SelectChat {
         (other.runtimeType == runtimeType &&
             other is _$SelectChatImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title));
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.geminiModelEnum, geminiModelEnum) ||
+                other.geminiModelEnum == geminiModelEnum));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, title);
+  int get hashCode => Object.hash(runtimeType, id, title, geminiModelEnum);
 
   @JsonKey(ignore: true)
   @override
@@ -725,41 +788,48 @@ class _$SelectChatImpl implements _SelectChat {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String prompt, List<XFile> files)
+    required TResult Function(String id, String prompt, List<XFile> files)
         generateFromImage,
-    required TResult Function(String id, String prompt) startChat,
+    required TResult Function(String id, String prompt, bool stopResponse)
+        startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(String id, String title) selectChat,
+    required TResult Function(
+            String id, String title, GeminiModelEnum geminiModelEnum)
+        selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
     required TResult Function(SignUpResponse userDetails) init,
   }) {
-    return selectChat(id, title);
+    return selectChat(id, title, geminiModelEnum);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult? Function(String id, String prompt)? startChat,
+    TResult? Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult? Function(String id, String prompt, bool stopResponse)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(String id, String title)? selectChat,
+    TResult? Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
     TResult? Function(SignUpResponse userDetails)? init,
   }) {
-    return selectChat?.call(id, title);
+    return selectChat?.call(id, title, geminiModelEnum);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult Function(String id, String prompt)? startChat,
+    TResult Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult Function(String id, String prompt, bool stopResponse)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(String id, String title)? selectChat,
+    TResult Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
@@ -767,7 +837,7 @@ class _$SelectChatImpl implements _SelectChat {
     required TResult orElse(),
   }) {
     if (selectChat != null) {
-      return selectChat(id, title);
+      return selectChat(id, title, geminiModelEnum);
     }
     return orElse();
   }
@@ -825,10 +895,12 @@ class _$SelectChatImpl implements _SelectChat {
 abstract class _SelectChat implements HomeEvent {
   const factory _SelectChat(
       {required final String id,
-      required final String title}) = _$SelectChatImpl;
+      required final String title,
+      required final GeminiModelEnum geminiModelEnum}) = _$SelectChatImpl;
 
   String get id;
   String get title;
+  GeminiModelEnum get geminiModelEnum;
   @JsonKey(ignore: true)
   _$$SelectChatImplCopyWith<_$SelectChatImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -899,11 +971,14 @@ class _$SwitchModelImpl implements _SwitchModel {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String prompt, List<XFile> files)
+    required TResult Function(String id, String prompt, List<XFile> files)
         generateFromImage,
-    required TResult Function(String id, String prompt) startChat,
+    required TResult Function(String id, String prompt, bool stopResponse)
+        startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(String id, String title) selectChat,
+    required TResult Function(
+            String id, String title, GeminiModelEnum geminiModelEnum)
+        selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
@@ -915,10 +990,12 @@ class _$SwitchModelImpl implements _SwitchModel {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult? Function(String id, String prompt)? startChat,
+    TResult? Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult? Function(String id, String prompt, bool stopResponse)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(String id, String title)? selectChat,
+    TResult? Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
@@ -930,10 +1007,12 @@ class _$SwitchModelImpl implements _SwitchModel {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult Function(String id, String prompt)? startChat,
+    TResult Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult Function(String id, String prompt, bool stopResponse)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(String id, String title)? selectChat,
+    TResult Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
@@ -1070,11 +1149,14 @@ class _$SpeakImpl implements _Speak {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String prompt, List<XFile> files)
+    required TResult Function(String id, String prompt, List<XFile> files)
         generateFromImage,
-    required TResult Function(String id, String prompt) startChat,
+    required TResult Function(String id, String prompt, bool stopResponse)
+        startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(String id, String title) selectChat,
+    required TResult Function(
+            String id, String title, GeminiModelEnum geminiModelEnum)
+        selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
@@ -1086,10 +1168,12 @@ class _$SpeakImpl implements _Speak {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult? Function(String id, String prompt)? startChat,
+    TResult? Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult? Function(String id, String prompt, bool stopResponse)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(String id, String title)? selectChat,
+    TResult? Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
@@ -1101,10 +1185,12 @@ class _$SpeakImpl implements _Speak {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult Function(String id, String prompt)? startChat,
+    TResult Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult Function(String id, String prompt, bool stopResponse)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(String id, String title)? selectChat,
+    TResult Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
@@ -1240,11 +1326,14 @@ class _$PauseImpl implements _Pause {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String prompt, List<XFile> files)
+    required TResult Function(String id, String prompt, List<XFile> files)
         generateFromImage,
-    required TResult Function(String id, String prompt) startChat,
+    required TResult Function(String id, String prompt, bool stopResponse)
+        startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(String id, String title) selectChat,
+    required TResult Function(
+            String id, String title, GeminiModelEnum geminiModelEnum)
+        selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
@@ -1256,10 +1345,12 @@ class _$PauseImpl implements _Pause {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult? Function(String id, String prompt)? startChat,
+    TResult? Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult? Function(String id, String prompt, bool stopResponse)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(String id, String title)? selectChat,
+    TResult? Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
@@ -1271,10 +1362,12 @@ class _$PauseImpl implements _Pause {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult Function(String id, String prompt)? startChat,
+    TResult Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult Function(String id, String prompt, bool stopResponse)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(String id, String title)? selectChat,
+    TResult Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,
@@ -1420,11 +1513,14 @@ class _$InitImpl implements _Init {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String prompt, List<XFile> files)
+    required TResult Function(String id, String prompt, List<XFile> files)
         generateFromImage,
-    required TResult Function(String id, String prompt) startChat,
+    required TResult Function(String id, String prompt, bool stopResponse)
+        startChat,
     required TResult Function(String prompt) generateFromText,
-    required TResult Function(String id, String title) selectChat,
+    required TResult Function(
+            String id, String title, GeminiModelEnum geminiModelEnum)
+        selectChat,
     required TResult Function(GeminiModelEnum modelEnum) switchModel,
     required TResult Function(String text) speak,
     required TResult Function(String text) pause,
@@ -1436,10 +1532,12 @@ class _$InitImpl implements _Init {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult? Function(String id, String prompt)? startChat,
+    TResult? Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult? Function(String id, String prompt, bool stopResponse)? startChat,
     TResult? Function(String prompt)? generateFromText,
-    TResult? Function(String id, String title)? selectChat,
+    TResult? Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult? Function(GeminiModelEnum modelEnum)? switchModel,
     TResult? Function(String text)? speak,
     TResult? Function(String text)? pause,
@@ -1451,10 +1549,12 @@ class _$InitImpl implements _Init {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String prompt, List<XFile> files)? generateFromImage,
-    TResult Function(String id, String prompt)? startChat,
+    TResult Function(String id, String prompt, List<XFile> files)?
+        generateFromImage,
+    TResult Function(String id, String prompt, bool stopResponse)? startChat,
     TResult Function(String prompt)? generateFromText,
-    TResult Function(String id, String title)? selectChat,
+    TResult Function(String id, String title, GeminiModelEnum geminiModelEnum)?
+        selectChat,
     TResult Function(GeminiModelEnum modelEnum)? switchModel,
     TResult Function(String text)? speak,
     TResult Function(String text)? pause,

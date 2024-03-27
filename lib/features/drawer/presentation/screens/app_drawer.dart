@@ -164,6 +164,10 @@ class AppDrawer extends StatelessWidget {
                                   title:
                                       state.conversationHistory?[index].title ??
                                           '',
+                                  geminiModelEnum: state
+                                          .conversationHistory?[index]
+                                          .geminiModelEnum ??
+                                      GeminiModelEnum.text,
                                 ),
                               );
                             },
@@ -198,14 +202,6 @@ class AppDrawer extends StatelessWidget {
                     );
                   },
                   title: const Text('Logout'),
-                  trailing: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(
-                      Icons.settings_outlined,
-                    ),
-                  ),
                 ),
               ],
             ),

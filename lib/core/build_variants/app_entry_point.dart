@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:close_ai/core/bloc/app_bloc_observer.dart';
 import 'package:close_ai/core/config/app_config.dart';
 import 'package:close_ai/core/dependency_injection/dependency_injection.dart';
 import 'package:close_ai/core/firestore/app_firestore.dart';
@@ -46,7 +45,8 @@ class AppEntryPoint {
     if (Platform.isAndroid) {
       unawaited(_setHighRefreshRate());
     }
-    Bloc.observer = const AppBlocObserver();
+    // TODO(Rochak): remove
+    // Bloc.observer = const AppBlocObserver();
 
     unawaited(
       SystemChrome.setPreferredOrientations([

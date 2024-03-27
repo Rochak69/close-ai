@@ -8,7 +8,7 @@ class ContentResponse with _$ContentResponse {
   const factory ContentResponse({
     String? role,
     String? text,
-    String? image,
+    List<String>? images,
   }) = _ContentResponse;
 
   factory ContentResponse.fromJson(Map<String, dynamic> json) =>

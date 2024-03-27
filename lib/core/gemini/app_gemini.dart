@@ -1,5 +1,6 @@
 import 'package:close_ai/constants/app_constant.dart';
 import 'package:close_ai/core/dio_provider/api_error.dart';
+import 'package:close_ai/features/homescreen/data/model/content_response.dart';
 import 'package:dartz/dartz.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:injectable/injectable.dart';
@@ -13,7 +14,7 @@ class GeminiClient {
   static final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
   static final imagemodel =
       GenerativeModel(model: 'gemini-pro-vision', apiKey: apiKey);
-  static final a = model.startChat();
+  static ChatSession chatSession = model.startChat();
 
   Future<Either<AppError, String>> generateContentFromText({
     required String prompt,
@@ -71,10 +72,17 @@ class GeminiClient {
     required String prompt,
   }) async {
     try {
-      final b = a.sendMessageStream(Content.text(prompt));
+      final b = chatSession.sendMessageStream(Content.text(prompt));
       return right(b);
     } catch (e) {
       return left(const InternalAppError());
     }
+  }
+
+  static Future<void> initChat({List<ContentResponse>? history}) async {
+    var chathistory = history
+        ?.map((e) => Content(e.role ?? '', [TextPart(e.text ?? '')]))
+        .toList();
+    chatSession = model.startChat(history: chathistory);
   }
 }
