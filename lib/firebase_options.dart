@@ -2,7 +2,7 @@
 // ignore_for_file: lines_longer_than_80_chars, avoid_classes_with_only_static_members
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
-    show TargetPlatform, defaultTargetPlatform, kIsWeb;
+    show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -36,7 +36,6 @@ class DefaultFirebaseOptions {
           'DefaultFirebaseOptions have not been configured for linux - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
-      // ignore: no_default_cases
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
@@ -68,8 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '181871412352',
     projectId: 'closeai-9376f',
     storageBucket: 'closeai-9376f.appspot.com',
-    iosClientId:
-        '181871412352-irvaidqsegqqsin961j5as9had1ohsim.apps.googleusercontent.com',
+    androidClientId: '181871412352-ahrc9g6nk1n6lbfulc95i2eg2nnpg9te.apps.googleusercontent.com',
+    iosClientId: '181871412352-irvaidqsegqqsin961j5as9had1ohsim.apps.googleusercontent.com',
     iosBundleId: 'com.chronosphere.closeai',
   );
 
@@ -79,8 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '181871412352',
     projectId: 'closeai-9376f',
     storageBucket: 'closeai-9376f.appspot.com',
-    iosClientId:
-        '181871412352-hhrj3ngs5ruph0vsdjap7a5slrs3ivqt.apps.googleusercontent.com',
+    androidClientId: '181871412352-ahrc9g6nk1n6lbfulc95i2eg2nnpg9te.apps.googleusercontent.com',
+    iosClientId: '181871412352-hhrj3ngs5ruph0vsdjap7a5slrs3ivqt.apps.googleusercontent.com',
     iosBundleId: 'com.example.myApp.RunnerTests',
   );
 }

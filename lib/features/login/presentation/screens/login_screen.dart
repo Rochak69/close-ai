@@ -8,6 +8,7 @@ import 'package:close_ai/core/route/app_router.dart';
 import 'package:close_ai/features/common/app_scaffold.dart';
 import 'package:close_ai/features/common/app_spacing.dart';
 import 'package:close_ai/features/common/app_text_form_field.dart';
+import 'package:close_ai/features/login/enum/social_provider_enum.dart';
 import 'package:close_ai/features/login/presentation/bloc/login_bloc.dart';
 import 'package:close_ai/features/login/presentation/screens/widgets/social_icon_button.dart';
 import 'package:close_ai/utlis/app_flushbar.dart';
@@ -165,7 +166,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   Center(
                     child: SocialIconButton(
                       iconPng: AppImages.googlePng,
-                      onTap: () {},
+                      onTap: () {
+                        BlocProvider.of<LoginBloc>(context).add(
+                          const LoginEvent.loginWithFirebase(
+                            socialProviderEnum: SocialProviderEnum.google,
+                          ),
+                        );
+                      },
                     ),
                   ),
                   const VerticalSpacing(16),

@@ -2,6 +2,7 @@ import 'package:close_ai/core/dependency_injection/dependency_injection.config.d
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,6 +20,8 @@ abstract class RegisterModule {
   // url here will be injected
   @singleton
   Dio get dio => Dio();
+  @singleton
+  GoogleSignIn get googleSignIn => GoogleSignIn();
 
   // same thing works for instances that's gotten asynchronous.
   // all you need to do is wrap your instance with a future and tell injectable how

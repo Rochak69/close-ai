@@ -16,43 +16,44 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LoginEvent {
-  String get email => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) login,
+    required TResult Function(SocialProviderEnum socialProviderEnum)
+        loginWithFirebase,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? login,
+    TResult? Function(SocialProviderEnum socialProviderEnum)? loginWithFirebase,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? login,
+    TResult Function(SocialProviderEnum socialProviderEnum)? loginWithFirebase,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
+    required TResult Function(_LoginWithFirebase value) loginWithFirebase,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Login value)? login,
+    TResult? Function(_LoginWithFirebase value)? loginWithFirebase,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_LoginWithFirebase value)? loginWithFirebase,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $LoginEventCopyWith<LoginEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -61,8 +62,6 @@ abstract class $LoginEventCopyWith<$Res> {
   factory $LoginEventCopyWith(
           LoginEvent value, $Res Function(LoginEvent) then) =
       _$LoginEventCopyWithImpl<$Res, LoginEvent>;
-  @useResult
-  $Res call({String email, String password});
 }
 
 /// @nodoc
@@ -74,32 +73,13 @@ class _$LoginEventCopyWithImpl<$Res, $Val extends LoginEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? email = null,
-    Object? password = null,
-  }) {
-    return _then(_value.copyWith(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$LoginImplCopyWith<$Res> implements $LoginEventCopyWith<$Res> {
+abstract class _$$LoginImplCopyWith<$Res> {
   factory _$$LoginImplCopyWith(
           _$LoginImpl value, $Res Function(_$LoginImpl) then) =
       __$$LoginImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String email, String password});
 }
@@ -169,6 +149,8 @@ class _$LoginImpl implements _Login {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) login,
+    required TResult Function(SocialProviderEnum socialProviderEnum)
+        loginWithFirebase,
   }) {
     return login(email, password);
   }
@@ -177,6 +159,7 @@ class _$LoginImpl implements _Login {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? login,
+    TResult? Function(SocialProviderEnum socialProviderEnum)? loginWithFirebase,
   }) {
     return login?.call(email, password);
   }
@@ -185,6 +168,7 @@ class _$LoginImpl implements _Login {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? login,
+    TResult Function(SocialProviderEnum socialProviderEnum)? loginWithFirebase,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -197,6 +181,7 @@ class _$LoginImpl implements _Login {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
+    required TResult Function(_LoginWithFirebase value) loginWithFirebase,
   }) {
     return login(this);
   }
@@ -205,6 +190,7 @@ class _$LoginImpl implements _Login {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Login value)? login,
+    TResult? Function(_LoginWithFirebase value)? loginWithFirebase,
   }) {
     return login?.call(this);
   }
@@ -213,6 +199,7 @@ class _$LoginImpl implements _Login {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_LoginWithFirebase value)? loginWithFirebase,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -227,13 +214,148 @@ abstract class _Login implements LoginEvent {
       {required final String email,
       required final String password}) = _$LoginImpl;
 
-  @override
   String get email;
-  @override
   String get password;
-  @override
   @JsonKey(ignore: true)
   _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoginWithFirebaseImplCopyWith<$Res> {
+  factory _$$LoginWithFirebaseImplCopyWith(_$LoginWithFirebaseImpl value,
+          $Res Function(_$LoginWithFirebaseImpl) then) =
+      __$$LoginWithFirebaseImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({SocialProviderEnum socialProviderEnum});
+}
+
+/// @nodoc
+class __$$LoginWithFirebaseImplCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$LoginWithFirebaseImpl>
+    implements _$$LoginWithFirebaseImplCopyWith<$Res> {
+  __$$LoginWithFirebaseImplCopyWithImpl(_$LoginWithFirebaseImpl _value,
+      $Res Function(_$LoginWithFirebaseImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? socialProviderEnum = null,
+  }) {
+    return _then(_$LoginWithFirebaseImpl(
+      socialProviderEnum: null == socialProviderEnum
+          ? _value.socialProviderEnum
+          : socialProviderEnum // ignore: cast_nullable_to_non_nullable
+              as SocialProviderEnum,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoginWithFirebaseImpl implements _LoginWithFirebase {
+  const _$LoginWithFirebaseImpl({required this.socialProviderEnum});
+
+  @override
+  final SocialProviderEnum socialProviderEnum;
+
+  @override
+  String toString() {
+    return 'LoginEvent.loginWithFirebase(socialProviderEnum: $socialProviderEnum)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoginWithFirebaseImpl &&
+            (identical(other.socialProviderEnum, socialProviderEnum) ||
+                other.socialProviderEnum == socialProviderEnum));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, socialProviderEnum);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoginWithFirebaseImplCopyWith<_$LoginWithFirebaseImpl> get copyWith =>
+      __$$LoginWithFirebaseImplCopyWithImpl<_$LoginWithFirebaseImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) login,
+    required TResult Function(SocialProviderEnum socialProviderEnum)
+        loginWithFirebase,
+  }) {
+    return loginWithFirebase(socialProviderEnum);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password)? login,
+    TResult? Function(SocialProviderEnum socialProviderEnum)? loginWithFirebase,
+  }) {
+    return loginWithFirebase?.call(socialProviderEnum);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? login,
+    TResult Function(SocialProviderEnum socialProviderEnum)? loginWithFirebase,
+    required TResult orElse(),
+  }) {
+    if (loginWithFirebase != null) {
+      return loginWithFirebase(socialProviderEnum);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Login value) login,
+    required TResult Function(_LoginWithFirebase value) loginWithFirebase,
+  }) {
+    return loginWithFirebase(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Login value)? login,
+    TResult? Function(_LoginWithFirebase value)? loginWithFirebase,
+  }) {
+    return loginWithFirebase?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Login value)? login,
+    TResult Function(_LoginWithFirebase value)? loginWithFirebase,
+    required TResult orElse(),
+  }) {
+    if (loginWithFirebase != null) {
+      return loginWithFirebase(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoginWithFirebase implements LoginEvent {
+  const factory _LoginWithFirebase(
+          {required final SocialProviderEnum socialProviderEnum}) =
+      _$LoginWithFirebaseImpl;
+
+  SocialProviderEnum get socialProviderEnum;
+  @JsonKey(ignore: true)
+  _$$LoginWithFirebaseImplCopyWith<_$LoginWithFirebaseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

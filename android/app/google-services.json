@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "181871412352-ahrc9g6nk1n6lbfulc95i2eg2nnpg9te.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chronosphere.closeai",
+            "certificate_hash": "cdfa4952b025719a09646d0e68942ae74dc724f9"
+          }
+        },
+        {
+          "client_id": "181871412352-lreb953636n4u37vpfk7oc54pggnc9ri.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chronosphere.closeai",
+            "certificate_hash": "578c57fb9f9b7419b3196722ff13ba94e895107e"
+          }
+        },
+        {
           "client_id": "181871412352-2at7g7ln327don52tpr454p0qi7glolb.apps.googleusercontent.com",
           "client_type": 3
         }

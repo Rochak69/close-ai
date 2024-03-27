@@ -29,7 +29,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "com.example.verygoodcore.close_ai"
+    namespace "com.chronosphere.closeai"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -39,7 +39,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 
     sourceSets {
@@ -110,8 +110,8 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.debug
-            // signingConfig signingConfigs.release
+
+            signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
@@ -126,5 +126,5 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.21"
 }
