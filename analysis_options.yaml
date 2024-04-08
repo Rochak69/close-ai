@@ -21,4 +21,5 @@ analyzer:
   exclude:
     - bricks/**
     - lib/**.g.dart
+    - mason/**
 
