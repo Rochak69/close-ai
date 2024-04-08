@@ -98,12 +98,12 @@ android {
         }
         staging {
             dimension "default"
-            applicationIdSuffix ".stg"
+
             manifestPlaceholders = [appName: "[STG] Close Ai"]
         }
         development {
             dimension "default"
-            applicationIdSuffix ".dev"
+
             manifestPlaceholders = [appName: "[DEV] Close Ai"]
         }
     }
