@@ -19,32 +19,38 @@ mixin _$DrawerEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getChatHistory,
+    required TResult Function() clearAll,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getChatHistory,
+    TResult? Function()? clearAll,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getChatHistory,
+    TResult Function()? clearAll,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetChatHistory value) getChatHistory,
+    required TResult Function(_ClearAll value) clearAll,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetChatHistory value)? getChatHistory,
+    TResult? Function(_ClearAll value)? clearAll,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetChatHistory value)? getChatHistory,
+    TResult Function(_ClearAll value)? clearAll,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -107,6 +113,7 @@ class _$GetChatHistoryImpl implements _GetChatHistory {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getChatHistory,
+    required TResult Function() clearAll,
   }) {
     return getChatHistory();
   }
@@ -115,6 +122,7 @@ class _$GetChatHistoryImpl implements _GetChatHistory {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getChatHistory,
+    TResult? Function()? clearAll,
   }) {
     return getChatHistory?.call();
   }
@@ -123,6 +131,7 @@ class _$GetChatHistoryImpl implements _GetChatHistory {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getChatHistory,
+    TResult Function()? clearAll,
     required TResult orElse(),
   }) {
     if (getChatHistory != null) {
@@ -135,6 +144,7 @@ class _$GetChatHistoryImpl implements _GetChatHistory {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetChatHistory value) getChatHistory,
+    required TResult Function(_ClearAll value) clearAll,
   }) {
     return getChatHistory(this);
   }
@@ -143,6 +153,7 @@ class _$GetChatHistoryImpl implements _GetChatHistory {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetChatHistory value)? getChatHistory,
+    TResult? Function(_ClearAll value)? clearAll,
   }) {
     return getChatHistory?.call(this);
   }
@@ -151,6 +162,7 @@ class _$GetChatHistoryImpl implements _GetChatHistory {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetChatHistory value)? getChatHistory,
+    TResult Function(_ClearAll value)? clearAll,
     required TResult orElse(),
   }) {
     if (getChatHistory != null) {
@@ -162,6 +174,108 @@ class _$GetChatHistoryImpl implements _GetChatHistory {
 
 abstract class _GetChatHistory implements DrawerEvent {
   const factory _GetChatHistory() = _$GetChatHistoryImpl;
+}
+
+/// @nodoc
+abstract class _$$ClearAllImplCopyWith<$Res> {
+  factory _$$ClearAllImplCopyWith(
+          _$ClearAllImpl value, $Res Function(_$ClearAllImpl) then) =
+      __$$ClearAllImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ClearAllImplCopyWithImpl<$Res>
+    extends _$DrawerEventCopyWithImpl<$Res, _$ClearAllImpl>
+    implements _$$ClearAllImplCopyWith<$Res> {
+  __$$ClearAllImplCopyWithImpl(
+      _$ClearAllImpl _value, $Res Function(_$ClearAllImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ClearAllImpl implements _ClearAll {
+  const _$ClearAllImpl();
+
+  @override
+  String toString() {
+    return 'DrawerEvent.clearAll()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ClearAllImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getChatHistory,
+    required TResult Function() clearAll,
+  }) {
+    return clearAll();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getChatHistory,
+    TResult? Function()? clearAll,
+  }) {
+    return clearAll?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getChatHistory,
+    TResult Function()? clearAll,
+    required TResult orElse(),
+  }) {
+    if (clearAll != null) {
+      return clearAll();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetChatHistory value) getChatHistory,
+    required TResult Function(_ClearAll value) clearAll,
+  }) {
+    return clearAll(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetChatHistory value)? getChatHistory,
+    TResult? Function(_ClearAll value)? clearAll,
+  }) {
+    return clearAll?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetChatHistory value)? getChatHistory,
+    TResult Function(_ClearAll value)? clearAll,
+    required TResult orElse(),
+  }) {
+    if (clearAll != null) {
+      return clearAll(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearAll implements DrawerEvent {
+  const factory _ClearAll() = _$ClearAllImpl;
 }
 
 /// @nodoc

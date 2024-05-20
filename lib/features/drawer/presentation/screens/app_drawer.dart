@@ -3,10 +3,11 @@ import 'package:close_ai/constants/app_colors.dart';
 import 'package:close_ai/core/route/app_router.dart';
 import 'package:close_ai/enum/gemini_model_enum.dart';
 import 'package:close_ai/features/drawer/presentation/bloc/drawer_bloc.dart';
+import 'package:close_ai/features/drawer/presentation/screens/widgets/conversation_tile.dart';
+import 'package:close_ai/features/homescreen/data/model/conversation_response.dart';
 import 'package:close_ai/features/homescreen/presentation/bloc/home_bloc.dart';
 import 'package:close_ai/utlis/app_globals.dart';
-import 'package:close_ai/utlis/uihelper.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:close_ai/utlis/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -150,40 +151,15 @@ class AppDrawer extends StatelessWidget {
                       BlocProvider.of<DrawerBloc>(context)
                           .add(const DrawerEvent.getChatHistory());
                     },
-                    child: ListView.builder(
-                      itemBuilder: (context, index) => Column(
-                        children: [
-                          ListTile(
-                            style: ListTileStyle.drawer,
-                            onTap: () {
-                              Navigator.pop(context);
-                              BlocProvider.of<HomeBloc>(context).add(
-                                HomeEvent.selectChat(
-                                  id: state.conversationHistory?[index].id ??
-                                      '',
-                                  title:
-                                      state.conversationHistory?[index].title ??
-                                          '',
-                                  geminiModelEnum: state
-                                          .conversationHistory?[index]
-                                          .geminiModelEnum ??
-                                      GeminiModelEnum.text,
-                                ),
-                              );
-                            },
-                            title: Text(
-                              state.conversationHistory?[index].title ?? '',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          if (index != state.conversationHistory!.length - 1)
-                            Container(
-                              width: double.infinity,
-                              color: AppColors.primaryDark,
-                              height: 1,
-                            ),
-                        ],
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) => Container(
+                        width: double.infinity,
+                        color: AppColors.primaryDark,
+                        height: 1,
+                      ),
+                      itemBuilder: (context, index) => ConversationTile(
+                        conversation: state.conversationHistory?[index] ??
+                            const ConversationResponse(),
                       ),
                       itemCount: state.conversationHistory?.length ?? 0,
                     ),
@@ -191,17 +167,15 @@ class AppDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.logout),
-                  onTap: () async {
-                    UiHelper.showloaderdialog(context);
-                    await FirebaseAuth.instance.signOut();
-                    Future.delayed(
-                      const Duration(seconds: 1),
-                      () {
-                        AutoRouter.of(context).replace(const LoginRoute());
-                      },
-                    );
-                  },
+                  onTap: () => AppUtils.logout(context),
                   title: const Text('Logout'),
+                  trailing: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      AutoRouter.of(context).push(const SettingsRoute());
+                    },
+                    icon: const Icon(Icons.settings),
+                  ),
                 ),
               ],
             ),

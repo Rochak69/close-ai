@@ -4,6 +4,7 @@ import 'package:close_ai/features/homescreen/presentation/screens/home_screen.da
 
 import 'package:close_ai/features/login/presentation/screens/login_screen.dart';
 import 'package:close_ai/features/select_text/select_text_screen.dart';
+import 'package:close_ai/features/settings_screen/settings_screen.dart';
 import 'package:close_ai/features/signup/data/model/signup_response.dart';
 import 'package:close_ai/features/signup/presentation/screens/signup_screen.dart';
 import 'package:close_ai/features/splash/splash_screen.dart';
@@ -41,6 +42,11 @@ class AppRouter extends _$AppRouter {
           transitionsBuilder: TransitionsBuilders.slideBottom,
           path: SelectTextRoute.name.routePath(),
           page: SelectTextRoute.page,
+        ),
+        CustomRoute(
+          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+          path: SettingsRoute.name.routePath(),
+          page: SettingsRoute.page,
         ),
         CustomRoute(
           transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
