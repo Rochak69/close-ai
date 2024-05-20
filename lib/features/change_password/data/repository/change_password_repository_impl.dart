@@ -13,7 +13,9 @@ class ChangePasswordRepositoryImpl extends ChangePasswordRepository {
   final ChangePaswordRemoteSource _remoteSource;
 
   @override
-  Future<Either<AppError, ApiResponse>> sendOtp({required String email}) async {
+  Future<Either<AppError, ApiResponse<dynamic>>> sendOtp({
+    required String email,
+  }) async {
     try {
       final result = await _remoteSource.sendOtp(
         email: email,
