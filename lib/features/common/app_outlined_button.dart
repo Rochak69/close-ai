@@ -48,12 +48,12 @@ class AppOutlinedButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: onPressed,
         style: Theme.of(context).outlinedButtonTheme.style!.copyWith(
-              side: const MaterialStatePropertyAll(
+              side: const WidgetStatePropertyAll(
                 BorderSide(color: AppColors.textFieldGrey),
               ),
               backgroundColor: onPressed == null
-                  ? const MaterialStatePropertyAll(AppColors.textFieldGrey)
-                  : MaterialStatePropertyAll(backgroundColor),
+                  ? const WidgetStatePropertyAll(AppColors.textFieldGrey)
+                  : WidgetStatePropertyAll(backgroundColor),
             ),
         child: isLoading
             ? const CircularProgressIndicator()

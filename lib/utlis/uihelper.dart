@@ -8,7 +8,6 @@ class UiHelper {
     showDialog(
       context: context,
       barrierDismissible: false,
-      useRootNavigator: true,
       builder: (context) {
         return Center(
           child: Material(
