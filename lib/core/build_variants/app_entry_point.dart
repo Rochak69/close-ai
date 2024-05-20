@@ -7,6 +7,7 @@ import 'package:close_ai/core/firestore/app_firestore.dart';
 
 import 'package:close_ai/core/route/app_router.dart';
 import 'package:close_ai/core/theme/app_theme.dart';
+import 'package:close_ai/features/change_password/presentation/bloc/change_password_bloc.dart';
 import 'package:close_ai/features/drawer/presentation/bloc/drawer_bloc.dart';
 import 'package:close_ai/features/homescreen/presentation/bloc/home_bloc.dart';
 import 'package:close_ai/features/login/presentation/bloc/login_bloc.dart';
@@ -92,6 +93,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<SignupBloc>(
             create: (BuildContext context) => sl<SignupBloc>(),
+          ),
+          BlocProvider<ChangePasswordBloc>(
+            create: (BuildContext context) => sl<ChangePasswordBloc>(),
           ),
         ],
         child: MaterialApp.router(

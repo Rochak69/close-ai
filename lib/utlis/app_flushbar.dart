@@ -4,7 +4,6 @@ import 'package:close_ai/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppFlushbar {
-  static Flushbar<dynamic>? flushbar;
   static Future<void> error(
     BuildContext context, {
     String message = 'Error',
@@ -17,7 +16,7 @@ class AppFlushbar {
     // if (isShowing ?? false) {
     //   await dissmiss();
     // }
-    flushbar = Flushbar(
+    Flushbar(
       title: title,
       titleColor: Colors.white,
       message: message,
@@ -62,8 +61,7 @@ class AppFlushbar {
           ),
         ],
       ),
-    );
-    flushbar?.show(context);
+    ).show(context);
   }
 
   static Future<void> success(
@@ -77,7 +75,7 @@ class AppFlushbar {
     // if (isShowing ?? false) {
     //   await dissmiss();
     // }
-    flushbar = Flushbar(
+    Flushbar(
       title: title,
       titleColor: Colors.white,
       message: message,
@@ -107,13 +105,10 @@ class AppFlushbar {
           color: AppColors.colorWhite,
         ),
       ),
-    );
-    flushbar?.show(context);
+    ).show(context);
   }
 
-  static Future<void> dissmiss() async {
-    await flushbar?.dismiss();
-  }
+  static Future<void> dissmiss() async {}
 
   static void information(
     BuildContext context, {

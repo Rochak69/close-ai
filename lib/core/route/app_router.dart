@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:close_ai/extensions/string_extension.dart';
+import 'package:close_ai/features/change_password/presentation/screens/change_password_screen.dart';
 import 'package:close_ai/features/homescreen/presentation/screens/home_screen.dart';
 
 import 'package:close_ai/features/login/presentation/screens/login_screen.dart';
@@ -44,9 +45,14 @@ class AppRouter extends _$AppRouter {
           page: SelectTextRoute.page,
         ),
         CustomRoute(
-          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+          transitionsBuilder: TransitionsBuilders.slideLeft,
           path: SettingsRoute.name.routePath(),
           page: SettingsRoute.page,
+        ),
+        CustomRoute(
+          transitionsBuilder: TransitionsBuilders.slideLeft,
+          path: ChangePasswordRoute.name.routePath(),
+          page: ChangePasswordRoute.page,
         ),
         CustomRoute(
           transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
