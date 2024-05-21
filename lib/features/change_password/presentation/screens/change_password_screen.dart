@@ -45,13 +45,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               message: AppConstants.errorMessage,
             );
           },
-          success: () {
+          success: () async {
             Navigator.pop(context);
-            AppFlushbar.success(
+            await AppFlushbar.success(
               context,
               message: 'Please check your mail to reset your password.',
             );
-            Navigator.pop(context);
           },
           loading: () => UiHelper.showloaderdialog(context),
         );

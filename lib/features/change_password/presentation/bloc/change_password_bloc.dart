@@ -21,7 +21,7 @@ class ChangePasswordBloc
     _SendOtp event,
     Emitter<ChangePasswordState> emit,
   ) async {
-    emit(const ChangePasswordState.initial());
+    emit(const ChangePasswordState.loading());
     final result = await _sendOtpUsecase.call(SendOtpParam(event.email));
     result.fold(
       (l) {
