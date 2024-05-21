@@ -176,6 +176,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const VerticalSpacing(16),
+                  TextButton(
+                    onPressed: () {
+                      AutoRouter.of(context).push(const ChangePasswordRoute());
+                    },
+                    child: const Text(
+                      'Forgot Password?',
+                      style: TextStyle(decoration: TextDecoration.underline),
+                    ),
+                  ),
+                  const VerticalSpacing(16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

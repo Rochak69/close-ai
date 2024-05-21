@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -68,23 +65,30 @@ class DefaultFirebaseOptions {
     messagingSenderId: '181871412352',
     projectId: 'closeai-9376f',
     storageBucket: 'closeai-9376f.appspot.com',
-    androidClientId:
-        '181871412352-ahrc9g6nk1n6lbfulc95i2eg2nnpg9te.apps.googleusercontent.com',
-    iosClientId:
-        '181871412352-irvaidqsegqqsin961j5as9had1ohsim.apps.googleusercontent.com',
+    androidClientId: '181871412352-ahrc9g6nk1n6lbfulc95i2eg2nnpg9te.apps.googleusercontent.com',
+    iosClientId: '181871412352-irvaidqsegqqsin961j5as9had1ohsim.apps.googleusercontent.com',
     iosBundleId: 'com.chronosphere.closeai',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyB_nefUWWvt6wWDzMH8MUMKPOmKvXHtYqk',
-    appId: '1:181871412352:ios:19227803ec4d8b665bd265',
+    appId: '1:181871412352:ios:f291531858299c7b5bd265',
     messagingSenderId: '181871412352',
     projectId: 'closeai-9376f',
     storageBucket: 'closeai-9376f.appspot.com',
-    androidClientId:
-        '181871412352-ahrc9g6nk1n6lbfulc95i2eg2nnpg9te.apps.googleusercontent.com',
-    iosClientId:
-        '181871412352-hhrj3ngs5ruph0vsdjap7a5slrs3ivqt.apps.googleusercontent.com',
-    iosBundleId: 'com.example.myApp.RunnerTests',
+    androidClientId: '181871412352-ahrc9g6nk1n6lbfulc95i2eg2nnpg9te.apps.googleusercontent.com',
+    iosClientId: '181871412352-6p4pllaarfeibjeirv9l8f7n5hqik4qu.apps.googleusercontent.com',
+    iosBundleId: 'com.example.myApp',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyCiRIKJr9MVy_kLn67Xu4-Q8-juG-VDwDQ',
+    appId: '1:181871412352:web:dc36bda5d8ab010f5bd265',
+    messagingSenderId: '181871412352',
+    projectId: 'closeai-9376f',
+    authDomain: 'closeai-9376f.firebaseapp.com',
+    storageBucket: 'closeai-9376f.appspot.com',
+    measurementId: 'G-XKFV1MK0J9',
+  );
+
 }
