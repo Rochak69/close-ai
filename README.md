@@ -44,6 +44,10 @@ $ flutter test --coverage --test-randomize-ordering-seed random
 ```
 
 ## Screenshots
+![Simulator Screenshot - iPhone 15 Pro Max - 2024-05-21 at 16 48 02](https://github.com/Rochak69/close-ai/assets/71219492/58ba02ef-74c1-48e8-ae69-ea41f6b49881)
+
+![Simulator Screenshot - iPhone 15 Pro Max - 2024-05-21 at 16 48 59](https://github.com/Rochak69/close-ai/assets/71219492/3a25bdc2-98c3-4e6e-bd86-8bf8ac6792fd)
+
 
 [coverage_badge]: coverage_badge.svg
 [flutter_localizations_link]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
