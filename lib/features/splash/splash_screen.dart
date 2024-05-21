@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:close_ai/constants/app_colors.dart';
+import 'package:close_ai/constants/app_images.dart';
 import 'package:close_ai/core/route/app_router.dart';
 import 'package:close_ai/extensions/string_extension.dart';
 import 'package:close_ai/features/common/app_scaffold.dart';
@@ -17,11 +18,10 @@ class SplashScreen extends StatelessWidget {
     return AppScaffold(
       body: ColoredBox(
         color: Colors.lightGreen.shade50,
-        child: const Center(
-          child: Icon(
-            Icons.flutter_dash_outlined,
-            size: 180,
-            color: AppColors.blue,
+        child: Center(
+          child: Image.asset(
+            AppImages.closeNoBg,
+            width: 140,
           ),
         )
             .animate(

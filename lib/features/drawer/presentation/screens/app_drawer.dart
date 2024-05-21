@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:close_ai/constants/app_colors.dart';
 import 'package:close_ai/core/route/app_router.dart';
 import 'package:close_ai/enum/gemini_model_enum.dart';
+import 'package:close_ai/features/common/app_spacing.dart';
 import 'package:close_ai/features/drawer/presentation/bloc/drawer_bloc.dart';
 import 'package:close_ai/features/drawer/presentation/screens/widgets/conversation_tile.dart';
 import 'package:close_ai/features/homescreen/data/model/conversation_response.dart';
@@ -23,6 +24,7 @@ class AppDrawer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const VerticalSpacing(20),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   height: 40,

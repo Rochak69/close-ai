@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: AppScaffold(
         appBar: AppBar(
           backgroundColor: AppColors.primary,
-          title: const Text('Chat Gemini'),
+          title: const Text('Chat with Gemini'),
         ),
         drawer: const AppDrawer(),
         body: SafeArea(
