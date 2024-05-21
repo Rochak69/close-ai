@@ -159,7 +159,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     onTap: () {},
                   ),
                 ),
-                const VerticalSpacing(16),
+                Center(
+                  child: TextButton(
+                    onPressed: () {
+                      AutoRouter.of(context).push(const ChangePasswordRoute());
+                    },
+                    child: const Text(
+                      'Forgot Password?',
+                      style: TextStyle(decoration: TextDecoration.underline),
+                    ),
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

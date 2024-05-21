@@ -16,7 +16,7 @@ class AppFlushbar {
     // if (isShowing ?? false) {
     //   await dissmiss();
     // }
-    Flushbar(
+    await Flushbar(
       title: title,
       titleColor: Colors.white,
       message: message,
@@ -75,7 +75,7 @@ class AppFlushbar {
     // if (isShowing ?? false) {
     //   await dissmiss();
     // }
-    Flushbar(
+    await Flushbar(
       title: title,
       titleColor: Colors.white,
       message: message,

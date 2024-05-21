@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:close_ai/constants/app_constant.dart';
+import 'package:close_ai/core/route/app_router.dart';
 import 'package:close_ai/features/change_password/presentation/bloc/change_password_bloc.dart';
 import 'package:close_ai/features/common/app_scaffold.dart';
 import 'package:close_ai/utlis/app_flushbar.dart';
@@ -47,8 +48,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           },
           success: () async {
             Navigator.pop(context);
-            await AppFlushbar.success(
-              context,
+            AutoRouter.of(context).popForced();
+
+            AppFlushbar.success(
+              AppRouter.instance.navigatorKey.currentContext!,
               message: 'Please check your mail to reset your password.',
             );
           },
