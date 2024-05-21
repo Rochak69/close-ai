@@ -109,6 +109,8 @@ class _GeminiInputFieldState extends State<GeminiInputField> {
           keyboardType: widget.textInputType,
           controller: widget.textEditingController,
           textInputAction: widget.textInputAction,
+          maxLines: 5,
+          minLines: 1,
           decoration: InputDecoration(
             filled: true,
             isDense: true,

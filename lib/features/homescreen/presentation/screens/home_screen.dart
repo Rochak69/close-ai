@@ -158,6 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           validator: ValidationBuilder().required().build(),
                           autovalidateMode: AutovalidateMode.disabled,
                           textEditingController: controller,
+                          textInputAction: TextInputAction.newline,
                           currentModel: state.currentModel,
                           isLoading: state.theStates == TheStates.loading,
                           onSend: (files) {

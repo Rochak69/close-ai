@@ -114,9 +114,14 @@ class MessageWidget extends StatelessWidget {
                       ? CrossAxisAlignment.end
                       : CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      content?.text ?? '',
-                      style: const TextStyle(fontSize: 16),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: content?.role == 'user' ? 8 : 0,
+                          right: content?.role == 'user' ? 0 : 8),
+                      child: Text(
+                        content?.text ?? '',
+                        style: const TextStyle(fontSize: 16),
+                      ),
                     ),
                     if (isLoading && content?.role == 'model')
                       AnimatedTextKit(
