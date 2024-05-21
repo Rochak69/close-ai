@@ -116,8 +116,9 @@ class MessageWidget extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                          left: content?.role == 'user' ? 8 : 0,
-                          right: content?.role == 'user' ? 0 : 8),
+                        left: content?.role == 'user' ? 8 : 0,
+                        right: content?.role == 'user' ? 0 : 8,
+                      ),
                       child: Text(
                         content?.text ?? '',
                         style: const TextStyle(fontSize: 16),
