@@ -44,9 +44,22 @@ $ flutter test --coverage --test-randomize-ordering-seed random
 ```
 
 ## Screenshots
-![Simulator Screenshot - iPhone 15 Pro Max - 2024-05-21 at 16 48 02](https://github.com/Rochak69/close-ai/assets/71219492/58ba02ef-74c1-48e8-ae69-ea41f6b49881)
+<img src="https://github.com/Rochak69/close-ai/assets/71219492/58ba02ef-74c1-48e8-ae69-ea41f6b49881" width="430" height="932" alt="Simulator Screenshot - iPhone 15 Pro Max - 2024-05-21 at 16 48 02">
 
-![Simulator Screenshot - iPhone 15 Pro Max - 2024-05-21 at 16 48 59](https://github.com/Rochak69/close-ai/assets/71219492/3a25bdc2-98c3-4e6e-bd86-8bf8ac6792fd)
+<img src="https://github.com/Rochak69/close-ai/assets/71219492/3a25bdc2-98c3-4e6e-bd86-8bf8ac6792fd" width="430" height="932" alt="Simulator Screenshot - iPhone 15 Pro Max - 2024-05-21 at 16 48 59">
+
+<img src="https://github.com/Rochak69/close-ai/assets/71219492/72fb0a36-615e-4b47-984b-20be1c04d196" width="430" height="932" alt="Simulator Screenshot - iPhone 15 Pro Max - 2024-05-21 at 16 55 51">
+
+<img src="https://github.com/Rochak69/close-ai/assets/71219492/9c7b6079-ad42-4fdc-8d1e-13d66b4aa870" width="430" height="932" alt="Simulator Screenshot - iPhone 15 Pro Max - 2024-05-21 at 16 55 54">
+
+<img src="https://github.com/Rochak69/close-ai/assets/71219492/9f3c6fa7-c8b8-4e76-9e35-e6c0993d958e" width="430" height="932" alt="Simulator Screenshot - iPhone 15 Pro Max - 2024-05-21 at 16 56 17">
+
+<img src="https://github.com/Rochak69/close-ai/assets/71219492/e8a977d8-6d46-47a9-8074-22d12e3c007b" width="430" height="932" alt="Simulator Screenshot - iPhone 15 Pro Max - 2024-05-21 at 16 56 21">
+
+
+
+
+
 
 
 [coverage_badge]: coverage_badge.svg
