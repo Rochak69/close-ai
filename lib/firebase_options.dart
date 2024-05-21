@@ -65,8 +65,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '181871412352',
     projectId: 'closeai-9376f',
     storageBucket: 'closeai-9376f.appspot.com',
-    androidClientId: '181871412352-ahrc9g6nk1n6lbfulc95i2eg2nnpg9te.apps.googleusercontent.com',
-    iosClientId: '181871412352-irvaidqsegqqsin961j5as9had1ohsim.apps.googleusercontent.com',
+    androidClientId:
+        '181871412352-ahrc9g6nk1n6lbfulc95i2eg2nnpg9te.apps.googleusercontent.com',
+    iosClientId:
+        '181871412352-irvaidqsegqqsin961j5as9had1ohsim.apps.googleusercontent.com',
     iosBundleId: 'com.chronosphere.closeai',
   );
 
@@ -76,8 +78,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '181871412352',
     projectId: 'closeai-9376f',
     storageBucket: 'closeai-9376f.appspot.com',
-    androidClientId: '181871412352-ahrc9g6nk1n6lbfulc95i2eg2nnpg9te.apps.googleusercontent.com',
-    iosClientId: '181871412352-6p4pllaarfeibjeirv9l8f7n5hqik4qu.apps.googleusercontent.com',
+    androidClientId:
+        '181871412352-ahrc9g6nk1n6lbfulc95i2eg2nnpg9te.apps.googleusercontent.com',
+    iosClientId:
+        '181871412352-6p4pllaarfeibjeirv9l8f7n5hqik4qu.apps.googleusercontent.com',
     iosBundleId: 'com.example.myApp',
   );
 
@@ -90,5 +94,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'closeai-9376f.appspot.com',
     measurementId: 'G-XKFV1MK0J9',
   );
-
 }

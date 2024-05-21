@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: AppScaffold(
         appBar: AppBar(
           backgroundColor: AppColors.primary,
-          title: const Text('Chat Gemini'),
+          title: const Text('Chat with Gemini'),
         ),
         drawer: const AppDrawer(),
         body: SafeArea(
@@ -158,6 +158,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           validator: ValidationBuilder().required().build(),
                           autovalidateMode: AutovalidateMode.disabled,
                           textEditingController: controller,
+                          textInputAction: TextInputAction.newline,
+                          textInputType: TextInputType.multiline,
                           currentModel: state.currentModel,
                           isLoading: state.theStates == TheStates.loading,
                           onSend: (files) {
