@@ -159,6 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           autovalidateMode: AutovalidateMode.disabled,
                           textEditingController: controller,
                           textInputAction: TextInputAction.newline,
+                          textInputType: TextInputType.multiline,
                           currentModel: state.currentModel,
                           isLoading: state.theStates == TheStates.loading,
                           onSend: (files) {
