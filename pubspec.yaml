@@ -13,7 +13,7 @@ dependencies:
   bloc: ^8.1.2
   bloc_concurrency: ^0.2.4
   cached_network_image: ^3.3.1
-  cloud_firestore: ^4.15.9
+  cloud_firestore: ^4.17.5
   connectivity_plus: ^6.0.3
   dartz: ^0.10.1
   dio: ^5.4.1
