@@ -19,7 +19,7 @@ dependencies:
   dio: ^5.4.1
   easy_debounce: ^2.0.3
   equatable: ^2.0.5
-  firebase_auth: ^4.17.9
+  firebase_auth: ^4.20.0
   firebase_core: ^2.27.1
   flutter:
     sdk: flutter
